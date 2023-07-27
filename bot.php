@@ -56,7 +56,7 @@ if ($mform->is_cancelled()) {
 
 
 base::page(
-    new moodle_url('/local/cts_co/request.php'),
+    new moodle_url('/local/fakesmarts/bot.php', ['id' => $id]),
     get_string('bot', 'local_fakesmarts'),
     '',
     $context,

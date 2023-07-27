@@ -10,7 +10,7 @@ $bot_id = required_parAM('id', PARAM_INT);
 
 $context = context_system::instance();
 
-\local_cts_co\base::page(new moodle_url('/local/fakesmarts/content.php'), get_string('content', 'local_fakesmarts'), '', $context);
+\local_fakesmarts\base::page(new moodle_url('/local/fakesmarts/content.php'), get_string('content', 'local_fakesmarts'), '', $context);
 
 
 //**************** ******

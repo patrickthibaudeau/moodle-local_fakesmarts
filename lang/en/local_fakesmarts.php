@@ -3,6 +3,7 @@ $string['actions'] = 'Actions';
 $string['add_bot'] = 'Create new bot';
 $string['add_content'] = 'Add content';
 $string['bot'] = 'Bot';
+$string['bots'] = 'Bots';
 $string['bot_type'] = 'Bot type';
 $string['bot_type_factual'] = 'Factual';
 $string['bot_type_transcription'] = 'Transcription';
