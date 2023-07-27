@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <a href="add_content.php?id={{bot_id}}" class="btn btn-outline-primary">
+                    {{#str}}add_content, local_fakesmarts{{/str}}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <div class="card">
+            <h3 class="card-header">
+                {{bot_name}}
+            </h3>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{#str}}name, local_fakesmarts{{/str}}</th>
+                            <th>{{#str}}actions, local_fakesmarts{{/str}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#files}}
+                        <tr>
+                            <td>{{name}}</td>
+                            <td>
+                                <a href="edit_content.php?id={{id}}" class="btn btn-outline-primary">
+                                    {{#str}}edit, local_fakesmarts{{/str}}
+                                </a>
+                                <button class="btn btn-outline-danger delete-bot" data-id="{{id}}">
+                                    {{#str}}delete, local_fakesmarts{{/str}}
+                                </button>
+                            </td>
+                        </tr>
+                        {{/files}}
+                    </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
