@@ -17,6 +17,7 @@ $string['content'] = 'Content';
 $string['delete'] = 'Delete';
 $string['description'] = 'Description';
 $string['edit'] = 'Edit';
+$string['edit_content'] = 'Edit content';
 $string['error_importfile'] = 'There was an error importing the file';
 $string['existing_bots'] = 'Existing bots';
 $string['file'] = 'File';

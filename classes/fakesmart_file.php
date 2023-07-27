@@ -99,15 +99,8 @@ class fakesmart_file extends crud {
 		$this->content = $result->content ?? '';
 		$this->usermodified = $result->usermodified ?? 0;
 		$this->timecreated = $result->timecreated ?? 0;
-          $this->timecreated_hr = '';
-          if ($this->timecreated) {
-		        $this->timecreated_hr = strftime(get_string('strftimedate'),$result->timecreated);
-          }
 		$this->timemodified = $result->timemodified ?? 0;
-      $this->timemodified_hr = '';
-          if ($this->timemodified) {
-		        $this->timemodified_hr = strftime(get_string('strftimedate'),$result->timemodified);
-          }
+
 	}
 
 	/**
