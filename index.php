@@ -9,7 +9,7 @@ $context = context_system::instance();
 
 \local_fakesmarts\base::page($CFG->wwwroot . '/local/fakesmarts/index.php', get_string('pluginname', 'local_fakesmarts'), '', $context);
 
-
+$PAGE->requires->js_call_amd('local_fakesmarts/bot', 'init');
 //**************** ******
 //*** DISPLAY HEADER ***
 //**********************

@@ -10,8 +10,14 @@ $bot_id = required_parAM('id', PARAM_INT);
 
 $context = context_system::instance();
 
-\local_fakesmarts\base::page(new moodle_url('/local/fakesmarts/content.php'), get_string('content', 'local_fakesmarts'), '', $context);
+\local_fakesmarts\base::page(
+    new moodle_url('/local/fakesmarts/content.php', ['id' => $bot_id]),
+    get_string('content', 'local_fakesmarts'),
+    '',
+    $context
+);
 
+$PAGE->requires->js_call_amd('local_fakesmarts/content', 'init');
 
 //**************** ******
 //*** DISPLAY HEADER ***
