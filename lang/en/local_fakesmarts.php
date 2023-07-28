@@ -35,4 +35,5 @@ $string['name'] = 'Name';
 $string['pluginname'] = 'Fake Smarts';
 $string['privacy:metadata'] = 'This plugin stores no personal data.';
 $string['system_message'] = 'System message';
+$string['test_area'] = 'Test area';
 $string['test_bot'] = 'Test bot';

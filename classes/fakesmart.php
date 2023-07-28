@@ -135,6 +135,16 @@ class fakesmart extends crud
     }
 
     /**
+     * @return string
+     * @throws \dml_exception
+     */
+    public function get_bot_type_system_message() : string {
+        global $DB;
+        $bot_type = $DB->get_record('local_fakesmarts_type', ['id' => $this->bot_type]);
+        return $bot_type->system_message ?? '';
+    }
+
+    /**
      * @return bot_system_message - longtext (-1)
      */
     public function get_bot_system_message()
