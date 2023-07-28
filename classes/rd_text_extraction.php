@@ -68,24 +68,26 @@ class RD_Text_Extraction
     protected static function docx_to_text( $path_to_file )
     {
         $response = '';
-        $zip      = zip_open($path_to_file);
 
-        if (!$zip || is_numeric($zip)) return false;
-
-        while ($zip_entry = zip_read($zip)) {
-
-            if (zip_entry_open($zip, $zip_entry) == FALSE)
-                continue;
-
-            if (zip_entry_name($zip_entry) != 'word/document.xml')
-                continue;
-
-            $response .= zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-
-            zip_entry_close($zip_entry);
+        $zip = new ZipArchive();
+        if ($zip->open($path_to_file) !== true) {
+            return false;
         }
 
-        zip_close($zip);
+        $response = '';
+
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            $filename = $zip->getNameIndex($i);
+
+            if ($filename !== 'word/document.xml') {
+                continue;
+            }
+
+            $content = $zip->getFromIndex($i);
+            $response .= $content;
+        }
+
+        $zip->close();
 
         $response = str_replace('</w:r></w:p></w:tc><w:tc>', ' ', $response);
         $response = str_replace('</w:r></w:p>', "\r\n", $response);

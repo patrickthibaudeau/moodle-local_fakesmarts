@@ -5,6 +5,41 @@ require_once("../../config.php");
 require_once($CFG->dirroot . "/local/fakesmarts/classes/forms/add_content_form.php");
 require_once('classes/rd_text_extraction.php');
 
+/**
+ * Loads all files found in a given folder.
+ * Calls itself recursively for all sub folders.
+ *
+ * @param string $dir
+ */
+function requireFilesOfFolder($dir)
+{
+    foreach (new DirectoryIterator($dir) as $fileInfo) {
+        if (!$fileInfo->isDot()) {
+            if ($fileInfo->isDir()) {
+                requireFilesOfFolder($fileInfo->getPathname());
+            } else {
+                require_once $fileInfo->getPathname();
+            }
+        }
+    }
+}
+
+$rootFolder = __DIR__.'/classes/Smalot/PdfParser';
+
+// Manually require files, which can't be loaded automatically that easily.
+require_once $rootFolder.'/Element.php';
+require_once $rootFolder.'/PDFObject.php';
+require_once $rootFolder.'/Font.php';
+require_once $rootFolder.'/Page.php';
+require_once $rootFolder.'/Element/ElementString.php';
+require_once $rootFolder.'/Encoding/AbstractEncoding.php';
+
+/*
+ * Load the rest of PDFParser files from /src/Smalot/PDFParser
+ * Dont worry, it wont load files multiple times.
+ */
+requireFilesOfFolder($rootFolder);
+
 use local_fakesmarts\base;
 use local_fakesmarts\fakesmart_file;
 use Smalot\PdfParser;

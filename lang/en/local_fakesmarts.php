@@ -22,6 +22,6 @@ $string['error_importfile'] = 'There was an error importing the file';
 $string['existing_bots'] = 'Existing bots';
 $string['file'] = 'File';
 $string['name'] = 'Name';
-
 $string['pluginname'] = 'Fake Smarts';
 $string['privacy:metadata'] = 'This plugin stores no personal data.';
+$string['test_bot'] = 'Test bot';
