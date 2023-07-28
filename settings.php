@@ -44,13 +44,15 @@ if ($hassiteconfig) {
         '', PARAM_TEXT, 255
     ));
 
-    // Subscriptioin id.
+    // Deployement name.
     $settings->add( new admin_setting_configtext(
         'local_fakesmarts/deployment_name',
         get_string('deployment_name', 'local_fakesmarts'),
         get_string('deployment_name_help', 'local_fakesmarts'),
         '', PARAM_TEXT, 255
     ));
+
+    // MS OpenAI URL will be the following: $AZURE_ENDPOINT/openai/deployments/$DEPLOYMENT_NAME/chat/completions?api-version=2023-05-15
 
     $ADMIN->add('localplugins', $settings);
 
