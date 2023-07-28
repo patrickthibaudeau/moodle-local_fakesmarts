@@ -1,5 +1,6 @@
 <?php
 
+namespace local_fakesmarts;
 /**
  * Class RD_Text_Extraction
  *
@@ -11,12 +12,12 @@
  * @see https://stackoverflow.com/questions/19503653/how-to-extract-text-from-word-file-doc-docx-xlsx-pptx-php
  *
  */
-class RD_Text_Extraction
+class rd_text_extraction
 {
     /**
      * @param $path_to_file
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     protected static function pdf_to_text( $path_to_file ) {
 
@@ -37,9 +38,9 @@ class RD_Text_Extraction
 
     /**
      * @param $path_to_file
-     * @return mixed|string
+     * @return string
      */
-    protected static function doc_to_text( $path_to_file )
+    protected static function doc_to_text( $path_to_file ) : string
     {
         $fileHandle = fopen($path_to_file, 'r');
         $line       = @fread($fileHandle, filesize($path_to_file));
@@ -51,7 +52,7 @@ class RD_Text_Extraction
             $pos = strpos($current_line, chr(0x00));
 
             if ( ($pos !== FALSE) || (strlen($current_line) == 0) ) {
-
+                continue;
             } else {
                 $response .= $current_line . ' ';
             }
@@ -63,13 +64,12 @@ class RD_Text_Extraction
     }
 
     /**
-     * @return bool|string
+     * @param $path_to_file
+     * @return string
      */
-    protected static function docx_to_text( $path_to_file )
+    protected static function docx_to_text( $path_to_file ) : string
     {
-        $response = '';
-
-        $zip = new ZipArchive();
+        $zip = new \ZipArchive();
         if ($zip->open($path_to_file) !== true) {
             return false;
         }
@@ -97,19 +97,20 @@ class RD_Text_Extraction
     }
 
     /**
+     * @param $path_to_file
      * @return string
      */
-    protected static function xlsx_to_text( $path_to_file )
+    protected static function xlsx_to_text( $path_to_file ) : string
     {
         $xml_filename = 'xl/sharedStrings.xml'; //content file name
-        $zip_handle   = new ZipArchive();
+        $zip_handle   = new \ZipArchive();
         $response     = '';
 
         if (true === $zip_handle->open($path_to_file)) {
 
             if (($xml_index = $zip_handle->locateName($xml_filename)) !== false) {
 
-                $doc = new DOMDocument();
+                $doc = new \DOMDocument();
 
                 $xml_data   = $zip_handle->getFromIndex($xml_index);
                 $doc->loadXML($xml_data, LIBXML_NOENT | LIBXML_XINCLUDE | LIBXML_NOERROR | LIBXML_NOWARNING);
@@ -127,15 +128,15 @@ class RD_Text_Extraction
     /**
      * @return string
      */
-    protected static function pptx_to_text( $path_to_file )
+    protected static function pptx_to_text( $path_to_file ) : string
     {
-        $zip_handle = new ZipArchive();
+        $zip_handle = new \ZipArchive();
         $response   = '';
 
         if (true === $zip_handle->open($path_to_file)) {
 
             $slide_number = 1; //loop through slide files
-            $doc = new DOMDocument();
+            $doc = new \DOMDocument();
 
             while (($xml_index = $zip_handle->locateName('ppt/slides/slide' . $slide_number . '.xml')) !== false) {
 
@@ -156,9 +157,9 @@ class RD_Text_Extraction
     }
 
     /**
-     * @return array
+     * @return string[]
      */
-    public static function get_valid_file_types()
+    public static function get_valid_file_types() : array
     {
         return [
             'doc',
@@ -171,10 +172,10 @@ class RD_Text_Extraction
 
     /**
      * @param $path_to_file
-     * @return bool|mixed|string
-     * @throws Exception
+     * @return string
+     * @throws \Exception
      */
-    public static function convert_to_text( $path_to_file )
+    public static function convert_to_text( $path_to_file ) : string
     {
         if (isset($path_to_file) && file_exists($path_to_file)) {
 

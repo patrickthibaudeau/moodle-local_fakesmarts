@@ -3,7 +3,8 @@
 require_once("../../config.php");
 
 require_once($CFG->dirroot . "/local/fakesmarts/classes/forms/add_content_form.php");
-require_once('classes/rd_text_extraction.php');
+
+use local_fakesmarts\rd_text_extraction;
 
 /**
  * Loads all files found in a given folder.
@@ -83,7 +84,7 @@ if ($mform->is_cancelled()) {
     // save the file
     file_put_contents($file_path, $fileContent);
     // Convert the content of the file to text
-    $content = RD_Text_Extraction::convert_to_text($file_path);
+    $content = rd_text_extraction::convert_to_text($file_path);
     // Create content data array
     $content_data = [
         'fakesmarts_id' => $data->fakesmarts_id,
