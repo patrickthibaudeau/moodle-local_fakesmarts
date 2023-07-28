@@ -2,11 +2,11 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <a href="bot.php" class="btn btn-outline-primary">
-                    {{#str}}add_bot, local_fakesmarts{{/str}}
+                <a href="edit_bot_type.php" class="btn btn-outline-primary">
+                    {{#str}}add_type, local_fakesmarts{{/str}}
                 </a>
-                <a href="bot_types.php" class="btn btn-outline-primary">
-                    {{#str}}bot_types, local_fakesmarts{{/str}}
+                <a href="index.php" class="btn btn-outline-primary">
+                {{#str}}bots, local_fakesmarts{{/str}}
                 </a>
             </div>
         </div>
@@ -17,38 +17,30 @@
     <div class="col">
         <div class="card">
             <h3 class="card-header">
-                {{#str}}existing_bots, local_fakesmarts{{/str}}
+                {{#str}}existing_bot_types, local_fakesmarts{{/str}}
             </h3>
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>{{#str}}name, local_fakesmarts{{/str}}</th>
-                            <th>{{#str}}bot_type, local_fakesmarts{{/str}}</th>
                             <th>{{#str}}actions, local_fakesmarts{{/str}}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{#bots}}
+                        {{#bot_types}}
                         <tr>
                             <td>{{name}}</td>
-                            <td>{{bot_type}}</td>
                             <td>
-                                <a href="bot.php?id={{id}}" class="btn btn-outline-primary">
+                                <a href="edit_bot_type.php?id={{id}}" class="btn btn-outline-primary">
                                     {{#str}}edit, local_fakesmarts{{/str}}
                                 </a>
-                                <a href="content.php?id={{id}}" class="btn btn-outline-primary">
-                                {{#str}}content, local_fakesmarts{{/str}}
-                                </a>
-                                <a href="test_bot.php?id={{id}}" class="btn btn-outline-primary">
-                                {{#str}}test_bot, local_fakesmarts{{/str}}
-                                </a>
-                                <button class="btn btn-outline-danger delete-bot" data-id="{{id}}">
+                                <button class="btn btn-outline-danger delete-bot-type" data-id="{{id}}">
                                     {{#str}}delete, local_fakesmarts{{/str}}
                                 </button>
                             </td>
                         </tr>
-                        {{/bots}}
+                        {{/bot_types}}
                     </tbody>
                     </table>
             </div>

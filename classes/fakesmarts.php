@@ -52,10 +52,13 @@ class fakesmarts {
 	}
 
     static public function get_bot_types() {
-        return [
-            self::BOT_TYPE_FACTUAL => get_string('bot_type_factual', 'local_fakesmarts'),
-            self::BOT_TYPE_TRANSCRIPTION => get_string('bot_type_transcription', 'local_fakesmarts')
-        ];
+        global $DB;
+        $types = $DB->get_records('local_fakesmarts_type', []);
+        $bot_types = [];
+        foreach ($types as $type) {
+            $bot_types[$type->id] = $type->name;
+        }
+        return $bot_types;
     }
 
 }

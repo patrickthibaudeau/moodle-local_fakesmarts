@@ -19,10 +19,24 @@ class renderer extends \plugin_renderer_base {
         return $this->render_from_template('local_fakesmarts/dashboard', $data);
     }
 
+    /**
+     * @param \templatable $content
+     * @return bool|string
+     * @throws \moodle_exception
+     */
     public function render_content(\templatable $content) {
         $data = $content->export_for_template($this);
         return $this->render_from_template('local_fakesmarts/content', $data);
     }
 
+    /**
+     * @param \templatable $bot_types
+     * @return bool|string
+     * @throws \moodle_exception
+     */
+    public function render_bot_types(\templatable $bot_types) {
+        $data = $bot_types->export_for_template($this);
+        return $this->render_from_template('local_fakesmarts/bot_types', $data);
+    }
 
 }

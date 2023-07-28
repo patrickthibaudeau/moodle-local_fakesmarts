@@ -18,4 +18,13 @@ $functions = array(
         'capabilities' => '',
         'ajax' => true
     ),
+    'fakesmarts_bot_type_delete' => array(
+        'classname' => 'local_fakesmarts_external_bot_type',
+        'methodname' => 'delete',
+        'classpath' => 'local/fakesmarts/classes/external/bot_type.php',
+        'description' => 'Delete bot type',
+        'type' => 'write',
+        'capabilities' => '',
+        'ajax' => true
+    ),
 );
