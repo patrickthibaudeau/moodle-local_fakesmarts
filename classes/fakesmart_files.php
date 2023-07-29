@@ -38,6 +38,14 @@ class fakesmart_files {
 	    return $this->results;
 	}
 
+    public function concatenate_content() {
+        $content = '';
+        foreach($this->results as $r) {
+            $content .= $r->content;
+        }
+        return $content;
+    }
+
 	/**
 	  * Array to be used for selects
 	  * Defaults used key = record id, value = name 

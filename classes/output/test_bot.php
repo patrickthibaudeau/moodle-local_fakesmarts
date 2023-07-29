@@ -15,7 +15,9 @@
 
 namespace local_fakesmarts\output;
 
+use local_fakesmarts\gpt;
 use local_fakesmarts\fakesmart;
+use local_fakesmarts\fakesmart_files;
 
 class test_bot implements \renderable, \templatable
 {
@@ -42,12 +44,34 @@ class test_bot implements \renderable, \templatable
     {
         global $USER, $CFG, $DB;
 
+
         $FAKESMART = new fakesmart($this->bot_id);
+//        $FILES = new fakesmart_files($this->bot_id);
+//        $system_message = $FAKESMART->get_bot_type_system_message();
+//        $messages = [
+//            'messages' => [
+//                [
+//                    'role' => 'system',
+//                    'content' => $system_message
+//                ],
+//                [
+//                    'role' => 'user',
+//                    'content' => $FILES->concatenate_content()
+//                ],
+//                [
+//                    'role' => 'user',
+//                    'content' => 'Who teaches the course?'
+//                ]
+//            ]
+//        ];
+
+        $prompt = 'Is there a zoom link for this course?';
+
+        print_object(gpt::get_response($this->bot_id, $prompt));
 
         $data = [
             'bot_id' => $this->bot_id,
-            'name' => $FAKESMART->get_name(),
-            'system_message' => $FAKESMART->get_bot_type_system_message(),
+            'name' => $FAKESMART->get_name()
         ];
         return $data;
     }
