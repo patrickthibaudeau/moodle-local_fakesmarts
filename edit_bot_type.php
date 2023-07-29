@@ -27,6 +27,8 @@ if ($mform->is_cancelled()) {
     redirect($CFG->wwwroot . '/local/fakesmarts/bot_types.php');
 } else if ($data = $mform->get_data()) {
 
+    $cache = cache::make('local_fakesmarts', 'fakesmarts_system_messages');
+
     if ($data->id) {
         $data->usermodified = $USER->id;
         $data->timemodified = time();
@@ -37,6 +39,7 @@ if ($mform->is_cancelled()) {
         $data->timecreated = time();
         $DB->insert_record('local_fakesmarts_type', $data);
     }
+    $cache->set($data->id, $data->system_message);
     redirect($CFG->wwwroot . '/local/fakesmarts/bot_types.php');
 
 } else {

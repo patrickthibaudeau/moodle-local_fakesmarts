@@ -67,7 +67,7 @@ class test_bot implements \renderable, \templatable
 
         $prompt = 'Is there a zoom link for this course?';
 
-        print_object(gpt::get_response($this->bot_id, $prompt));
+//        print_object(gpt::get_response($this->bot_id, $prompt));
 
         $data = [
             'bot_id' => $this->bot_id,

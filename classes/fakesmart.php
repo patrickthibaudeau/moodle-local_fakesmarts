@@ -140,8 +140,9 @@ class fakesmart extends crud
      */
     public function get_bot_type_system_message() : string {
         global $DB;
-        $bot_type = $DB->get_record('local_fakesmarts_type', ['id' => $this->bot_type]);
-        return $bot_type->system_message ?? '';
+        // System messages are cached
+        $cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
+        return $cache->get($this->bot_type) ?? '';
     }
 
     /**

@@ -19,6 +19,7 @@ $string['bot_type_help'] = 'Select the type of bot.<br><ul>
 </ul>';
 $string['bot_system_message'] = 'Bot system message';
 $string['bot_system_message_help'] = 'Enter the system message to be appended to the default system message when the bot is used';
+$string['cachedef_fakesmarts_system_messages'] = 'Caches all system messages for bots';
 $string['cancel'] = 'Cancel';
 $string['content'] = 'Content';
 $string['deployment_name'] = 'Deployment name';
