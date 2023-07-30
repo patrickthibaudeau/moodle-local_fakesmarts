@@ -89,12 +89,12 @@ class gpt
                 }
             }
             $content_prompt .= $sentences;
-            "Question: Please answer with a boolean only to the following question. In the sentences provided above, do the all the sentences mean the same thing?\n";
+            "Question: Please answer with a boolean only to the following question. In the sentences provided above, do they all the sentences mean the same thing?\n";
             $messages = [
                 'messages' => [
                     [
                         'role' => 'system',
-                        'content' => 'You compare text. You only answer with a single boolean with the highest count.'
+                        'content' => 'You compare text. You only answer with a single boolean. You return the boolean that appears more often.'
                     ],
                     [
                         'role' => 'user',
@@ -105,6 +105,7 @@ class gpt
 
             $comparison_result = self::_make_call(json_encode($messages));
             $answer = $comparison_result->choices[0]->message->content;
+            print_object($answer);
             if ($answer == 'True') {
                 $summaries = $summary[0];
             } else {
