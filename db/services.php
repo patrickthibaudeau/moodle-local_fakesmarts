@@ -27,4 +27,13 @@ $functions = array(
         'capabilities' => '',
         'ajax' => true
     ),
+    'fakesmarts_get_gpt_response' => array(
+        'classname' => 'local_fakesmarts_external_gpt',
+        'methodname' => 'response',
+        'classpath' => 'local/fakesmarts/classes/external/gpt.php',
+        'description' => 'Returns response from OpenAI',
+        'type' => 'read',
+        'capabilities' => '',
+        'ajax' => true
+    ),
 );

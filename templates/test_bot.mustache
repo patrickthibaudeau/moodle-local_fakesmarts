@@ -14,11 +14,17 @@
     <div class="col">
         <div class="card">
             <h3 class="card-header">
-                {{#str}}test_area, local_fakesmarts{{/str}}
+                {{#str}}test_area, local_fakesmarts{{/str}} - {{name}}
             </h3>
             <div class="card-body">
-                <div id="test-bot">
+                <div id="fakesmarts-bot-container">
+                    <div id="fakesmarts-conversation">
 
+                    </div>
+                    <div id="fakemarts-input-container">
+                        <input type="text" id="user-prompt" class="form-control" placeholder="{{#str}}ask_a_question, local_fakesmarts{{/str}}">
+                        <button id="submit-question" class="btn btn-primary mt-2" data-bot_id="{{bot_id}}">{{#str}}submit, local_fakesmarts{{/str}}</button>
+                    </div>
                 </div>
             </div>
         </div>
