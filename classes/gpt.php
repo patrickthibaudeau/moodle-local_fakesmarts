@@ -49,6 +49,7 @@ class gpt
         $user_content = $cache->get($bot_id . '_' . sesskey());
         // Get number of words in content and split it into chunks if it's too long
         $chunk_text = self::_split_into_chunks($user_content);
+        print_object(count($chunk_text));
         // Determine the context window size (overlap)
         $context_window_size = 50;
         $summary = [];
@@ -68,7 +69,7 @@ class gpt
                     ],
                     [
                         'role' => 'user',
-                        'content' => $chunk
+                        'content' => $chunk. ' Your response must only solely be based on the content from the context. Stick with the facts provided only.'
                     ],
                     [
                         'role' => 'user',

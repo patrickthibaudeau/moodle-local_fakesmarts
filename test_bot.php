@@ -20,9 +20,10 @@ echo $OUTPUT->header();
 $output = $PAGE->get_renderer('local_fakesmarts');
 $test_bot = new \local_fakesmarts\output\test_bot($bot_id);
 echo $output->render_test_bot($test_bot);
-$cache = cache::make('local_fakesmarts', 'fakesmarts_system_messages');
-//echo $cache->get(1 . '_' . sesskey());
-//print(gpt::get_response(9, 'Who is the main character inn this story?'));
+//$cache = cache::make('local_fakesmarts', 'fakesmarts_system_messages');
+//echo $cache->get(8 . '_' . sesskey());
+
+//print(gpt::get_response(8, 'Can I give my presentation with someone else?'));
 //**********************
 //*** DISPLAY FOOTER ***
 //**********************
