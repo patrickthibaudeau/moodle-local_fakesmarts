@@ -108,6 +108,31 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023072801, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023073000) {
+
+        // Define table local_fakesmarts_logs to be created.
+        $table = new xmldb_table('local_fakesmarts_logs');
+
+        // Adding fields to table local_fakesmarts_logs.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('fakesmarts_id', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
+        $table->add_field('prompt', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('message', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('confidence', XMLDB_TYPE_INTEGER, '3', null, null, null, '0');
+        $table->add_field('ip', XMLDB_TYPE_CHAR, '15', null, null, null, '0');
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '16', null, null, null, '0');
+
+        // Adding keys to table local_fakesmarts_logs.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+        // Conditionally launch create table for local_fakesmarts_logs.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023073000, 'local', 'fakesmarts');
+    }
 
     return true;
 }

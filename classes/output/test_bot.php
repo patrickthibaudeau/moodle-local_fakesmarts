@@ -44,8 +44,17 @@ class test_bot implements \renderable, \templatable
     {
         global $USER, $CFG, $DB;
 
-
         $FAKESMART = new fakesmart($this->bot_id);
+        $FAKESMARTFILES = new fakesmart_files($this->bot_id);
+        $bot_type = $FAKESMART->get_bot_type();
+        // Build the cache for the bot
+        $cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
+        // Delete any existing cache for this bot
+        $cache->delete($bot_type . '_' . sesskey());
+        $cache->delete($this->bot_id . '_' . sesskey());
+        // Set the cache for this bot
+        $cache->set($bot_type . '_' . sesskey(), $FAKESMART->concatenate_system_messages());
+        $cache->set($this->bot_id . '_' . sesskey(), $FAKESMARTFILES->concatenate_content());
 
         $data = [
             'bot_id' => $this->bot_id,

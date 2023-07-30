@@ -44,8 +44,8 @@ class gpt
         // initiate cache store
         $cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
         // Get system message and user content from cache
-        $system_message = $cache->get($FAKESMART->get_bot_type());
-        $user_content = $cache->get($bot_id);
+        $system_message = $cache->get($FAKESMART->get_bot_type() . '_' . sesskey());
+        $user_content = $cache->get($bot_id . '_' . sesskey());
         // Get number of words in content and split it into chunks if it's too long
         $chunk_text = self::_split_into_chunks($user_content);
         // Determine the context window size (overlap)
@@ -145,16 +145,16 @@ class gpt
 
     /**
      * Get the response from the API
-     * @param int $bot_id
-     * @param string $prompt
+     * @param $bot_id
+     * @param $prompt
      * @return string
      * @throws \dml_exception
      */
-    public static function get_response($bot_id, $prompt)
+    public static function get_response($bot_id, $prompt) : string
     {
         $content = '';
         // Build the message
-        $content = self::_build_message($bot_id, $prompt);
+        $content = self::_build_message($bot_id,$prompt);
 
         // If a response is returned, format it
         if (isset($content)) {
