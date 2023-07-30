@@ -105,7 +105,6 @@ class gpt
 
             $comparison_result = self::_make_call(json_encode($messages));
             $answer = $comparison_result->choices[0]->message->content;
-            print_object($answer);
             if ($answer == 'True') {
                 $summaries = $summary[0];
             } else {
