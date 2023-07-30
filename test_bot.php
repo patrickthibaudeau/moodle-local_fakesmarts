@@ -22,7 +22,7 @@ $test_bot = new \local_fakesmarts\output\test_bot($bot_id);
 echo $output->render_test_bot($test_bot);
 //$cache = cache::make('local_fakesmarts', 'fakesmarts_system_messages');
 //print_object(str_word_count($cache->get(8)));
-//gpt::get_response(8, 'What are the Zoom links');
+//print(gpt::get_response(9, 'Who is the main character'));
 //**********************
 //*** DISPLAY FOOTER ***
 //**********************

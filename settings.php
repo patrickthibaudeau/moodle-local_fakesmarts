@@ -57,7 +57,7 @@ if ($hassiteconfig) {
         'local_fakesmarts/max_chunks',
         get_string('chunk_limit', 'local_fakesmarts'),
         get_string('chunk_limit_help', 'local_fakesmarts'),
-        12000, PARAM_INT, 6
+        40000, PARAM_INT, 6
     ));
 
     // MS OpenAI URL will be the following: $AZURE_ENDPOINT/openai/deployments/$DEPLOYMENT_NAME/chat/completions?api-version=2023-05-15
