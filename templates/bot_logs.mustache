@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <a href="index.php" class="btn btn-outline-primary">
+                    {{#str}}bots, local_fakesmarts{{/str}}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <div class="card">
+            <h3 class="card-header">
+                {{#str}}logs_for, local_fakesmarts{{/str}} {{name}}
+            </h3>
+            <div class="card-body">
+                <table id="bot_logs" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{#str}}prompt, local_fakesmarts{{/str}}</th>
+                            <th>{{#str}}response, local_fakesmarts{{/str}}</th>
+                            <th>{{#str}}ip, local_fakesmarts{{/str}}</th>
+                            <th>{{#str}}timecreated, local_fakesmarts{{/str}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#logs}}
+                        <tr>
+                            <td>{{{prompt}}}</td>
+                            <td>{{{message}}}</td>
+                            <td>{{ip}}</td>
+                            <td>{{timecreated}}</td>
+                        </tr>
+                        {{/logs}}
+                    </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>

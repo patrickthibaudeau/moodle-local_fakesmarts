@@ -49,4 +49,14 @@ class renderer extends \plugin_renderer_base {
         return $this->render_from_template('local_fakesmarts/test_bot', $data);
     }
 
+    /**
+     * @param \templatable $bot_types
+     * @return bool|string
+     * @throws \moodle_exception
+     */
+    public function render_bot_logs(\templatable $logs) {
+        $data = $logs->export_for_template($this);
+        return $this->render_from_template('local_fakesmarts/bot_logs', $data);
+    }
+
 }

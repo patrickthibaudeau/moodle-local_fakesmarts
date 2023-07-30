@@ -3,6 +3,7 @@
 namespace local_fakesmarts;
 
 use local_fakesmarts\fakesmart;
+use local_fakesmarts\logs;
 
 class gpt
 {
@@ -79,10 +80,42 @@ class gpt
             $summary[] = $result->choices[0]->message->content;
         }
 
-        // Implode the chunks into one string
-        $summeries = implode('', $summary);
+        if (count($summary) > 1) {
+            $content_prompt = '';
+            $sentences = '';
+            foreach ($summary as $i => $response) {
+                if ($response != '') {
+                    $sentences .=  $response . "\n" ;
+                }
+            }
+            $content_prompt .= $sentences;
+            "Question: Please answer with a boolean only to the following question. In the sentences provided above, do the all the sentences mean the same thing?\n";
+            $messages = [
+                'messages' => [
+                    [
+                        'role' => 'system',
+                        'content' => 'You compare text. You only answer with a single boolean with the highest count.'
+                    ],
+                    [
+                        'role' => 'user',
+                        'content' => $content_prompt
+                    ]
+                ]
+            ];
 
-        return $summeries;
+            $comparison_result = self::_make_call(json_encode($messages));
+            $answer = $comparison_result->choices[0]->message->content;
+            if ($answer == 'True') {
+                $summaries = $summary[0];
+            } else {
+                $summaries = implode('', $summary);
+            }
+        } else {
+            // Implode the chunks into one string
+            $summaries = implode('', $summary);
+        }
+
+        return $summaries;
     }
 
     /**
@@ -163,6 +196,9 @@ class gpt
             $content = self::_make_link($content);
             $content = self::_make_email($content);
         }
+
+        // Add to logs
+        logs::insert($bot_id, $prompt, $content);
         return $content;
     }
 }
