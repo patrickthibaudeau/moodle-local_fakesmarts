@@ -28,7 +28,6 @@ class gpt
         curl_setopt($ch, CURLOPT_TIMEOUT, 2000);
         $result = json_decode(curl_exec($ch));
         curl_close($ch);
-        print_object($result);
         return $result;
     }
 
@@ -49,7 +48,6 @@ class gpt
         $user_content = $cache->get($bot_id . '_' . sesskey());
         // Get number of words in content and split it into chunks if it's too long
         $chunk_text = self::_split_into_chunks($user_content);
-        print_object(count($chunk_text));
         // Determine the context window size (overlap)
         $context_window_size = 50;
         $summary = [];
@@ -69,7 +67,7 @@ class gpt
                     ],
                     [
                         'role' => 'user',
-                        'content' => $chunk. ' Your response must only solely be based on the content from the context. Stick with the facts provided only.'
+                        'content' => $chunk. ' Your response must only and solely be based on the content from the context. Stick with the facts provided only. Provide examples and links if there are any in the context'
                     ],
                     [
                         'role' => 'user',
@@ -202,4 +200,35 @@ class gpt
         logs::insert($bot_id, $prompt, $content);
         return $content;
     }
+
+    /**
+     * Used for automatic testing and comparing text
+     * @param $bot_id
+     * @param $prompt
+     * @return string
+     * @throws \dml_exception
+     */
+    public static function compare_text($response, $answer) : string
+    {
+        $content_prompt = '';
+        $sentences = "Text 1: " . $response . "\n\nText 2: " . $answer;
+        $content_prompt .= $sentences;
+        "Question: Please answer with a boolean only to the following question. In the two texts provided above, do the two texts mean the same thing?\n";
+        $messages = [
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => 'You compare text. You only answer with a single boolean. You return the boolean that appears more often.'
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $content_prompt
+                ]
+            ]
+        ];
+
+        $comparison_result = self::_make_call(json_encode($messages));
+        return $comparison_result->choices[0]->message->content;
+    }
+
 }

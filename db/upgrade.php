@@ -134,5 +134,34 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023073000, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023073004) {
+
+        // Define table local_fakesmarts_qa to be created.
+        $table = new xmldb_table('local_fakesmarts_qa');
+
+        // Adding fields to table local_fakesmarts_qa.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('fakesmarts_id', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
+        $table->add_field('question', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('answer', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('accuracy', XMLDB_TYPE_INTEGER, '1', null, null, null, '0');
+        $table->add_field('usermodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+
+        // Adding keys to table local_fakesmarts_qa.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+        $table->add_key('usermodified', XMLDB_KEY_FOREIGN, ['usermodified'], 'user', ['id']);
+
+        // Conditionally launch create table for local_fakesmarts_qa.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023073004, 'local', 'fakesmarts');
+    }
+
+
     return true;
 }

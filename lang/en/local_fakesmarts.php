@@ -3,6 +3,7 @@ $string['actions'] = 'Actions';
 $string['add_bot'] = 'Create new bot';
 $string['add_content'] = 'Add content';
 $string['add_type'] = 'Add type';
+$string['auto_test'] = 'Auto-Test';
 $string['ask_a_question'] = 'Ask a question';
 $string['azure_endpoint'] = 'Azure Endpoint';
 $string['azure_endpoint_help'] = 'URL of the Azure endpoint';
