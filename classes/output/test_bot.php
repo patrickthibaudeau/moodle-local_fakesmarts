@@ -70,7 +70,7 @@ class test_bot implements \renderable, \templatable
 
         $number_of_tokens = $tokenizer->count($full_text) + 1000; // Add 1000 tokens to the count as the output
 
-        $cost = round( ($number_of_tokens / 1000) * $config->gpt_cost, 2) * 2; // * 2 because the output cost  doubles the price
+        $cost = (($number_of_tokens / 1000) * $config->gpt_cost) * 2; // * 2 because the output cost  doubles the price
 
         $data = [
             'bot_id' => $this->bot_id,

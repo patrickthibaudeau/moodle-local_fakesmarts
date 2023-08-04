@@ -22,6 +22,10 @@
                         <tr>
                             <th>{{#str}}prompt, local_fakesmarts{{/str}}</th>
                             <th>{{#str}}response, local_fakesmarts{{/str}}</th>
+                            <th>{{#str}}prompt_tokens, local_fakesmarts{{/str}}</th>
+                            <th>{{#str}}completion_tokens, local_fakesmarts{{/str}}</th>
+                            <th>{{#str}}total_tokens, local_fakesmarts{{/str}}</th>
+                            <th>{{#str}}cost, local_fakesmarts{{/str}}</th>
                             <th>{{#str}}ip, local_fakesmarts{{/str}}</th>
                             <th>{{#str}}timecreated, local_fakesmarts{{/str}}</th>
                         </tr>
@@ -31,6 +35,10 @@
                         <tr>
                             <td>{{{prompt}}}</td>
                             <td>{{{message}}}</td>
+                            <td>{{{prompt_tokens}}}</td>
+                            <td>{{{completion_tokens}}}</td>
+                            <td>{{{total_tokens}}}</td>
+                            <td>${{{cost}}}</td>
                             <td>{{ip}}</td>
                             <td>{{timecreated}}</td>
                         </tr>

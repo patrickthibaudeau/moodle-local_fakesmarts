@@ -4,7 +4,18 @@ namespace local_fakesmarts;
 
 class logs
 {
-    public static function insert($fakesmarts_id, $prompt, $message) {
+    /**
+     * Insert a log record
+     *
+     * @param int $fakesmarts_id
+     * @param string $prompt
+     * @param string $message
+     * @param string $prompt_tokens
+     * @param string $response_tokens
+     * @param int $cost
+     * @throws \dml_exception
+     */
+    public static function insert($fakesmarts_id, $prompt, $message, $prompt_tokens, $completion_tokens, $total_tokens, $cost) {
         global $DB;
         // Get client IP
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -19,6 +30,10 @@ class logs
             'fakesmarts_id' => $fakesmarts_id,
             'prompt' => $prompt,
             'message' => $message,
+            'prompt_tokens' => $prompt_tokens,
+            'completion_tokens' => $completion_tokens,
+            'total_tokens' => $total_tokens,
+            'cost' => $cost,
             'ip' => $ip,
             'timecreated' => time()
         ];
@@ -38,7 +53,11 @@ class logs
                     id, 
                     fakesmarts_id, 
                     prompt, 
-                    message, 
+                    message,
+                    prompt_tokens,
+                    completion_tokens,
+                    total_tokens,
+                    cost,
                     DATE_FORMAT(FROM_UNIXTIME(timecreated), '%m/%d/%Y %h:%i') as timecreated,
                     ip
                 FROM 

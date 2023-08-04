@@ -52,6 +52,9 @@ class gpt
         $chunk_text = self::_split_into_chunks($user_content);
         // Determine the context window size (overlap)
         $context_window_size = 50;
+        $prompt_tokens = 0;
+        $completion_tokens = 0;
+        $total_tokens = 0;
         $summary = [];
         $i = 0;
         // Loop through the chunks and send them to the API
@@ -78,6 +81,11 @@ class gpt
                 ]
             ];
             $result = self::_make_call(json_encode($messages));
+            // Add the number of tokens used for the prompt to the total tokens
+            $prompt_tokens = $prompt_tokens + $result->usage->prompt_tokens;
+            $completion_tokens = $completion_tokens + $result->usage->completion_tokens;
+            $total_tokens = $total_tokens + $result->usage->total_tokens;
+            // Capture the response
             $summary[] = $result->choices[0]->message->content;
         }
 
@@ -105,6 +113,11 @@ class gpt
             ];
 
             $comparison_result = self::_make_call(json_encode($messages));
+            // Add the number of tokens used for the comparison to the total tokens
+            $prompt_tokens = $prompt_tokens + $comparison_result->usage->prompt_tokens;
+            $completion_tokens = $completion_tokens + $comparison_result->usage->completion_tokens;
+            $total_tokens = $total_tokens + $comparison_result->usage->total_tokens;
+
             $answer = $comparison_result->choices[0]->message->content;
             if ($answer == 'True') {
                 $summaries = $summary[0];
@@ -115,6 +128,10 @@ class gpt
             // Implode the chunks into one string
             $summaries = implode('', $summary);
         }
+        // Get the cost of the call
+        $cost = self::_get_cost($total_tokens);
+        // Add to logs
+        logs::insert($bot_id, $prompt, $summaries, $prompt_tokens, $completion_tokens, $total_tokens, $cost);
 
         return $summaries;
     }
@@ -178,6 +195,21 @@ class gpt
     }
 
     /**
+     * Get the cost of the API call
+     * @param $object GPT object rteturned from the API
+     * @return float
+     * @throws \dml_exception
+     */
+    protected static function _get_cost($total_tokens): float
+    {
+        // plugin config
+        $config = get_config('local_fakesmarts');
+        $cost = round(($total_tokens / 1000) * $config->gpt_cost, 2);
+
+        return $cost;
+    }
+
+    /**
      * Get the response from the API
      * @param $bot_id
      * @param $prompt
@@ -198,8 +230,6 @@ class gpt
             $content = self::_make_email($content);
         }
 
-        // Add to logs
-        logs::insert($bot_id, $prompt, $content);
         return $content;
     }
 
@@ -233,19 +263,6 @@ class gpt
         return $comparison_result->choices[0]->message->content;
     }
 
-    /**
-     * Get the cost of the API call
-     * @param $object GPT object rteturned from the API
-     * @return float
-     * @throws \dml_exception
-     */
-    protected static function _get_cost($object): float
-    {
-        // plugin config
-        $config = get_config('local_fakesmarts');
-        $cost = round(($object->usage->total_tokens / 1000) * $config->gpt_cost, 2);
 
-        return $cost;
-    }
 
 }
