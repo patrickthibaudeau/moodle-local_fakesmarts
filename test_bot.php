@@ -23,7 +23,7 @@ echo $output->render_test_bot($test_bot);
 //$cache = cache::make('local_fakesmarts', 'fakesmarts_system_messages');
 //echo $cache->get(8 . '_' . sesskey());
 
-//print(gpt::get_response(8, 'Can I give my presentation with someone else?'));
+//print(gpt::get_response(15, 'What is this bot used for?'));
 //**********************
 //*** DISPLAY FOOTER ***
 //**********************

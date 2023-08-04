@@ -44,11 +44,12 @@ class content implements \renderable, \templatable
 
         $files = $FAKESMARTSFILES->get_records();
         $files = array_values($files);
-
+        $word_count = str_word_count($FAKESMARTSFILES->concatenate_content());
         $data = [
             'bot_id' => $this->bot_id,
             'bot_name' => $FAKESMARTSFILES->get_bot_name(),
-            'files' => $files
+            'files' => $files,
+            'word_count' => $word_count,
         ];
         return $data;
     }

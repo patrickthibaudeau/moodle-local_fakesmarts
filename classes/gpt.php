@@ -27,6 +27,8 @@ class gpt
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 2000);
         $result = json_decode(curl_exec($ch));
+//        print_object($result);
+//        die;
         curl_close($ch);
         return $result;
     }
@@ -67,7 +69,7 @@ class gpt
                     ],
                     [
                         'role' => 'user',
-                        'content' => $chunk. ' Your response must only and solely be based on the content from the context. Stick with the facts provided only. Provide examples and links if there are any in the context'
+                        'content' => $chunk
                     ],
                     [
                         'role' => 'user',
@@ -84,11 +86,11 @@ class gpt
             $sentences = '';
             foreach ($summary as $i => $response) {
                 if ($response != '') {
-                    $sentences .=  $response . "\n" ;
+                    $sentences .= $response . "\n";
                 }
             }
             $content_prompt .= $sentences;
-            "Question: Please answer with a boolean only to the following question. In the sentences provided above, do they all the sentences mean the same thing?\n";
+            "Question: Please answer with a boolean only to the following question. In the sentences provided above, do all the sentences mean the same thing?\n";
             $messages = [
                 'messages' => [
                     [
@@ -182,11 +184,11 @@ class gpt
      * @return string
      * @throws \dml_exception
      */
-    public static function get_response($bot_id, $prompt) : string
+    public static function get_response($bot_id, $prompt): string
     {
         $content = '';
         // Build the message
-        $content = self::_build_message($bot_id,$prompt);
+        $content = self::_build_message($bot_id, $prompt);
 
         // If a response is returned, format it
         if (isset($content)) {
@@ -208,7 +210,7 @@ class gpt
      * @return string
      * @throws \dml_exception
      */
-    public static function compare_text($response, $answer) : string
+    public static function compare_text($response, $answer): string
     {
         $content_prompt = '';
         $sentences = "Text 1: " . $response . "\n\nText 2: " . $answer;
@@ -229,6 +231,21 @@ class gpt
 
         $comparison_result = self::_make_call(json_encode($messages));
         return $comparison_result->choices[0]->message->content;
+    }
+
+    /**
+     * Get the cost of the API call
+     * @param $object GPT object rteturned from the API
+     * @return float
+     * @throws \dml_exception
+     */
+    protected static function _get_cost($object): float
+    {
+        // plugin config
+        $config = get_config('local_fakesmarts');
+        $cost = round(($object->usage->total_tokens / 1000) * $config->gpt_cost, 2);
+
+        return $cost;
     }
 
 }

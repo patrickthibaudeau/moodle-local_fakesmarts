@@ -60,6 +60,13 @@ if ($hassiteconfig) {
         65000, PARAM_INT, 6
     ));
 
+    $settings->add( new admin_setting_configtext(
+        'local_fakesmarts/gpt_cost',
+        get_string('gpt_cost', 'local_fakesmarts'),
+        get_string('gpt_cost_help', 'local_fakesmarts'),
+        0.0035, PARAM_FLOAT, 6
+    ));
+
     // MS OpenAI URL will be the following: $AZURE_ENDPOINT/openai/deployments/$DEPLOYMENT_NAME/chat/completions?api-version=2023-05-15
 
     $ADMIN->add('localplugins', $settings);
