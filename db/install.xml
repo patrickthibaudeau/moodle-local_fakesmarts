@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/fakesmarts/db" VERSION="20230728" COMMENT="XMLDB file for Moodle local/fakesmarts"
+<XMLDB PATH="local/fakesmarts/db" VERSION="20230804" COMMENT="XMLDB file for Moodle local/fakesmarts"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -55,6 +55,41 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="system_message" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="usermodified" TYPE="foreign" FIELDS="usermodified" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="local_fakesmarts_logs" COMMENT="Logs from bot usage">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="fakesmarts_id" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="prompt" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="message" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="confidence" TYPE="int" LENGTH="3" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="prompt_tokens" TYPE="int" LENGTH="20" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="completion_tokens" TYPE="int" LENGTH="20" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="total_tokens" TYPE="int" LENGTH="20" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="cost" TYPE="number" LENGTH="12" NOTNULL="false" DEFAULT="0.0" SEQUENCE="false" DECIMALS="6"/>
+        <FIELD NAME="ip" TYPE="char" LENGTH="15" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="16" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="local_fakesmarts_qa" COMMENT="Stores questions and answers for testing the bot">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="fakesmarts_id" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="question" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="answer" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="accuracy" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Boolean. Did the bot provide the correct answer?"/>
         <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
