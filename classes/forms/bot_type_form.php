@@ -1,4 +1,5 @@
 <?php
+
 namespace local_fakesmarts;
 
 defined('MOODLE_INTERNAL') || die();
@@ -17,19 +18,67 @@ class bot_type_form extends \moodleform
         // Create form object
         $mform = &$this->_form;
 
-        $mform->addElement('hidden', 'id');
-        $mform->setType('id', PARAM_INT);
+        //Hidden id form element
+        $mform->addElement(
+            'hidden',
+            'id'
+        );
+        $mform->setType(
+            'id',
+            PARAM_INT
+        );
 
         //Header: General
-        $mform->addElement('header', 'bot_type_form', get_string('bot_type', 'local_fakesmarts'));
+        $mform->addElement(
+            'header',
+            'bot_type_form',
+            get_string('bot_type', 'local_fakesmarts')
+        );
 
         // Name form element
-       $mform->addElement('text', 'name', get_string('name', 'local_fakesmarts'));
-       $mform->setType('name', PARAM_TEXT);
+        $mform->addElement(
+            'text',
+            'name',
+            get_string('name', 'local_fakesmarts')
+        );
+        $mform->setType(
+            'name',
+            PARAM_TEXT
+        );
+        // Description form element
+        $mform->addElement(
+            'textarea',
+            'description',
+            get_string('description', 'local_fakesmarts')
+        );
 
-       // Description form element
-        $mform->addElement('textarea', 'system_message', get_string('system_message', 'local_fakesmarts'), ['rows' => 20]);
-        $mform->setType('description', PARAM_TEXT);
+
+        // Use indexing server form element
+        $mform->addElement(
+            'selectyesno',
+            'use_indexing_server',
+            get_string('use_indexing_server', 'local_fakesmarts')
+        );
+        $mform->addHelpButton(
+            'use_indexing_server',
+            'use_indexing_server',
+            'local_fakesmarts'
+        );
+        $mform->setType(
+            'use_indexing_server',
+            PARAM_INT
+        );
+
+        // Description form element
+        $mform->addElement(
+            'textarea',
+            'system_message',
+            get_string('system_message', 'local_fakesmarts'),
+            ['rows' => 20]
+        );
+        $mform->setType(
+            'description',
+            PARAM_TEXT);
 
         $this->add_action_buttons();
         $this->set_data($formdata);

@@ -26,7 +26,26 @@ class fakesmarts {
 	 */
 	public function __construct() {
 	    global $DB;
-	    $this->results = $DB->get_records('local_fakesmarts');
+        $sql = "
+        Select
+            f.id,
+            f.name,
+            f.description,
+            f.bot_type,
+            ft.name As type_name,
+            f.bot_system_message,
+            ft.use_indexing_server,
+            f.usermodified,
+            f.timecreated,
+            f.timemodified,
+            date_format(from_unixtime(f.timecreated), '%d/%m/%Y') as timecreated_hr,
+            date_format(from_unixtime(f.timemodified), '%d/%m/%Y') as timemodified_hr
+        From
+            {local_fakesmarts} f Inner Join
+            {local_fakesmarts_type} ft On ft.id = f.bot_type
+        Order By
+            f.name";
+	    $this->results = $DB->get_records_sql($sql);
 	}
 
 	/**

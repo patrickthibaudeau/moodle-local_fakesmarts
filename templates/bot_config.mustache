@@ -55,14 +55,14 @@
         <div class="card">
             <div class="card-body">
                 {{#can_edit}}
-                <a href="bot.php" class="btn btn-outline-primary">
-                    {{#str}}add_bot, local_fakesmarts{{/str}}
-                </a>
+                    <a href="bot.php" class="btn btn-outline-primary">
+                        {{#str}}add_bot, local_fakesmarts{{/str}}
+                    </a>
                 {{/can_edit}}
                 {{#can_view_bot_types}}
-                <a href="bot_types.php" class="btn btn-outline-primary">
-                    {{#str}}bot_types, local_fakesmarts{{/str}}
-                </a>
+                    <a href="bot_types.php" class="btn btn-outline-primary">
+                        {{#str}}bot_types, local_fakesmarts{{/str}}
+                    </a>
                 {{/can_view_bot_types}}
             </div>
         </div>
@@ -78,48 +78,50 @@
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th>{{#str}}name, local_fakesmarts{{/str}}</th>
-                            <th>{{#str}}bot_type, local_fakesmarts{{/str}}</th>
-                            <th>{{#str}}actions, local_fakesmarts{{/str}}</th>
-                        </tr>
+                    <tr>
+                        <th>{{#str}}name, local_fakesmarts{{/str}}</th>
+                        <th>{{#str}}bot_type, local_fakesmarts{{/str}}</th>
+                        <th>{{#str}}actions, local_fakesmarts{{/str}}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {{#bots}}
+                    {{#bots}}
                         <tr>
                             <td>{{name}}</td>
-                            <td>{{bot_type}}</td>
+                            <td>{{type_name}}</td>
                             <td>
                                 {{#can_edit}}
-                                <a href="bot.php?id={{id}}" class="btn btn-outline-primary">
+                                    <a href="bot.php?id={{id}}" class="btn btn-outline-primary">
                                     {{#str}}edit, local_fakesmarts{{/str}}
-                                </a>
+                                    </a>
                                 {{/can_edit}}
                                 {{#can_edit_bot_content}}
-                                <a href="content.php?id={{id}}" class="btn btn-outline-primary">
-                                {{#str}}content, local_fakesmarts{{/str}}
-                                </a>
+                                    {{#use_indexing_server}}
+                                        <a href="content.php?id={{id}}" class="btn btn-outline-primary">
+                                        {{#str}}content, local_fakesmarts{{/str}}
+                                        </a>
+                                    {{/use_indexing_server}}
                                 {{/can_edit_bot_content}}
                                 {{#can_test}}
-                                <a href="test_bot.php?id={{id}}" class="btn btn-outline-primary">
-                                {{#str}}test_bot, local_fakesmarts{{/str}}
-                                </a>
+                                    <a href="test_bot.php?id={{id}}" class="btn btn-outline-primary">
+                                    {{#str}}test_bot, local_fakesmarts{{/str}}
+                                    </a>
                                 {{/can_test}}
                                 {{#can_view_bot_logs}}
-                                <a href="bot_logs.php?id={{id}}" class="btn btn-outline-primary">
-                                {{#str}}logs, local_fakesmarts{{/str}}
-                                </a>
+                                    <a href="bot_logs.php?id={{id}}" class="btn btn-outline-primary">
+                                    {{#str}}logs, local_fakesmarts{{/str}}
+                                    </a>
                                 {{/can_view_bot_logs}}
                                 {{#can_delete}}
-                                <button class="btn btn-outline-danger delete-bot" data-id="{{id}}">
-                                    {{#str}}delete, local_fakesmarts{{/str}}
-                                </button>
+                                    <button class="btn btn-outline-danger delete-bot" data-id="{{id}}">
+                                        {{#str}}delete, local_fakesmarts{{/str}}
+                                    </button>
                                 {{/can_delete}}
                             </td>
                         </tr>
-                        {{/bots}}
+                    {{/bots}}
                     </tbody>
-                    </table>
+                </table>
             </div>
         </div>
     </div>

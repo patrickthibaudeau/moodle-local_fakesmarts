@@ -42,6 +42,8 @@ $string['existing_bot_types'] = 'Existing bot types';
 $string['file'] = 'File';
 $string['gpt_cost'] = 'GPT cost?';
 $string['gpt_cost_help'] = 'Cost of GPT based per 1000 tokens';
+$string['indexing_server_url'] = 'Indexing server URL';
+$string['indexing_server_url_help'] = 'URL of the indexing server';
 $string['ip'] = 'IP';
 $string['logs'] = 'Logs';
 $string['logs_for'] = 'Logs for';
@@ -59,6 +61,8 @@ $string['test_bot'] = 'Test bot';
 $string['total_tokens'] = 'Total tokens';
 $string['total_words'] = 'Number of words in combined content. (You cannot exceed 11600 words)';
 $string['timecreated'] = 'Time created';
+$string['use_indexing_server'] = 'Use indexing server';
+$string['use_indexing_server_help'] = 'If your bot uses static content, use the indexing server to speed up the response time and reduce tokens/costs';
 $string['word_count'] = 'Word count';
 
 // Capabilites

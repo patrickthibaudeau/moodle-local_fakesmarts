@@ -20,20 +20,12 @@
                 {{#str}}test_area, local_fakesmarts{{/str}} - {{name}}
             </h3>
             <div class="card-body">
-                <div id="fakesmarts-bot-container">
-                    <div id="fakesmarts-conversation">
-
-                    </div>
-                    <div id="fakemarts-input-container">
-                        <input type="text" id="user-prompt" class="form-control" placeholder="{{#str}}ask_a_question, local_fakesmarts{{/str}}">
-                        <button
-                                id="submit-question"
-                                class="btn btn-primary mt-2"
-                                data-bot_id="{{bot_id}}"
-                        >{{#str}}submit, local_fakesmarts{{/str}}
-                        </button>
-                    </div>
-                </div>
+                {{#use_indexing_server}}
+                    {{> local_fakesmarts/indexing_server_test}}
+                {{/use_indexing_server}}
+                {{^use_indexing_server}}
+                    {{> local_fakesmarts/none_indexing_server_test}}
+                {{/use_indexing_server}}
                 <div>
                     Your call will use approximately <span id="token-count">{{number_of_tokens}} tokens at a cost of approximately ${{cost}}</span>
                 </div>

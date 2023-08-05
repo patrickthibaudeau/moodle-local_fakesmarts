@@ -67,6 +67,13 @@ if ($hassiteconfig) {
         0.0035, PARAM_FLOAT, 6
     ));
 
+    $settings->add( new admin_setting_configtext(
+        'local_fakesmarts/indexing_server_url',
+        get_string('indexing_server_url', 'local_fakesmarts'),
+        get_string('indexing_server_url_help', 'local_fakesmarts'),
+        '', PARAM_TEXT, 255
+    ));
+
     // MS OpenAI URL will be the following: $AZURE_ENDPOINT/openai/deployments/$DEPLOYMENT_NAME/chat/completions?api-version=2023-05-15
 
     $ADMIN->add('localplugins', $settings);

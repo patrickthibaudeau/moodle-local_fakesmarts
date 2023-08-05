@@ -201,5 +201,35 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023080401, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023080505) {
+
+        // Define field use_indexing_server to be added to local_fakesmarts_type.
+        $table = new xmldb_table('local_fakesmarts_type');
+        $field = new xmldb_field('use_indexing_server', XMLDB_TYPE_INTEGER, '1', null, null, null, '1', 'system_message');
+
+        // Conditionally launch add field use_indexing_server.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023080505, 'local', 'fakesmarts');
+    }
+
+    if ($oldversion < 2023080506) {
+
+        // Define field description to be added to local_fakesmarts_type.
+        $table = new xmldb_table('local_fakesmarts_type');
+        $field = new xmldb_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null, 'name');
+
+        // Conditionally launch add field description.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023080506, 'local', 'fakesmarts');
+    }
+
     return true;
 }

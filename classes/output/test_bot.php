@@ -76,7 +76,8 @@ class test_bot implements \renderable, \templatable
             'bot_id' => $this->bot_id,
             'name' => $FAKESMART->get_name(),
             'number_of_tokens' => $number_of_tokens,
-            'cost' => $cost
+            'cost' => $cost,
+            'use_indexing_server' => $FAKESMART->use_indexing_server()
         ];
         return $data;
     }
