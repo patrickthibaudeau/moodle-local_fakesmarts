@@ -20,6 +20,16 @@ class renderer extends \plugin_renderer_base {
     }
 
     /**
+     * Used with root/index.php
+     * @param \templatable $dashboard
+     * @return type
+     */
+    public function render_bot_config(\templatable $bot_config) {
+        $data = $bot_config->export_for_template($this);
+        return $this->render_from_template('local_fakesmarts/bot_config', $data);
+    }
+
+    /**
      * @param \templatable $content
      * @return bool|string
      * @throws \moodle_exception

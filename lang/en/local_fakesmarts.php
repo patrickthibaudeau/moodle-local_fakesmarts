@@ -10,6 +10,7 @@ $string['azure_endpoint_help'] = 'URL of the Azure endpoint';
 $string['azure_key'] = 'Azure Key';
 $string['azure_key_help'] = 'Use one of the two keys available for the OpenAI service in Azure';
 $string['bot'] = 'Bot';
+$string['bot_configurations'] = 'Bot configurations';
 $string['bots'] = 'Bots';
 $string['bot_type'] = 'Bot type';
 $string['bot_types'] = 'Bot types';
@@ -59,3 +60,15 @@ $string['total_tokens'] = 'Total tokens';
 $string['total_words'] = 'Number of words in combined content. (You cannot exceed 11600 words)';
 $string['timecreated'] = 'Time created';
 $string['word_count'] = 'Word count';
+
+// Capabilites
+$string['fakesmarts:delete_bots'] = 'Delete bots';
+$string['fakesmarts:edit_bots'] = 'Add/Edit bots';
+$string['fakesmarts:test_bots'] = 'Test bots';
+$string['fakesmarts:view_bots'] = 'View bots';
+$string['fakesmarts:delete_bot_types'] = 'Delete bot types';
+$string['fakesmarts:edit_bot_types'] = 'Add/Edit bot types';
+$string['fakesmarts:view_bot_types'] = 'View bot types';
+$string['fakesmarts:delete_bot_content'] = 'Delete bot content';
+$string['fakesmarts:edit_bot_content'] = 'Add/Edit bot content';
+$string['fakesmarts:view_bot_logs'] = 'View bot logs';
