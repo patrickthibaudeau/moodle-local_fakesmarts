@@ -54,8 +54,7 @@ function xmldb_local_fakesmarts_install()
     $record->use_indexing_server = 0;
     $record->system_message = 'You are a factual bot that creates meeting notes from the transcript provided. ';
     $record->system_message .= 'You do not add content that is not available in the transcript. ';
-    $record->system_message .= 'Create meeting notes and separate the notes by topic. Each topic should be in a numbered list. ';
-    $record->system_message .= 'Once done, create all action items from transcription.';
+    $record->system_message .= 'Your response must be in the same language as the transcript provided. ';
     $record->timecreated = time();
     $record->timemodified = time();
     $record->usermodified = $USER->id;

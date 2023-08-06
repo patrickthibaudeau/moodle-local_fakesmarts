@@ -204,7 +204,7 @@ class gpt
     {
         // plugin config
         $config = get_config('local_fakesmarts');
-        $cost = round(($total_tokens / 1000) * $config->gpt_cost, 2);
+        $cost = ($total_tokens / 1000) * $config->gpt_cost;
 
         return $cost;
     }
