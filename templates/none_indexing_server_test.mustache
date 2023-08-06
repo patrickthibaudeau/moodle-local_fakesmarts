@@ -1,10 +1,9 @@
 <div  class="row">
     <div class="col">
-        <textarea id="fakesmarts-test-input" cols="80" rows="20"></textarea>
+        <h3>{{#str}}paste_text, local_fakesmarts{{/str}}</h3>
+        <textarea id="fakesmarts-test-input" style="width: 100%;" rows="20"></textarea>
         <div id="fakesmarts-bot-container">
-            <div id="fakesmarts-conversation">
 
-            </div>
             <div id="fakemarts-input-container">
                 <input type="text" id="user-prompt" class="form-control"
                        placeholder="{{#str}}ask_a_question, local_fakesmarts{{/str}}">
@@ -18,9 +17,16 @@
         </div>
     </div>
     <div class="col">
-                    <div id="test-results">
-
-                    </div>
+        {{> local_fakesmarts/test_bot_statistics}}
+        <div class="card mt-3">
+            <h3 class="card-header">
+                {{#str}}response, local_fakesmarts{{/str}}
+            </h3>
+            <div class="card-body">
+                <div id="fakesmarts-conversation">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

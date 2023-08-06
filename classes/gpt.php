@@ -40,14 +40,20 @@ class gpt
      * @return object
      * @throws \dml_exception
      */
-    protected static function _build_message($bot_id, $prompt)
+    protected static function _build_message($bot_id, $prompt, $content = '')
     {
+        // Create object that will return the data
+        $data = new \stdClass();
         $FAKESMART = new fakesmart($bot_id);
         // initiate cache store
         $cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
         // Get system message and user content from cache
         $system_message = $cache->get($FAKESMART->get_bot_type() . '_' . sesskey());
-        $user_content = $cache->get($bot_id . '_' . sesskey());
+        if ($FAKESMART->use_indexing_server()) {
+            $user_content = $content;
+        } else {
+            $user_content = $cache->get($bot_id . '_' . sesskey());
+        }
         // Get number of words in content and split it into chunks if it's too long
         $chunk_text = self::_split_into_chunks($user_content);
         // Determine the context window size (overlap)
@@ -133,7 +139,12 @@ class gpt
         // Add to logs
         logs::insert($bot_id, $prompt, $summaries, $prompt_tokens, $completion_tokens, $total_tokens, $cost);
 
-        return $summaries;
+        $data->prompt_tokens = $prompt_tokens;
+        $data->completion_tokens = $completion_tokens;
+        $data->total_tokens = $total_tokens;
+        $data->cost = $cost;
+        $data->message = $summaries;
+        return $data;
     }
 
     /**
@@ -213,24 +224,26 @@ class gpt
      * Get the response from the API
      * @param $bot_id
      * @param $prompt
-     * @return string
+     * @return object
      * @throws \dml_exception
      */
-    public static function get_response($bot_id, $prompt): string
+    public static function get_response($bot_id, $prompt, $content = ''): object
     {
         $content = '';
         // Build the message
-        $content = self::_build_message($bot_id, $prompt);
+        $data = self::_build_message($bot_id, $prompt, $conten);
+        $message = $data->message;
 
-        // If a response is returned, format it
-        if (isset($content)) {
-            $content = $content;
-            $content = nl2br(htmlspecialchars($content));
-            $content = self::_make_link($content);
-            $content = self::_make_email($content);
+        // Format the message
+        if (isset($message)) {
+            $message = nl2br(htmlspecialchars($message));
+            $message = self::_make_link($message);
+            $message = self::_make_email($message);
         }
 
-        return $content;
+        $data->message = $message;
+
+        return $data;
     }
 
     /**

@@ -5,9 +5,11 @@
                 <a href="index.php" class="btn btn-outline-primary">
                 {{#str}}bots, local_fakesmarts{{/str}}
                 </a>
+                {{#use_indexing_server}}
                 <a href="auto_test.php?id={{bot_id}}" class="btn btn-outline-primary">
                     {{#str}}auto_test, local_fakesmarts{{/str}}
                 </a>
+                {{/use_indexing_server}}
             </div>
         </div>
     </div>
@@ -17,7 +19,7 @@
     <div class="col">
         <div class="card">
             <h3 class="card-header">
-                {{#str}}test_area, local_fakesmarts{{/str}} - {{name}}
+                {{name}}
             </h3>
             <div class="card-body">
                 {{#use_indexing_server}}
@@ -26,9 +28,7 @@
                 {{^use_indexing_server}}
                     {{> local_fakesmarts/none_indexing_server_test}}
                 {{/use_indexing_server}}
-                <div>
-                    Your call will use approximately <span id="token-count">{{number_of_tokens}} tokens at a cost of approximately ${{cost}}</span>
-                </div>
+
             </div>
         </div>
     </div>

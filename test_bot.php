@@ -9,7 +9,11 @@ $context = context_system::instance();
 
 $bot_id = required_param('id', PARAM_INT);
 
-\local_fakesmarts\base::page($CFG->wwwroot . '/local/fakesmarts/index.php', get_string('pluginname', 'local_fakesmarts'), '', $context);
+\local_fakesmarts\base::page(
+    $CFG->wwwroot . '/local/fakesmarts/test_bot.php',
+    get_string('testing_bot', 'local_fakesmarts'),
+    get_string('testing_bot', 'local_fakesmarts'),
+    $context);
 
 $PAGE->requires->js_call_amd('local_fakesmarts/gpt', 'init');
 //**************** ******

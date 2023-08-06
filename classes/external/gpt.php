@@ -40,7 +40,8 @@ class local_fakesmarts_external_gpt extends external_api {
         return new external_function_parameters(
             array(
                 'bot_id' => new external_value(PARAM_INT, 'ID of the bot being used', false, 0),
-                'prompt' => new external_value(PARAM_TEXT, 'Question asked by user', false, '')
+                'prompt' => new external_value(PARAM_TEXT, 'Question asked by user', false, ''),
+                'content' => new external_value(PARAM_TEXT, 'User content', false, '')
             )
         );
     }
@@ -52,13 +53,14 @@ class local_fakesmarts_external_gpt extends external_api {
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
      */
-    public static function response($bot_id, $prompt) {
+    public static function response($bot_id, $prompt, $content) {
         global $CFG, $USER, $DB, $PAGE;
 
         //Parameter validation
         $params = self::validate_parameters(self::response_parameters(), array(
                 'bot_id' => $bot_id,
-                'prompt' => $prompt
+                'prompt' => $prompt,
+                'content' => $content
             )
         );
 
@@ -69,7 +71,7 @@ class local_fakesmarts_external_gpt extends external_api {
 
         $message = gpt::get_response($bot_id, $prompt);
 
-        return $message;
+        return json_encode($message);
     }
 
     /**

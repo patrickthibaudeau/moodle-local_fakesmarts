@@ -62,8 +62,9 @@ class test_bot implements \renderable, \templatable
         $cache->delete($this->bot_id . '_' . sesskey());
         // Set the cache for this bot
         $cache->set($bot_type . '_' . sesskey(), $FAKESMART->concatenate_system_messages());
-        $cache->set($this->bot_id . '_' . sesskey(), $FAKESMARTFILES->concatenate_content());
-
+        if ($FAKESMART->use_indexing_server()) {
+            $cache->set($this->bot_id . '_' . sesskey(), $FAKESMARTFILES->concatenate_content());
+        }
         $tokenizer_config = new Gpt3TokenizerConfig();
         $tokenizer = new Gpt3Tokenizer($tokenizer_config);
         $full_text = $cache->get($bot_type . '_' . sesskey()) . $cache->get($this->bot_id . '_' . sesskey());
