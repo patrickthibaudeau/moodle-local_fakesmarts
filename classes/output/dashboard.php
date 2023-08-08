@@ -37,13 +37,14 @@ class dashboard implements \renderable, \templatable
     {
         global $USER, $CFG, $DB;
 
+        $context = \context_system::instance();
         $FAKESMARTS = new fakesmarts();
 
         $bots = $FAKESMARTS->get_records();
         $bots = array_values($bots);
 
         $data = [
-            'bots' => $bots
+            'can_view_bots' => has_capability('local/fakesmarts:view_bots', $context),
         ];
         return $data;
     }
