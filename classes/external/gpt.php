@@ -69,7 +69,7 @@ class local_fakesmarts_external_gpt extends external_api {
         $context = \context_system::instance();
         self::validate_context($context);
 
-        $message = gpt::get_response($bot_id, $prompt);
+        $message = gpt::get_response($bot_id, $prompt, $content);
 
         return json_encode($message);
     }

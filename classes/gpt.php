@@ -50,10 +50,13 @@ class gpt
         // Get system message and user content from cache
         $system_message = $cache->get($FAKESMART->get_bot_type() . '_' . sesskey());
         if ($FAKESMART->use_indexing_server()) {
-            $user_content = $content;
-        } else {
             $user_content = $cache->get($bot_id . '_' . sesskey());
+        } else {
+            $user_content = $content;
         }
+        // Remove all lines and replace with space. AKA lower token count
+        $user_content = preg_replace('/\s+/', ' ', trim($user_content));
+
         // Get number of words in content and split it into chunks if it's too long
         $chunk_text = self::_split_into_chunks($user_content);
         // Determine the context window size (overlap)
@@ -224,14 +227,14 @@ class gpt
      * Get the response from the API
      * @param $bot_id
      * @param $prompt
+     * @param $content
      * @return object
      * @throws \dml_exception
      */
     public static function get_response($bot_id, $prompt, $content = ''): object
     {
-        $content = '';
         // Build the message
-        $data = self::_build_message($bot_id, $prompt, $conten);
+        $data = self::_build_message($bot_id, $prompt, $content);
         $message = $data->message;
 
         // Format the message

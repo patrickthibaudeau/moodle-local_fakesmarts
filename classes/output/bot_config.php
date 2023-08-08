@@ -54,7 +54,7 @@ class bot_config implements \renderable, \templatable
             'can_edit_bot_content' => has_capability('local/fakesmarts:edit_bot_content', $context),
             'can_view_bot_logs' => has_capability('local/fakesmarts:view_bot_logs', $context),
         ];
-print_object($data);
+
         return $data;
     }
 

@@ -15,7 +15,7 @@ function get_response() {
         var bot_id = $(this).data('bot_id');
         var prompt = $('#user-prompt').val();
         var content  = $('#fakesmarts-test-input').val();
-        // console.log(bot_id);
+        console.log(content);
         // console.log(prompt);
         //Delete the record
         var gpt_response = ajax.call([{
