@@ -64,13 +64,20 @@ if ($hassiteconfig) {
         'local_fakesmarts/gpt_cost',
         get_string('gpt_cost', 'local_fakesmarts'),
         get_string('gpt_cost_help', 'local_fakesmarts'),
-        0.0035, PARAM_FLOAT, 6
+        0.0035, PARAM_FLOAT, 12
     ));
 
     $settings->add( new admin_setting_configtext(
         'local_fakesmarts/indexing_server_url',
         get_string('indexing_server_url', 'local_fakesmarts'),
         get_string('indexing_server_url_help', 'local_fakesmarts'),
+        '', PARAM_TEXT, 255
+    ));
+
+    $settings->add( new admin_setting_configpasswordunmask(
+        'local_fakesmarts/indexing_server_api_key',
+        get_string('indexing_server_api_key', 'local_fakesmarts'),
+        get_string('indexing_server_api_key_help', 'local_fakesmarts'),
         '', PARAM_TEXT, 255
     ));
 

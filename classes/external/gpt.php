@@ -41,7 +41,7 @@ class local_fakesmarts_external_gpt extends external_api {
             array(
                 'bot_id' => new external_value(PARAM_INT, 'ID of the bot being used', false, 0),
                 'prompt' => new external_value(PARAM_TEXT, 'Question asked by user', false, ''),
-                'content' => new external_value(PARAM_TEXT, 'User content', false, '')
+                'content' => new external_value(PARAM_RAW, 'User content', false, '')
             )
         );
     }

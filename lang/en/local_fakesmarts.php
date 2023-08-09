@@ -47,6 +47,8 @@ $string['fakesmarts_suite'] = 'Fake Smarts Suite';
 $string['file'] = 'File';
 $string['gpt_cost'] = 'GPT cost?';
 $string['gpt_cost_help'] = 'Cost of GPT based per 1000 tokens';
+$string['indexing_server_api_key'] = 'Indexing server API Key';
+$string['indexing_server_api_key_help'] = 'Enter the API key for the indexing server';
 $string['indexing_server_url'] = 'Indexing server URL';
 $string['indexing_server_url_help'] = 'URL of the indexing server';
 $string['ip'] = 'IP';
@@ -84,3 +86,8 @@ $string['fakesmarts:view_bot_types'] = 'View bot types';
 $string['fakesmarts:delete_bot_content'] = 'Delete bot content';
 $string['fakesmarts:edit_bot_content'] = 'Add/Edit bot content';
 $string['fakesmarts:view_bot_logs'] = 'View bot logs';
+
+// MinutesMaster
+$string['convert'] = 'Convert';
+$string['language'] = 'Language';
+$string['language_help'] = 'Select the language in which you would like the results to be returned. Note: Make sure that your template provides support for the language you have chosen.';
