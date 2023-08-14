@@ -8,6 +8,9 @@
 namespace local_fakesmarts;
 
 use local_fakesmarts\crud;
+use local_fakesmarts\fakesmart;
+use local_fakesmarts\fakesmart_files;
+use local_fakesmarts\cria;
 
 class fakesmart_file extends crud {
 
@@ -200,5 +203,21 @@ class fakesmart_file extends crud {
 	public function set_timemodified($timemodified){
 		$this->timemodified = $timemodified;
 	}
+
+    /**
+     * Upload files to indexing server
+     * @param $bot_id
+     * @return void
+     */
+    public function upload_files_to_indexing_server($bot_id) {
+        // Remove existing files
+        $cria = cria::get_files($bot_id);
+        foreach($cria->files as $file){
+            cria::delete_file($bot_id, $file->file_id);
+        }
+        // upload new files
+        return cria::add_file($bot_id);
+    }
+
 
 }

@@ -28,8 +28,12 @@ if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
     redirect($CFG->wwwroot . '/local/fakesmarts/content.php?id=' . $formdata->fakesmarts_id);
 } else if ($data = $mform->get_data()) {
+    $FAKESMARTSFILE = new fakesmart_file($data->fakesmarts_id);
+    $data->content = $content = preg_replace('/\s+/', ' ', trim($data->content));
     // Update content
     $DB->update_record('local_fakesmarts_files', $data);
+
+    $FAKESMARTSFILE->upload_files_to_indexing_server($data->fakesmarts_id);
     // Redirect to the content page
     redirect($CFG->wwwroot . '/local/fakesmarts/content.php?id=' . $data->fakesmarts_id,);
 } else {

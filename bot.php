@@ -27,7 +27,6 @@ if ($id) {
 }
 
 
-
 $mform = new \local_fakesmarts\bot_form(null, array('formdata' => $formdata));
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
@@ -38,15 +37,22 @@ if ($mform->is_cancelled()) {
         $FAKESMART = new fakeSmart($data->id);
         $data->description = $data->description_editor['text'];
         $FAKESMART->update_record($data);
+        if ($FAKESMART->use_indexing_server()) {
+            $FAKESMART->update_bot_on_indexing_server();
+        }
+
     } else {
         $data->description = $data->description_editor['text'];
         $FAKESMART = new fakeSmart();
-        $FAKESMART->insert_record($data);
+        $id = $FAKESMART->insert_record($data);
+        $NEW_BOT = new fakeSmart($id);
+        if ($NEW_BOT->use_indexing_server()) {
+            $NEW_BOT->create_bot_on_indexing_server();
+        }
     }
 
 
-        redirect($CFG->wwwroot . '/local/fakesmarts/bot_config.php');
-
+    redirect($CFG->wwwroot . '/local/fakesmarts/bot_config.php');
 
 
 } else {

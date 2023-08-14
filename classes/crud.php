@@ -8,6 +8,9 @@
 
 namespace local_fakesmarts;
 
+use local_fakesmarts\fakesmarts_type;
+use local_fakesmarts\cria;
+
 abstract class crud
 {
 

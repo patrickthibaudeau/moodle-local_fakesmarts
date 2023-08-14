@@ -9,6 +9,7 @@
 namespace local_fakesmarts;
 
 use local_fakesmarts\crud;
+use local_fakesmarts\cria;
 
 class fakesmart extends crud
 {
@@ -260,6 +261,32 @@ class fakesmart extends crud
     public function set_timemodified($timemodified)
     {
         $this->timemodified = $timemodified;
+    }
+
+    /**
+     * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public function create_bot_on_indexing_server()
+    {
+        cria::create_bot($this->id);
+    }
+
+    /**
+     * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public function update_bot_on_indexing_server()
+    {
+        $bot_exists = cria::get_bot($this->id);
+
+        if ($bot_exists->status == 404) {
+            cria::create_bot($this->id);
+        } else {
+            cria::update_bot($this->id);
+        }
     }
 
 }

@@ -5,6 +5,7 @@ require_once("../../config.php");
 require_once($CFG->dirroot . "/local/fakesmarts/classes/forms/add_content_form.php");
 
 use local_fakesmarts\rd_text_extraction;
+use local_fakesmarts\cria;
 
 /**
  * Loads all files found in a given folder.
@@ -64,7 +65,7 @@ if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
     redirect($CFG->wwwroot . '/local/fakesmarts/index.php');
 } else if ($data = $mform->get_data()) {
-
+    $FAKESMARTFILES= new fakesmart_file($data->fakesmarts_id);
     // Get file name and content
     $filename = $mform->get_new_filename('importedFile');
     $fileContent = $mform->get_file_content('importedFile');
@@ -105,8 +106,8 @@ if ($mform->is_cancelled()) {
     foreach ($records as $record) {
         $content .= $record->content . "\n\n";
     }
-    // Create file on indexing server
-
+    // Upload files to indexing server
+    $FAKESMARTFILES->upload_files_to_indexing_server($data->fakesmarts_id);
     // Redirect to the content page
     redirect($CFG->wwwroot . '/local/fakesmarts/content.php?id=' . $data->fakesmarts_id,);
 } else {
