@@ -45,7 +45,7 @@ if ($mform->is_cancelled()) {
     }
 
 
-        redirect($CFG->wwwroot . '/local/fakesmarts/index.php');
+        redirect($CFG->wwwroot . '/local/fakesmarts/bot_config.php');
 
 
 

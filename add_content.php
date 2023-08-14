@@ -85,6 +85,8 @@ if ($mform->is_cancelled()) {
     file_put_contents($file_path, $fileContent);
     // Convert the content of the file to text
     $content = rd_text_extraction::convert_to_text($file_path);
+    // Remove all lines and replace with space. AKA lower token count
+    $content = preg_replace('/\s+/', ' ', trim($content));
     // Create content data array
     $content_data = [
         'fakesmarts_id' => $data->fakesmarts_id,

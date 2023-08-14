@@ -9,19 +9,30 @@ class gpt
 {
 
     /**
-     * Call to MS OpenAI API that returns the results
-     *
+     * Send the request to the API
+     * @param $bot_id
      * @param $data
+     * @param $method
+     * @param $use_indexing_server
      * @return mixed
      * @throws \dml_exception
      */
-    protected static function _make_call($data)
+    protected static function _make_call($bot_id, $data, $method = 'GET', $use_indexing_server = 1)
     {
         $config = get_config('local_fakesmarts');
-        $url = $config->azure_endpoint . '/openai/deployments/' . $config->deployment_name . '/chat/completions?api-version=2023-05-15';
+        if ($use_indexing_server) {
+            $url = $config->indexing_server_url;
+        } else {
+            $url = $config->azure_endpoint . '/openai/deployments/' . $config->deployment_name . '/chat/completions?api-version=2023-05-15';
+        }
+
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'api-key: ' . $config->azure_key));
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        if ($use_indexing_server) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'x-api-key: ' . $config->indexing_server_api_key));
+        } else {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'api-key: ' . $config->azure_key));
+        }
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -89,7 +100,7 @@ class gpt
                     ]
                 ]
             ];
-            $result = self::_make_call(json_encode($messages));
+            $result = self::_make_call($bot_id, json_encode($messages), 'GET', $FAKESMART->use_indexing_server());
             // Add the number of tokens used for the prompt to the total tokens
             $prompt_tokens = $prompt_tokens + $result->usage->prompt_tokens;
             $completion_tokens = $completion_tokens + $result->usage->completion_tokens;
