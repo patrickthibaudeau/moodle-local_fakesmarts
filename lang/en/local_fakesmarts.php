@@ -10,6 +10,7 @@ $string['azure_endpoint_help'] = 'URL of the Azure endpoint';
 $string['azure_key'] = 'Azure Key';
 $string['azure_key_help'] = 'Use one of the two keys available for the OpenAI service in Azure';
 $string['bot'] = 'Bot';
+$string['bot_already_exists'] = 'A bot with this id already exists.';
 $string['bot_configuration'] = 'BotCraft';
 $string['bot_configuration_help'] = 'Easily create a bot by providing your own documentation and system messages.';
 $string['bot_configurations'] = 'Bot configurations';
@@ -26,6 +27,7 @@ $string['bot_system_message'] = 'Bot system message';
 $string['bot_system_message_help'] = 'Enter the system message to be appended to the default system message when the bot is used';
 $string['cachedef_fakesmarts_system_messages'] = 'Caches all system messages for bots';
 $string['cancel'] = 'Cancel';
+$string['chat_does_not_exist'] = 'The chat requested does not exist.';
 $string['chunk_limit'] = 'Number of words per chunk';
 $string['chunk_limit_help'] = 'OpenAI works on chunks of text. This setting defines the number of words per chunk.<br>
 For GPT-3.5-turbo 16k, the maximum number of words per chunk is 12000.';

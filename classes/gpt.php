@@ -17,11 +17,11 @@ class gpt
      * @return mixed
      * @throws \dml_exception
      */
-    protected static function _make_call($bot_id, $data, $method = 'GET', $use_indexing_server = 1)
+    public static function _make_call($bot_id, $data, $call = '', $method = 'GET', $use_indexing_server = 1)
     {
         $config = get_config('local_fakesmarts');
         if ($use_indexing_server) {
-            $url = $config->indexing_server_url;
+            $url = $config->indexing_server_url . 'bots/' . $bot_id . '/' . $call;
         } else {
             $url = $config->azure_endpoint . '/openai/deployments/' . $config->deployment_name . '/chat/completions?api-version=2023-05-15';
         }
