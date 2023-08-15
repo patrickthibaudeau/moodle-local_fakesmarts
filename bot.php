@@ -30,7 +30,7 @@ if ($id) {
 $mform = new \local_fakesmarts\bot_form(null, array('formdata' => $formdata));
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
-    redirect($CFG->wwwroot . '/local/fakesmarts/index.php');
+    redirect($CFG->wwwroot . '/local/fakesmarts/bot_config.php');
 } else if ($data = $mform->get_data()) {
 
     if ($data->id) {
