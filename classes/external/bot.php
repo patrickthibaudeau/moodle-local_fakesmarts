@@ -13,6 +13,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+use local_fakesmarts\fakesmart;
+use local_fakesmarts\cria;
 /**
  * External Web Service Template
  *
@@ -62,7 +64,11 @@ class local_fakesmarts_external_bot extends external_api {
         //OPTIONAL but in most web service it should present
         $context = \context_system::instance();
         self::validate_context($context);
-
+        $FAKESMART = new fakesmart($id);
+        if ($FAKESMART->use_indexing_server()) {
+            // Delete bot on indexing server
+            cria::delete_bot($id);
+        }
         $DB->delete_records('local_fakesmarts_files', array('fakesmarts_id' => $id));
         $DB->delete_records('local_fakesmarts', array('id' => $id));
 
