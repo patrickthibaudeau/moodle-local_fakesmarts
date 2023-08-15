@@ -159,8 +159,12 @@ class cria
      * @return mixed
      * @throws \dml_exception
      */
-    public static function delete_file($bot_id, $file)
+    public static function delete_file($bot_id, $file, $use_file_id = false)
     {
+        if (!$use_file_id) {
+            $file = '/var/www/moodledata/local/fakesmarts/' . $bot_id . '/' . $file;
+        }
+
         // Create array
         $data = [
            $file

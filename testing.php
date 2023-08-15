@@ -21,14 +21,16 @@ $context = context_system::instance();
 //**********************
 echo $OUTPUT->header();
 
-$chat_id = 'f17b4821-b3ba-4c61-808e-d260482d8957';
-$bot_id = 11;
-//print_object($_POST);
-//print_object($_FILES['file']);
-//print_object(cria::send_chat_request($bot_id, $chat_id, 'When should I register?'));
+$file_name = '8a51e01f-eb69-4f3b-9cc5-a8846a004a50';
+$bot_id = 13;
+$prompt = "Is there a bachelor degree in business?";;
+$chat_id = '68d5831c-f40e-4d17-bf1e-8d142431171e';
+//print_object(cria::start_chat($bot_id));
+print_object(cria::send_chat_request($bot_id, $chat_id, $prompt));
 
-print_object(cria::get_chat_history($bot_id, $chat_id));
-print_object(cria::get_chat_summary($bot_id));
+//print_object(cria::delete_file($bot_id, $file_name, true));
+//print_object(cria::get_files($bot_id));
+//print_object(cria::get_chat_summary($bot_id));
 
 
 //print_object(cria::get_files(11));

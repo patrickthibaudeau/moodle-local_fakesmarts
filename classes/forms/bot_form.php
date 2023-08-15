@@ -39,6 +39,10 @@ class bot_form extends \moodleform
         $mform->setType('bot_type', PARAM_INT);
         $mform->addHelpButton('bot_type', 'bot_type', 'local_fakesmarts');
 
+        // Welcome message element
+        $mform->addElement('editor', 'welcome_message_editor', get_string('welcome_message', 'local_fakesmarts'));
+        $mform->setType('welcome_message', PARAM_RAW);
+
         // Bot system message form element
         $mform->addElement('textarea', 'bot_system_message', get_string('bot_system_message', 'local_fakesmarts'));
         $mform->setType('bot_system_message', PARAM_TEXT);

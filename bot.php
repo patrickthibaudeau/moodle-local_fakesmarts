@@ -21,6 +21,7 @@ if ($id) {
     $FAKESMART = new fakeSmart($id);
     $formdata = $FAKESMART->get_record();
     $formdata->description_editor['text'] = $formdata->description;
+    $formdata->welcome_message_editor['text'] = $formdata->welcome_message;
 
 } else {
     $formdata = new stdClass();
@@ -36,6 +37,7 @@ if ($mform->is_cancelled()) {
     if ($data->id) {
         $FAKESMART = new fakeSmart($data->id);
         $data->description = $data->description_editor['text'];
+        $data->welcome_message = $data->welcome_message_editor['text'];
         $FAKESMART->update_record($data);
         if ($FAKESMART->use_indexing_server()) {
             $FAKESMART->update_bot_on_indexing_server();
@@ -43,6 +45,7 @@ if ($mform->is_cancelled()) {
 
     } else {
         $data->description = $data->description_editor['text'];
+        $data->welcome_message = $data->welcome_message_editor['text'];
         $FAKESMART = new fakeSmart();
         $id = $FAKESMART->insert_record($data);
         $NEW_BOT = new fakeSmart($id);

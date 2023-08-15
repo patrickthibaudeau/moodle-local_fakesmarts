@@ -75,6 +75,8 @@ $string['total_words'] = 'Number of words in combined content:';
 $string['timecreated'] = 'Time created';
 $string['use_indexing_server'] = 'Use indexing server';
 $string['use_indexing_server_help'] = 'If your bot uses static content, use the indexing server to speed up the response time and reduce tokens/costs';
+$string['welcome_message'] = 'Welcome message';
+$string['welcome_message_help'] = 'The welcome message to be displayed when the bot is used';
 $string['word_count'] = 'Word count';
 
 // Capabilites

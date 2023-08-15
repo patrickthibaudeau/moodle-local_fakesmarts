@@ -231,5 +231,20 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023080506, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023081500) {
+
+        // Define field welcome_message to be added to local_fakesmarts.
+        $table = new xmldb_table('local_fakesmarts');
+        $field = new xmldb_field('welcome_message', XMLDB_TYPE_TEXT, null, null, null, null, null, 'bot_type');
+
+        // Conditionally launch add field welcome_message.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023081500, 'local', 'fakesmarts');
+    }
+
     return true;
 }
