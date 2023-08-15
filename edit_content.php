@@ -29,7 +29,7 @@ if ($mform->is_cancelled()) {
     redirect($CFG->wwwroot . '/local/fakesmarts/content.php?id=' . $formdata->fakesmarts_id);
 } else if ($data = $mform->get_data()) {
     $FAKESMARTSFILE = new fakesmart_file($data->fakesmarts_id);
-    $data->content = $content = preg_replace('/\s+/', ' ', trim($data->content));
+//    $data->content = $content = preg_replace('/\s+/', ' ', trim($data->content));
     // Update content
     $DB->update_record('local_fakesmarts_files', $data);
 

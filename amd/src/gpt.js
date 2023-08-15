@@ -15,6 +15,7 @@ function get_response() {
         var bot_id = $(this).data('bot_id');
         var prompt = $('#user-prompt').val();
         var content  = $('#fakesmarts-test-input').val();
+        var chat_id = $('#fakesmarts-chat-id').val();
         console.log(content);
         // console.log(prompt);
         //Delete the record
@@ -22,6 +23,7 @@ function get_response() {
             methodname: 'fakesmarts_get_gpt_response',
             args: {
                 bot_id: bot_id,
+                chat_id: chat_id,
                 prompt: prompt,
                 content: content
             }

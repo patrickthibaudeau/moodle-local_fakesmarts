@@ -24,6 +24,7 @@ use local_fakesmarts\fakesmart;
 use local_fakesmarts\fakesmart_files;
 use local_fakesmarts\Gpt3TokenizerConfig;
 use local_fakesmarts\Gpt3Tokenizer;
+use local_fakesmarts\cria;
 
 class test_bot implements \renderable, \templatable
 {
@@ -50,35 +51,19 @@ class test_bot implements \renderable, \templatable
     {
         global $USER, $CFG, $DB;
 
-        $config = get_config('local_fakesmarts');
-
         $FAKESMART = new fakesmart($this->bot_id);
-        $FAKESMARTFILES = new fakesmart_files($this->bot_id);
-        $bot_type = $FAKESMART->get_bot_type();
-        // Build the cache for the bot
-        $cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
-        // Delete any existing cache for this bot
-        $cache->delete($bot_type . '_' . sesskey());
-        $cache->delete($this->bot_id . '_' . sesskey());
-        // Set the cache for this bot
-        $cache->set($bot_type . '_' . sesskey(), $FAKESMART->concatenate_system_messages());
+
+        $chat_id = 0;
         if ($FAKESMART->use_indexing_server()) {
-            $cache->set($this->bot_id . '_' . sesskey(), $FAKESMARTFILES->concatenate_content());
+            $session = cria::start_chat($this->bot_id);
+            $chat_id = $session->chat_id;
         }
-        $tokenizer_config = new Gpt3TokenizerConfig();
-        $tokenizer = new Gpt3Tokenizer($tokenizer_config);
-        $full_text = $cache->get($bot_type . '_' . sesskey()) . $cache->get($this->bot_id . '_' . sesskey());
-
-        $number_of_tokens = $tokenizer->count($full_text) + 1000; // Add 1000 tokens to the count as the output
-
-        $cost = (($number_of_tokens / 1000) * $config->gpt_cost) * 2; // * 2 because the output cost  doubles the price
 
         $data = [
             'bot_id' => $this->bot_id,
             'name' => $FAKESMART->get_name(),
-            'number_of_tokens' => $number_of_tokens,
-            'cost' => $cost,
-            'use_indexing_server' => $FAKESMART->use_indexing_server()
+            'use_indexing_server' => $FAKESMART->use_indexing_server(),
+            'chat_id' => $chat_id,
         ];
         return $data;
     }

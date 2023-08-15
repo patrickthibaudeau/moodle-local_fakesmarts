@@ -24,6 +24,7 @@ require_once($CFG->libdir . "/externallib.php");
 require_once("$CFG->dirroot/config.php");
 
 use local_fakesmarts\gpt;
+use local_fakesmarts\cria;
 
 class local_fakesmarts_external_gpt extends external_api {
     //**************************** SEARCH USERS **********************
@@ -40,6 +41,7 @@ class local_fakesmarts_external_gpt extends external_api {
         return new external_function_parameters(
             array(
                 'bot_id' => new external_value(PARAM_INT, 'ID of the bot being used', false, 0),
+                'chat_id' => new external_value(PARAM_RAW, 'Chat ID from indexing server', false, 0),
                 'prompt' => new external_value(PARAM_TEXT, 'Question asked by user', false, ''),
                 'content' => new external_value(PARAM_RAW, 'User content', false, '')
             )
@@ -53,12 +55,13 @@ class local_fakesmarts_external_gpt extends external_api {
      * @throws invalid_parameter_exception
      * @throws restricted_context_exception
      */
-    public static function response($bot_id, $prompt, $content) {
+    public static function response($bot_id, $chat_id, $prompt, $content) {
         global $CFG, $USER, $DB, $PAGE;
 
         //Parameter validation
         $params = self::validate_parameters(self::response_parameters(), array(
                 'bot_id' => $bot_id,
+                'chat_id' => $chat_id,
                 'prompt' => $prompt,
                 'content' => $content
             )
@@ -68,8 +71,22 @@ class local_fakesmarts_external_gpt extends external_api {
         //OPTIONAL but in most web service it should present
         $context = \context_system::instance();
         self::validate_context($context);
+        if ($chat_id != 0) {
+            $result = cria::send_chat_request($bot_id, $chat_id, $prompt);
+            // Clean up content
+            $content = nl2br(htmlspecialchars($result->reply->reply));
+            $content = gpt::make_email($content);
+            $content = gpt::make_link($content);
 
-        $message = gpt::get_response($bot_id, $prompt, $content);
+            $message = new \stdClass();
+            $message->message = $content;
+            $message->prompt_tokens = 0;
+            $message->completion_tokens = 0;
+            $message->total_tokens = 0;
+            $message->cost = 0;
+        } else {
+            $message = gpt::get_response($bot_id, $prompt, $content);
+        }
 
         return json_encode($message);
     }

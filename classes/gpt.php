@@ -198,7 +198,7 @@ class gpt
      * @param $input
      * @return array|string|string[]|null
      */
-    protected static function _make_link($input)
+    public static function make_link($input)
     {
         $url_pattern = '<https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)>';
         $str = preg_replace($url_pattern, '<a href="$0" target="_blank">$0</a> ', $input);
@@ -211,7 +211,7 @@ class gpt
      * @param $input
      * @return array|string|string[]|null
      */
-    protected static function _make_email($input)
+    public static function make_email($input)
     {
         //Detect and create email
         $mail_pattern = "/([A-z0-9\._-]+\@[A-z0-9_-]+\.)([A-z0-9\_\-\.]{1,}[A-z])/";
@@ -251,8 +251,8 @@ class gpt
         // Format the message
         if (isset($message)) {
             $message = nl2br(htmlspecialchars($message));
-            $message = self::_make_link($message);
-            $message = self::_make_email($message);
+            $message = self::make_link($message);
+            $message = self::make_email($message);
         }
 
         $data->message = $message;

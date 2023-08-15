@@ -125,7 +125,7 @@ class cria
         $curl = curl_init();
         // Set parameters
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://patdev.glendon.yorku.ca:3001/bots/' . $bot_id
+            CURLOPT_URL => $config->indexing_server_url . 'bots/' . $bot_id
                 . '/files/?x-api-key=' . $config->indexing_server_api_key,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
@@ -139,7 +139,7 @@ class cria
                 'Content-Type: multipart/form-data'
             ),
             CURLOPT_POSTFIELDS => array(
-                'files' => new \CURLFILE($full_path, 'text/plain'),
+                'files' => new \CURLFILE($full_path, 'text/plain', $file_name),
             ),
         ));
         // Upload file
@@ -161,10 +161,6 @@ class cria
      */
     public static function delete_file($bot_id, $file, $use_file_id = false)
     {
-        if (!$use_file_id) {
-            $file = '/var/www/moodledata/local/fakesmarts/' . $bot_id . '/' . $file;
-        }
-
         // Create array
         $data = [
            $file
