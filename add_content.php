@@ -98,16 +98,10 @@ if ($mform->is_cancelled()) {
         'timecreated' => time(),
     ];
     // Insert the content into the database
-    $DB->insert_record('local_fakesmarts_files', $content_data);
+    $file_id = $DB->insert_record('local_fakesmarts_files', $content_data);
 
-    // Get all records for theis bot
-    $records = $DB->get_records('local_fakesmarts_files', ['fakesmarts_id' => $data->fakesmarts_id]);
-    $content = '';
-    foreach ($records as $record) {
-        $content .= $record->content . "\n\n";
-    }
     // Upload files to indexing server
-    $FAKESMARTFILES->upload_files_to_indexing_server($data->fakesmarts_id);
+    $FAKESMARTFILES->upload_files_to_indexing_server($data->fakesmarts_id, $file_id);
     // Redirect to the content page
     redirect($CFG->wwwroot . '/local/fakesmarts/content.php?id=' . $data->fakesmarts_id,);
 } else {

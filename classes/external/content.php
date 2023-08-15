@@ -13,6 +13,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+use local_fakesmarts\fakesmart_file;
+use local_fakesmarts\cria;
+
 /**
  * External Web Service Template
  *
@@ -63,6 +66,9 @@ class local_fakesmarts_external_content extends external_api {
         $context = \context_system::instance();
         self::validate_context($context);
 
+        $FAKESMARTFILE = new fakesmart_file($id);
+        // Delete file from indexing server
+        cria::delete_file($FAKESMARTFILE->get_fakesmarts_id(), $FAKESMARTFILE->get_indexing_server_file_name());
         $DB->delete_records('local_fakesmarts_files', array('id' => $id));
 
         return true;

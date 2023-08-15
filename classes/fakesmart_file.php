@@ -209,14 +209,29 @@ class fakesmart_file extends crud {
      * @param $bot_id
      * @return void
      */
-    public function upload_files_to_indexing_server($bot_id) {
-        // Remove existing files
-        $cria = cria::get_files($bot_id);
-        foreach($cria->files as $file){
-            cria::delete_file($bot_id, $file->file_id);
+    public function upload_files_to_indexing_server($bot_id, $file_id, $replace = false) {
+        if ($replace == true) {
+            // Get file name
+            $FAKESMARTFILE = new fakesmart_file($file_id);
+            // Delete file on indexing server based on file name
+            cria::delete_file($bot_id, $FAKESMARTFILE->get_indexing_server_file_name());
         }
-        // upload new files
-        return cria::add_file($bot_id);
+
+        // upload new file
+        return cria::add_file($bot_id, $file_id);
+    }
+
+    /**
+     * Get file name for file on indexing server
+     * @return string
+     */
+    public function get_indexing_server_file_name() {
+        $file_name = $this->get_name() . '_' . $this->get_fakesmarts_id() . '.txt';
+        $file_name = str_replace(' ', '_', $file_name);
+        $file_name = str_replace('(', '_', $file_name);
+        $file_name = str_replace(')', '_', $file_name);
+
+        return strtolower($file_name);
     }
 
 

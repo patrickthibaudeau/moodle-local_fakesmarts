@@ -33,7 +33,7 @@ if ($mform->is_cancelled()) {
     // Update content
     $DB->update_record('local_fakesmarts_files', $data);
 
-    $FAKESMARTSFILE->upload_files_to_indexing_server($data->fakesmarts_id);
+    $FAKESMARTSFILE->upload_files_to_indexing_server($data->fakesmarts_id, $data->id, true);
     // Redirect to the content page
     redirect($CFG->wwwroot . '/local/fakesmarts/content.php?id=' . $data->fakesmarts_id,);
 } else {

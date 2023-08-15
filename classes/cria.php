@@ -3,6 +3,7 @@
 namespace local_fakesmarts;
 
 use local_fakesmarts\fakesmart;
+use local_fakesmarts\fakesmart_file;
 use local_fakesmarts\fakesmart_files;
 use local_fakesmarts\gpt;
 
@@ -96,7 +97,7 @@ class cria
      * @return mixed
      * @throws \dml_exception
      */
-    public static function add_file($bot_id)
+    public static function add_file($bot_id, $file_id)
     {
         global $CFG;
 
@@ -104,13 +105,10 @@ class cria
         $config = get_config('local_fakesmarts');
         // Create objects
         $FAKESMART = new fakesmart($bot_id);
-        $FAKESMARTFILES = new fakesmart_files($bot_id);
+        $FAKESMARTFILE = new fakesmart_file($file_id);
 
         // Create temp file
-        $file_name = $FAKESMART->get_name() . '_file.txt';
-        $file_name = str_replace(' ', '_', $file_name);
-        $file_name = str_replace('(', '_', $file_name);
-        $file_name = str_replace(')', '_', $file_name);
+        $file_name = $FAKESMARTFILE->get_indexing_server_file_name();
 
         // Make sure temp folders exist
         if (!is_dir($CFG->dataroot . '/local/fakesmarts/')) {
@@ -122,7 +120,7 @@ class cria
         // Set full path
         $full_path = $CFG->dataroot . '/local/fakesmarts/' . $bot_id . '/' . $file_name;
         // Create temp file
-        file_put_contents($full_path, $FAKESMARTFILES->concatenate_content());
+        file_put_contents($full_path, $FAKESMARTFILE->get_content());
         // Initiate CURL
         $curl = curl_init();
         // Set parameters
@@ -157,14 +155,15 @@ class cria
 
     /**
      * @param $bot_id
+     * @param $file File can be either the file name or the indexing server file id
      * @return mixed
      * @throws \dml_exception
      */
-    public static function delete_file($bot_id, $file_id)
+    public static function delete_file($bot_id, $file)
     {
         // Create array
         $data = [
-           $file_id
+           $file
         ];
         $data = json_encode($data);
         // Make call
