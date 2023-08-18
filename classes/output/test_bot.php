@@ -57,6 +57,9 @@ class test_bot implements \renderable, \templatable
         if ($FAKESMART->use_indexing_server()) {
             $session = cria::start_chat($this->bot_id);
             $chat_id = $session->chat_id;
+        } else {
+            $cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
+            $system_message = $cache->set($FAKESMART->get_bot_type() . '_' . sesskey(), $FAKESMART->get_bot_type_system_message()  . ' ' . $FAKESMART->get_bot_system_message());
         }
 
         $data = [

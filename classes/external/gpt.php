@@ -71,6 +71,7 @@ class local_fakesmarts_external_gpt extends external_api {
         //OPTIONAL but in most web service it should present
         $context = \context_system::instance();
         self::validate_context($context);
+        file_put_contents('/var/www/moodledata/temp/values.txt', "bot_id: $bot_id\nchat_id: $chat_id\nprompt: $prompt\ncontent: $content\n");
         if ($chat_id != 0) {
             $result = cria::send_chat_request($bot_id, $chat_id, $prompt);
             // Clean up content
@@ -85,7 +86,7 @@ class local_fakesmarts_external_gpt extends external_api {
             $message->total_tokens = 0;
             $message->cost = 0;
         } else {
-            $message = gpt::get_response($bot_id, $prompt, $content);
+            $message = gpt::get_response($bot_id, $prompt, $content, false);
         }
 
         return json_encode($message);
