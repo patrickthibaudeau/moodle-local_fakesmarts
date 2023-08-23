@@ -49,6 +49,7 @@ class gpt
             );
         }
         $result = json_decode(curl_exec($ch));
+        file_put_contents('/var/www/moodledata/temp/gpt.json', json_encode($result));
         curl_close($ch);
         return $result;
     }
@@ -246,17 +247,21 @@ class gpt
     }
 
     /**
-     * Get the cost of the API call
-     * @param $object GPT object rteturned from the API
+     * Get cost of API call
+     * @param $prompt_tokens
+     * @param $completion_tokens
      * @return float
      * @throws \dml_exception
      */
-    protected static function _get_cost($total_tokens): float
+    public static function _get_cost($prompt_tokens, $completion_tokens): float
     {
         // plugin config
         $config = get_config('local_fakesmarts');
-        $cost = ($total_tokens / 1000) * $config->gpt_cost;
+//        $cost = ($total_tokens / 1000) * $config->gpt_cost;
 
+        $prompt_cost = ($prompt_tokens / 1000) * 0.004;
+        $completion_cost = ($completion_tokens / 1000) * 0.006;
+        $cost = $prompt_cost + $completion_cost;
         return $cost;
     }
 

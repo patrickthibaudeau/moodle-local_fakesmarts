@@ -97,30 +97,17 @@ class cria
      * @return mixed
      * @throws \dml_exception
      */
-    public static function add_file($bot_id, $file_id)
+    public static function add_file($bot_id, $file_path, $file_name)
     {
         global $CFG;
 
+        file_put_contents('/var/www/moodledata/temp/add_file.txt', $file_path);
         // Get config to use later for the indexing server api key
         $config = get_config('local_fakesmarts');
         // Create objects
         $FAKESMART = new fakesmart($bot_id);
-        $FAKESMARTFILE = new fakesmart_file($file_id);
 
-        // Create temp file
-        $file_name = $FAKESMARTFILE->get_indexing_server_file_name();
 
-        // Make sure temp folders exist
-        if (!is_dir($CFG->dataroot . '/local/fakesmarts/')) {
-            mkdir($CFG->dataroot . '/local/fakesmarts/', 0777, true);
-        }
-        if (!is_dir($CFG->dataroot . '/local/fakesmarts/' . $bot_id)) {
-            mkdir($CFG->dataroot . '/local/fakesmarts/' . $bot_id, 0777, true);
-        }
-        // Set full path
-        $full_path = $CFG->dataroot . '/local/fakesmarts/' . $bot_id . '/' . $file_name;
-        // Create temp file
-        file_put_contents($full_path, $FAKESMARTFILE->get_content());
         // Initiate CURL
         $curl = curl_init();
         // Set parameters
@@ -139,11 +126,16 @@ class cria
                 'Content-Type: multipart/form-data'
             ),
             CURLOPT_POSTFIELDS => array(
-                'files' => new \CURLFILE($full_path, 'text/plain', $file_name),
+                'files' => new \CURLFILE(
+                    $file_path,
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    $file_name
+                ),
             ),
         ));
         // Upload file
         $result = curl_exec($curl);
+        file_put_contents('/var/www/moodledata/temp/add_file.json', json_encode($result));
         curl_close($curl);
 
         if ($result === false) {

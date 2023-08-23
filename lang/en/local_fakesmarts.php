@@ -40,6 +40,7 @@ $string['deployment_name'] = 'Deployment name';
 $string['deployment_name_help'] = 'The model deployment name in Azure';
 $string['delete'] = 'Delete';
 $string['description'] = 'Description';
+$string['display_settings'] = 'Display setttings';
 $string['edit'] = 'Edit';
 $string['edit_content'] = 'Edit content';
 $string['error_importfile'] = 'There was an error importing the file';

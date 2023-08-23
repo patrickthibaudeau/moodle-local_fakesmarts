@@ -1,4 +1,5 @@
 <?php
+
 namespace local_fakesmarts;
 
 use local_fakesmarts\fakesmart;
@@ -14,7 +15,7 @@ class bot_form extends \moodleform
 
     protected function definition()
     {
-        global $DB;
+        global $DB, $OUTPUT;
 
         $formdata = $this->_customdata['formdata'];
         // Create form object
@@ -23,14 +24,12 @@ class bot_form extends \moodleform
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
 
-        //Header: General
-        $mform->addElement('header', 'request_data', get_string('bot', 'local_fakesmarts'));
+        $mform->addElement('header', 'home-nav-start', get_string('bot', 'local_fakesmarts'));
+       // Name form element
+        $mform->addElement('text', 'name', get_string('name', 'local_fakesmarts'));
+        $mform->setType('name', PARAM_TEXT);
 
-        // Name form element
-       $mform->addElement('text', 'name', get_string('name', 'local_fakesmarts'));
-       $mform->setType('name', PARAM_TEXT);
-
-       // Description form element
+        // Description form element
         $mform->addElement('editor', 'description_editor', get_string('description', 'local_fakesmarts'));
         $mform->setType('description', PARAM_RAW);
 
@@ -39,14 +38,17 @@ class bot_form extends \moodleform
         $mform->setType('bot_type', PARAM_INT);
         $mform->addHelpButton('bot_type', 'bot_type', 'local_fakesmarts');
 
-        // Welcome message element
-        $mform->addElement('editor', 'welcome_message_editor', get_string('welcome_message', 'local_fakesmarts'));
-        $mform->setType('welcome_message', PARAM_RAW);
-
         // Bot system message form element
         $mform->addElement('textarea', 'bot_system_message', get_string('bot_system_message', 'local_fakesmarts'));
         $mform->setType('bot_system_message', PARAM_TEXT);
         $mform->addHelpButton('bot_system_message', 'bot_system_message', 'local_fakesmarts');
+
+        $mform->addElement('header', 'display-settings-nav-start', get_string('display_settings', 'local_fakesmarts'));
+     // Welcome message element
+        $mform->addElement('editor', 'welcome_message_editor', get_string('welcome_message', 'local_fakesmarts'));
+        $mform->setType('welcome_message', PARAM_RAW);
+
+
 
         $this->add_action_buttons();
         $this->set_data($formdata);

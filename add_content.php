@@ -67,7 +67,7 @@ if ($mform->is_cancelled()) {
 } else if ($data = $mform->get_data()) {
     $FAKESMARTFILES = new fakesmart_file($data->fakesmarts_id);
     // Get file name and content
-    $filename = $mform->get_new_filename('importedFile');
+    $filename = strtolower(str_replace(' ', '_',$mform->get_new_filename('importedFile')));
     $fileContent = $mform->get_file_content('importedFile');
     $path = $CFG->dataroot . '/temp/fakesmarts';
 
@@ -101,7 +101,7 @@ if ($mform->is_cancelled()) {
     $file_id = $DB->insert_record('local_fakesmarts_files', $content_data);
 
     // Upload files to indexing server
-    $FAKESMARTFILES->upload_files_to_indexing_server($data->fakesmarts_id, $file_id);
+    $FAKESMARTFILES->upload_files_to_indexing_server($data->fakesmarts_id, $file_path, $filename);
     // Redirect to the content page
     redirect($CFG->wwwroot . '/local/fakesmarts/content.php?id=' . $data->fakesmarts_id,);
 } else {

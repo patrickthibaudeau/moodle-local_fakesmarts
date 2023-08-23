@@ -25,6 +25,7 @@ require_once("$CFG->dirroot/config.php");
 
 use local_fakesmarts\gpt;
 use local_fakesmarts\cria;
+use local_fakesmarts\logs;
 
 class local_fakesmarts_external_gpt extends external_api {
     //**************************** SEARCH USERS **********************
@@ -81,10 +82,12 @@ class local_fakesmarts_external_gpt extends external_api {
 
             $message = new \stdClass();
             $message->message = $content;
-            $message->prompt_tokens = 0;
-            $message->completion_tokens = 0;
-            $message->total_tokens = 0;
-            $message->cost = 0;
+            $message->prompt_tokens = $result->reply->usage->prompt_tokens;
+            $message->completion_tokens = $result->reply->usage->completion_tokens;
+            $message->total_tokens = $result->reply->usage->total_tokens;
+            $message->cost = gpt::_get_cost($message->prompt_tokens, $message->completion_tokens);
+            // Insert logs
+            logs::insert($bot_id, $prompt, $content, $message->prompt_tokens, $message->completion_tokens, $message->total_tokens, $message->cost);
         } else {
             $message = gpt::get_response($bot_id, $prompt, $content, false);
         }
