@@ -54,6 +54,7 @@
     <TABLE NAME="local_fakesmarts_type" COMMENT="Bot types">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="model_id" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="description" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="system_message" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
@@ -109,6 +110,7 @@
         <FIELD NAME="azure_endpoint" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="azure_key" TYPE="char" LENGTH="1333" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="azure_deployment_name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="model_name" TYPE="char" LENGTH="50" NOTNULL="false" DEFAULT="gpt-35-turbo-16k" SEQUENCE="false"/>
         <FIELD NAME="prompt_cost" TYPE="number" LENGTH="8" NOTNULL="false" DEFAULT="0" SEQUENCE="false" DECIMALS="4"/>
         <FIELD NAME="completion_cost" TYPE="number" LENGTH="8" NOTNULL="false" DEFAULT="0" SEQUENCE="false" DECIMALS="4"/>
         <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>

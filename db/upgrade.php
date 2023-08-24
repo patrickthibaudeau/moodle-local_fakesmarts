@@ -276,6 +276,37 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023082300, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023082301) {
+
+        // Define field model_name to be added to local_fakesmarts_models.
+        $table = new xmldb_table('local_fakesmarts_models');
+        $field = new xmldb_field('model_name', XMLDB_TYPE_CHAR, '50', null, null, null, 'gpt-35-turbo-16k', 'azure_deployment_name');
+
+        // Conditionally launch add field model_name.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023082301, 'local', 'fakesmarts');
+    }
+
+    if ($oldversion < 2023082302) {
+
+        // Define field model_id to be added to local_fakesmarts_type.
+        $table = new xmldb_table('local_fakesmarts_type');
+        $field = new xmldb_field('model_id', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'id');
+
+        // Conditionally launch add field model_id.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023082302, 'local', 'fakesmarts');
+    }
+
+
 
     return true;
 }
