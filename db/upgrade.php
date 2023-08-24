@@ -246,5 +246,36 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023081500, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023082300) {
+
+        // Define table local_fakesmarts_models to be created.
+        $table = new xmldb_table('local_fakesmarts_models');
+
+        // Adding fields to table local_fakesmarts_models.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('azure_endpoint', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('azure_key', XMLDB_TYPE_CHAR, '1333', null, null, null, null);
+        $table->add_field('azure_deployment_name', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('prompt_cost', XMLDB_TYPE_NUMBER, '8, 4', null, null, null, '0');
+        $table->add_field('completion_cost', XMLDB_TYPE_NUMBER, '8, 4', null, null, null, '0');
+        $table->add_field('usermodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+
+        // Adding keys to table local_fakesmarts_models.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+        $table->add_key('usermodified', XMLDB_KEY_FOREIGN, ['usermodified'], 'user', ['id']);
+
+        // Conditionally launch create table for local_fakesmarts_models.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023082300, 'local', 'fakesmarts');
+    }
+
+
     return true;
 }
