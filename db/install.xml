@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/fakesmarts/db" VERSION="20230823" COMMENT="XMLDB file for Moodle local/fakesmarts"
+<XMLDB PATH="local/fakesmarts/db" VERSION="20230825" COMMENT="XMLDB file for Moodle local/fakesmarts"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -111,6 +111,8 @@
         <FIELD NAME="azure_key" TYPE="char" LENGTH="1333" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="azure_deployment_name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="model_name" TYPE="char" LENGTH="50" NOTNULL="false" DEFAULT="gpt-35-turbo-16k" SEQUENCE="false"/>
+        <FIELD NAME="indexing_server_url" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="indexing_server_key" TYPE="char" LENGTH="1333" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="prompt_cost" TYPE="number" LENGTH="8" NOTNULL="false" DEFAULT="0" SEQUENCE="false" DECIMALS="4"/>
         <FIELD NAME="completion_cost" TYPE="number" LENGTH="8" NOTNULL="false" DEFAULT="0" SEQUENCE="false" DECIMALS="4"/>
         <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
