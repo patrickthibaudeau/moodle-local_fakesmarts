@@ -152,4 +152,43 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
+
+    'local/fakesmarts:view_models' => array(
+
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(
+            'guest' => CAP_PROHIBIT,
+            'student' => CAP_PROHIBIT,
+            'teacher' => CAP_PROHIBIT,
+            'editingteacher' => CAP_PROHIBIT,
+            'manager' => CAP_ALLOW
+        )
+    ),
+
+    'local/fakesmarts:edit_models' => array(
+
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(
+            'guest' => CAP_PROHIBIT,
+            'student' => CAP_PROHIBIT,
+            'teacher' => CAP_PROHIBIT,
+            'editingteacher' => CAP_PROHIBIT,
+            'manager' => CAP_ALLOW
+        )
+    ),
+
+    'local/fakesmarts:delete_models' => array(
+
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(
+            'guest' => CAP_PROHIBIT,
+            'student' => CAP_PROHIBIT,
+            'teacher' => CAP_PROHIBIT,
+            'editingteacher' => CAP_PROHIBIT,
+            'manager' => CAP_ALLOW
+        )
+    ),
 );

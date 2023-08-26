@@ -15,15 +15,12 @@
 
 namespace local_fakesmarts\output;
 
-use local_fakesmarts\fakesmarts;
-
-class bot_config implements \renderable, \templatable
+class bot_models implements \renderable, \templatable
 {
 
 
     public function __construct()
     {
-
     }
 
     /**
@@ -38,22 +35,11 @@ class bot_config implements \renderable, \templatable
     {
         global $USER, $CFG, $DB;
 
-        $context = \context_system::instance();
-
-        $FAKESMARTS = new fakesmarts();
-
-        $bots = $FAKESMARTS->get_records();
-        $bots = array_values($bots);
+        $bot_models = $DB->get_records('local_fakesmarts_models', [], 'name ASC');
+        $bot_models = array_values($bot_models);
 
         $data = [
-            'bots' => $bots,
-            'can_edit' => has_capability('local/fakesmarts:edit_bots', $context),
-            'can_delete' => has_capability('local/fakesmarts:delete_bots', $context),
-            'can_test' => has_capability('local/fakesmarts:test_bots', $context),
-            'can_view_bot_types' => has_capability('local/fakesmarts:view_bot_types', $context),
-            'can_edit_bot_content' => has_capability('local/fakesmarts:edit_bot_content', $context),
-            'can_view_bot_logs' => has_capability('local/fakesmarts:view_bot_logs', $context),
-            'can_view_bot_models' => has_capability('local/fakesmarts:view_models', $context),
+            'bot_models' => $bot_models,
         ];
 
         return $data;

@@ -14,7 +14,8 @@ $string['bot_already_exists'] = 'A bot with this id already exists.';
 $string['bot_configuration'] = 'BotCraft';
 $string['bot_configuration_help'] = 'Easily create a bot by providing your own documentation and system messages.';
 $string['bot_configurations'] = 'Bot configurations';
-$string['bots'] = 'Bots';
+$string['bot_model'] = 'Bot modal';
+$string['bot_models'] = 'Bot modals';
 $string['bot_type'] = 'Bot type';
 $string['bot_types'] = 'Bot types';
 $string['bot_type_factual'] = 'Factual';
@@ -25,6 +26,7 @@ $string['bot_type_help'] = 'Select the type of bot.<br><ul>
 </ul>';
 $string['bot_system_message'] = 'Bot system message';
 $string['bot_system_message_help'] = 'Enter the system message to be appended to the default system message when the bot is used';
+$string['bots'] = 'Bots';
 $string['cachedef_fakesmarts_system_messages'] = 'Caches all system messages for bots';
 $string['cancel'] = 'Cancel';
 $string['chat_does_not_exist'] = 'The chat requested does not exist.';

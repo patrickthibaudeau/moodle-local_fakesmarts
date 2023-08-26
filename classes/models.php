@@ -1,11 +1,11 @@
 <?php
 /*
  * Author: Admin User
- * Create Date: 23-08-2023
+ * Create Date: 26-08-2023
  * License: LGPL 
  * 
  */
-namespace local_fakesmarts;
+namespace fakesmarts;
 
 class models {
 
@@ -21,7 +21,7 @@ class models {
 	 */
 	public function __construct() {
 	    global $DB;
-	    $this->results = $DB->get_records('local_fakesmarts_models',[],'name ASC');
+	    $this->results = $DB->get_records('local_fakesmarts_models');
 	}
 
 	/**
@@ -38,7 +38,7 @@ class models {
 	 */
 	public function get_select_array() {
 	    $array = [
-	        '' => get_string('select', 'local_fakesmarts')
+	        '' => get_string('select', 'fakesmarts')
 	      ];
 	      foreach($this->results as $r) {
 	            $array[$r->id] = $r->name;
