@@ -80,14 +80,24 @@ class local_fakesmarts_external_gpt extends external_api {
             $content = gpt::make_email($content);
             $content = gpt::make_link($content);
 
+            file_put_contents('/var/www/moodledata/temp/results.json',  json_encode($result));
+
             $message = new \stdClass();
             $message->message = $content;
-            $message->prompt_tokens = $result->reply->usage->prompt_tokens;
-            $message->completion_tokens = $result->reply->usage->completion_tokens;
-            $message->total_tokens = $result->reply->usage->total_tokens;
+            $message->prompt_tokens = $result->reply->usage_total->prompt_tokens;
+            $message->completion_tokens = $result->reply->usage_total->completion_tokens;
+            $message->total_tokens = $result->reply->usage_total->total_tokens;
             $message->cost = gpt::_get_cost($bot_id, $message->prompt_tokens, $message->completion_tokens);
             // Insert logs
-            logs::insert($bot_id, $prompt, $content, $message->prompt_tokens, $message->completion_tokens, $message->total_tokens, $message->cost);
+            logs::insert(
+                $bot_id,
+                $prompt,
+                $content,
+                $message->prompt_tokens,
+                $message->completion_tokens,
+                $message->total_tokens,
+                $message->cost,
+                $result->reply->context);
         } else {
             $message = gpt::get_response($bot_id, $prompt, $content, false);
         }

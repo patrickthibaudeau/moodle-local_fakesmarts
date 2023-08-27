@@ -46,7 +46,8 @@ class bot_logs implements \renderable, \templatable
 
         $data = [
             'name' => $FAKESMART->get_name(),
-            'logs' => logs::get_logs($this->bot_id)
+            'logs' => logs::get_logs($this->bot_id),
+            'total_usage_cost' => logs::get_total_usage_cost($this->bot_id),
         ];
         return $data;
     }

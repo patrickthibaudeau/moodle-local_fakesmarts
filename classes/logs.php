@@ -15,7 +15,7 @@ class logs
      * @param int $cost
      * @throws \dml_exception
      */
-    public static function insert($fakesmarts_id, $prompt, $message, $prompt_tokens, $completion_tokens, $total_tokens, $cost) {
+    public static function insert($fakesmarts_id, $prompt, $message, $prompt_tokens, $completion_tokens, $total_tokens, $cost, $context = '') {
         global $DB;
         // Get client IP
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -34,6 +34,7 @@ class logs
             'completion_tokens' => $completion_tokens,
             'total_tokens' => $total_tokens,
             'cost' => $cost,
+            'index_context' => $context,
             'ip' => $ip,
             'timecreated' => time()
         ];
@@ -54,6 +55,7 @@ class logs
                     fakesmarts_id, 
                     prompt, 
                     message,
+                    index_context,
                     prompt_tokens,
                     completion_tokens,
                     total_tokens,
@@ -71,6 +73,26 @@ class logs
         ];
         $logs = $DB->get_records_sql($sql, $params);
         return array_values($logs);
+    }
+
+    /**
+     * Get total usage cost for a given fakesmarts_id
+     *
+     * @param int $fakesmarts_id
+     * @return array
+     */
+    public static function get_total_usage_cost($fakesmarts_id, $currency = 'CAD') {
+        global $DB;
+        $sql = "SELECT 
+                    SUM(cost) as total_cost
+                FROM 
+                    {local_fakesmarts_logs}
+                WHERE
+                    fakesmarts_id = ?";
+        $logs = $DB->get_records_sql($sql, [$fakesmarts_id]);
+        $fmt = new \NumberFormatter( 'en_CA', \NumberFormatter::CURRENCY );
+        $value = $fmt->formatCurrency(array_values($logs)[0]->total_cost, $currency);
+        return $value;
     }
 
 }

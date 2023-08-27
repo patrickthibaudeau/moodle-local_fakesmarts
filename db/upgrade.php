@@ -408,6 +408,33 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023082606, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023082700) {
+
+        // Define field context to be added to local_fakesmarts_logs.
+        $table = new xmldb_table('local_fakesmarts_logs');
+        $field = new xmldb_field('context', XMLDB_TYPE_TEXT, null, null, null, null, null, 'message');
+
+        // Conditionally launch add field context.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023082700, 'local', 'fakesmarts');
+    }
+
+    if ($oldversion < 2023082701) {
+
+        // Rename field context on table local_fakesmarts_logs to index_context.
+        $table = new xmldb_table('local_fakesmarts_logs');
+        $field = new xmldb_field('context', XMLDB_TYPE_TEXT, null, null, null, null, null, 'message');
+
+        // Launch rename field context.
+        $dbman->rename_field($table, $field, 'index_context');
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023082701, 'local', 'fakesmarts');
+    }
 
     return true;
 }
