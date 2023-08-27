@@ -14,8 +14,8 @@ $string['bot_already_exists'] = 'A bot with this id already exists.';
 $string['bot_configuration'] = 'BotCraft';
 $string['bot_configuration_help'] = 'Easily create a bot by providing your own documentation and system messages.';
 $string['bot_configurations'] = 'Bot configurations';
-$string['bot_model'] = 'Bot modal';
-$string['bot_models'] = 'Bot modals';
+$string['bot_model'] = 'Model';
+$string['bot_models'] = 'Models';
 $string['bot_type'] = 'Bot type';
 $string['bot_types'] = 'Bot types';
 $string['bot_type_factual'] = 'Factual';
@@ -93,6 +93,9 @@ $string['fakesmarts:view_bot_types'] = 'View bot types';
 $string['fakesmarts:delete_bot_content'] = 'Delete bot content';
 $string['fakesmarts:edit_bot_content'] = 'Add/Edit bot content';
 $string['fakesmarts:view_bot_logs'] = 'View bot logs';
+$string['fakesmarts:delete_models'] = 'Delete models';
+$string['fakesmarts:edit_models'] = 'Add/Edit models';
+$string['fakesmarts:view_models'] = 'View models';
 
 // MinutesMaster
 $string['convert'] = 'Convert';
