@@ -2,8 +2,8 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <a href="edit_bot_model.php" class="btn btn-outline-primary">
-                    {{#str}}add_type, local_fakesmarts{{/str}}
+                <a href="edit_model.php" class="btn btn-outline-primary">
+                    {{#str}}add_model, local_fakesmarts{{/str}}
                 </a>
                 <a href="bot_config.php" class="btn btn-outline-primary">
                 {{#str}}bots, local_fakesmarts{{/str}}
@@ -28,11 +28,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#bot_types}}
+                        {{#bot_models}}
                         <tr>
                             <td>{{name}}</td>
                             <td>
-                                <a href="edit_bot_model.php?id={{id}}" class="btn btn-outline-primary">
+                                <a href="edit_model.php?id={{id}}" class="btn btn-outline-primary">
                                     {{#str}}edit, local_fakesmarts{{/str}}
                                 </a>
                                 <button class="btn btn-outline-danger delete-bot-type" data-id="{{id}}">
@@ -40,7 +40,7 @@
                                 </button>
                             </td>
                         </tr>
-                        {{/bot_types}}
+                        {{/bot_models}}
                     </tbody>
                     </table>
             </div>

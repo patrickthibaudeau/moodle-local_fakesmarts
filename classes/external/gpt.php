@@ -85,7 +85,7 @@ class local_fakesmarts_external_gpt extends external_api {
             $message->prompt_tokens = $result->reply->usage->prompt_tokens;
             $message->completion_tokens = $result->reply->usage->completion_tokens;
             $message->total_tokens = $result->reply->usage->total_tokens;
-            $message->cost = gpt::_get_cost($message->prompt_tokens, $message->completion_tokens);
+            $message->cost = gpt::_get_cost($bot_id, $message->prompt_tokens, $message->completion_tokens);
             // Insert logs
             logs::insert($bot_id, $prompt, $content, $message->prompt_tokens, $message->completion_tokens, $message->total_tokens, $message->cost);
         } else {

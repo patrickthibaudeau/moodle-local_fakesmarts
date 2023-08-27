@@ -9,9 +9,9 @@ require_login(1, false);
 $context = context_system::instance();
 
 \local_fakesmarts\base::page(
-    new moodle_url('/local/fakesmarts/bot_modles.php'),
-    get_string('bot_modles', 'local_fakesmarts'),
-    '',
+    new moodle_url('/local/fakesmarts/bot_models.php'),
+    get_string('bot_models', 'local_fakesmarts'),
+    get_string('bot_models', 'local_fakesmarts'),
     $context
 );
 
@@ -24,7 +24,7 @@ echo $OUTPUT->header();
 
 $output = $PAGE->get_renderer('local_fakesmarts');
 $bot_models = new \local_fakesmarts\output\bot_models();
-echo $output->render_bot_types($bot_models);
+echo $output->render_bot_models($bot_models);
 //**********************
 //*** DISPLAY FOOTER ***
 //**********************

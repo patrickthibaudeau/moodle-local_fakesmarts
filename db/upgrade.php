@@ -369,6 +369,44 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023082600, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023082605) {
+
+        // Define field model_id to be dropped from local_fakesmarts_type.
+        $table = new xmldb_table('local_fakesmarts_type');
+        $field = new xmldb_field('model_id');
+
+        // Conditionally launch drop field model_id.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field model_id to be added to local_fakesmarts.
+        $table = new xmldb_table('local_fakesmarts');
+        $field = new xmldb_field('model_id', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'id');
+
+        // Conditionally launch add field model_id.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023082605, 'local', 'fakesmarts');
+    }
+
+    if ($oldversion < 2023082606) {
+
+        // Define field embedding_id to be added to local_fakesmarts.
+        $table = new xmldb_table('local_fakesmarts');
+        $field = new xmldb_field('embedding_id', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'model_id');
+
+        // Conditionally launch add field embedding_id.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023082606, 'local', 'fakesmarts');
+    }
 
 
     return true;

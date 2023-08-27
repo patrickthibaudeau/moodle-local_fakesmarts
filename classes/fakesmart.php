@@ -41,6 +41,18 @@ class fakesmart extends crud
 
     /**
      *
+     * @var int
+     */
+    private $model_id;
+
+    /**
+     *
+     * @var int
+     */
+    private $embedding_id;
+
+    /**
+     *
      * @var string
      */
     private $bot_system_message;
@@ -96,6 +108,8 @@ class fakesmart extends crud
         $this->name = $result->name ?? '';
         $this->description = $result->description ?? '';
         $this->bot_type = $result->bot_type ?? 0;
+        $this->model_id = $result->model_id ?? 0;;
+        $this->embedding_id = $result->embedding_id ?? 0;;
         $this->bot_system_message = $result->bot_system_message ?? '';
         $this->usermodified = $result->usermodified ?? 0;
         $this->timecreated = $result->timecreated ?? 0;
@@ -133,6 +147,24 @@ class fakesmart extends crud
     public function get_bot_type()
     {
         return $this->bot_type;
+    }
+
+    /**
+     * Get Model record
+     * @return mixed|\stdClass
+     */
+    public function get_model_config() {
+        $MODEL = new model($this->model_id);
+        return $MODEL->get_result();
+    }
+
+    /**
+     * Get Embedding record
+     * @return mixed|\stdClass
+     */
+    public function get_embedding_config() {
+        $MODEL = new model($this->embedding_id);
+        return $MODEL->get_result();
     }
 
     /**

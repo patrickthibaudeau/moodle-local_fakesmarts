@@ -5,7 +5,7 @@
  * License: LGPL 
  * 
  */
-namespace fakesmarts;
+namespace local_fakesmarts;
 
 class models {
 
@@ -21,7 +21,7 @@ class models {
 	 */
 	public function __construct() {
 	    global $DB;
-	    $this->results = $DB->get_records('local_fakesmarts_models');
+	    $this->results = $DB->get_records('local_fakesmarts_models', [], 'name ASC');
 	}
 
 	/**
@@ -38,7 +38,7 @@ class models {
 	 */
 	public function get_select_array() {
 	    $array = [
-	        '' => get_string('select', 'fakesmarts')
+	        '' => get_string('select', 'local_fakesmarts')
 	      ];
 	      foreach($this->results as $r) {
 	            $array[$r->id] = $r->name;

@@ -22,18 +22,40 @@ class cria
         $FAKESMART = new fakesmart($bot_id);
         $system_message = $FAKESMART->get_bot_type_system_message() . ' ' . $FAKESMART->get_bot_system_message();
 
+        $llm = $FAKESMART->get_model_config();
+        $embedding = $FAKESMART->get_embedding_config();
+
         $data = [
             "system_message" => $system_message,
-            "chat_expires_seconds" => 900
+            "chat_expires_seconds" => 900,
+            "azure_credentials" => [
+                "llm" => [
+                    "api_base" => $llm->azure_endpoint,
+                    "api_version" => $llm->azure_api_version,
+                    "api_key" => $llm->azure_key,
+                    "api_deployment" => $llm->azure_deployment_name,
+                    "api_model" => $llm->model_name
+                ],
+                "embedding" => [
+                    "api_base" => $embedding->azure_endpoint,
+                    "api_version" => $embedding->azure_api_version,
+                    "api_key" => $embedding->azure_key,
+                    "api_deployment" => $embedding->azure_deployment_name,
+                    "api_model" => $embedding->model_name
+                ]
+            ],
         ];
 
         $data = json_encode($data);
         // Create bot
         $new_bot = gpt::_make_call($bot_id, $data, 'create', 'POST', true);
 
-        if ($new_bot->status == 409) {
-            return \core\notification::error(get_string('bot_already_exists', 'local_fakesmarts'));
+        if (isset($new_bot->status)) {
+            if ($new_bot->status == 409) {
+                return \core\notification::error(get_string('bot_already_exists', 'local_fakesmarts'));
+            }
         }
+
         return $new_bot;
     }
 
@@ -101,7 +123,6 @@ class cria
     {
         global $CFG;
 
-        file_put_contents('/var/www/moodledata/temp/add_file.txt', $file_path);
         // Get config to use later for the indexing server api key
         $config = get_config('local_fakesmarts');
         // Create objects
@@ -135,7 +156,6 @@ class cria
         ));
         // Upload file
         $result = curl_exec($curl);
-        file_put_contents('/var/www/moodledata/temp/add_file.json', json_encode($result));
         curl_close($curl);
 
         if ($result === false) {

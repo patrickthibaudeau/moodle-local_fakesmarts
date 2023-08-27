@@ -25,16 +25,17 @@ $context = context_system::instance();
 echo $OUTPUT->header();
 
 $file_name = '8a51e01f-eb69-4f3b-9cc5-a8846a004a50';
-$bot_id = 10;
+$bot_id = 33;
 $prompt = "Write a network governance policy for York University. Please include that users must use the York University VPN when working remotely.";;
 $content = '';
 
 $FAKESMART = new fakesmart($bot_id);
 
-
-$cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
-$system_message = $cache->set($FAKESMART->get_bot_type() . '_' . sesskey(), $FAKESMART->get_bot_type_system_message() . ' ' . $FAKESMART->get_bot_system_message());
-
+print_object($FAKESMART->get_model_config());
+print_object($FAKESMART->get_embedding_config());
+//$cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
+//$system_message = $cache->set($FAKESMART->get_bot_type() . '_' . sesskey(), $FAKESMART->get_bot_type_system_message() . ' ' . $FAKESMART->get_bot_system_message());
+//
 
 
 //print_object(cria::start_chat($bot_id));
@@ -45,9 +46,9 @@ $system_message = $cache->set($FAKESMART->get_bot_type() . '_' . sesskey(), $FAK
 //print_object(cria::get_chat_summary($bot_id));
 
 
-print_object('Starting chat');
-$message = gpt::get_response($bot_id, $prompt, $content);
-print_object($message);
+//print_object('Starting chat');
+//$message = gpt::get_response($bot_id, $prompt, $content);
+//print_object($message);
 //print_object(cria::get_files(11));
 //**********************
 //*** DISPLAY FOOTER ***

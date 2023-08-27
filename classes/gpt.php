@@ -253,14 +253,14 @@ class gpt
      * @return float
      * @throws \dml_exception
      */
-    public static function _get_cost($prompt_tokens, $completion_tokens): float
+    public static function _get_cost($bot_id, $prompt_tokens, $completion_tokens): float
     {
         // plugin config
-        $config = get_config('local_fakesmarts');
-//        $cost = ($total_tokens / 1000) * $config->gpt_cost;
+        $BOT = new fakesmart($bot_id);
+        $model = $BOT->get_model_config();
 
-        $prompt_cost = ($prompt_tokens / 1000) * 0.004;
-        $completion_cost = ($completion_tokens / 1000) * 0.006;
+        $prompt_cost = ($prompt_tokens / 1000) * $model->prompt_cost;
+        $completion_cost = ($completion_tokens / 1000) * $model->completion_cost;
         $cost = $prompt_cost + $completion_cost;
         return $cost;
     }

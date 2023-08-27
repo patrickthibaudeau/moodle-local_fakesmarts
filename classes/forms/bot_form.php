@@ -4,6 +4,7 @@ namespace local_fakesmarts;
 
 use local_fakesmarts\fakesmart;
 use local_fakesmarts\fakesmarts;
+use local_fakesmarts\models;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -21,6 +22,8 @@ class bot_form extends \moodleform
         // Create form object
         $mform = &$this->_form;
 
+        $MODELS = new models();
+
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
 
@@ -37,6 +40,14 @@ class bot_form extends \moodleform
         $mform->addElement('select', 'bot_type', get_string('bot_type', 'local_fakesmarts'), fakesmarts::get_bot_types());
         $mform->setType('bot_type', PARAM_INT);
         $mform->addHelpButton('bot_type', 'bot_type', 'local_fakesmarts');
+
+        // Bot type form element
+        $mform->addElement('select', 'model_id', get_string('model', 'local_fakesmarts'), $MODELS->get_select_array());
+        $mform->setType('model_id', PARAM_INT);
+
+        // Bot type form element
+        $mform->addElement('select', 'embedding_id', get_string('embedding', 'local_fakesmarts'), $MODELS->get_select_array());
+        $mform->setType('embedding_id', PARAM_INT);
 
         // Bot system message form element
         $mform->addElement('textarea', 'bot_system_message', get_string('bot_system_message', 'local_fakesmarts'));
