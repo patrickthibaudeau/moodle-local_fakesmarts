@@ -54,7 +54,7 @@ class gpt
             );
         }
         $result = json_decode(curl_exec($ch));
-        file_put_contents('/var/www/moodledata/temp/gpt.json', json_encode($result));
+
         curl_close($ch);
         return $result;
     }

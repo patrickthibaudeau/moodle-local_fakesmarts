@@ -72,15 +72,13 @@ class local_fakesmarts_external_gpt extends external_api {
         //OPTIONAL but in most web service it should present
         $context = \context_system::instance();
         self::validate_context($context);
-        file_put_contents('/var/www/moodledata/temp/values.txt', "bot_id: $bot_id\nchat_id: $chat_id\nprompt: $prompt\ncontent: $content\n");
+
         if ($chat_id != 0) {
             $result = cria::send_chat_request($bot_id, $chat_id, $prompt);
             // Clean up content
             $content = nl2br(htmlspecialchars($result->reply->reply));
             $content = gpt::make_email($content);
             $content = gpt::make_link($content);
-
-            file_put_contents('/var/www/moodledata/temp/results.json',  json_encode($result));
 
             $message = new \stdClass();
             $message->message = $content;
