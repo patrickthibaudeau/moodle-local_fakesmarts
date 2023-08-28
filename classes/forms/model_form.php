@@ -70,7 +70,7 @@ class model_form extends \moodleform
 
         // Azure key
         $mform->addElement(
-            'text',
+            'passwordunmask',
             'azure_key',
             get_string('azure_key', 'local_fakesmarts')
         );
@@ -99,6 +99,16 @@ class model_form extends \moodleform
         $mform->setType(
             'model_name',
             PARAM_TEXT
+        );
+
+        $mform->addElement(
+            'selectyesno',
+            'is_embedding',
+            get_string('is_embedding', 'local_fakesmarts')
+        );
+        $mform->setType(
+            'is_embedding',
+            PARAM_INT
         );
 
         // Prompt cost

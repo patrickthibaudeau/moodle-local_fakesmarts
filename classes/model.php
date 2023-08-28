@@ -53,6 +53,12 @@ class model extends crud
 
     /**
      *
+     * @var int
+     */
+    private $is_embedding;
+
+    /**
+     *
      * @var string
      */
     private $model_name;
@@ -135,6 +141,7 @@ class model extends crud
         $this->azure_api_version = $result->azure_api_version ?? '';
         $this->azure_key = $result->azure_key ?? '';
         $this->azure_deployment_name = $result->azure_deployment_name ?? '';
+        $this->is_embedding = $result->is_embedding ?? 0;
         $this->model_name = $result->model_name ?? '';
         $this->prompt_cost = $result->prompt_cost ?? '';
         $this->completion_cost = $result->completion_cost ?? '';
@@ -205,6 +212,13 @@ class model extends crud
     public function get_azure_deployment_name()
     {
         return $this->azure_deployment_name;
+    }
+
+    /**
+     * @return is_embedding - int (1)
+     */
+    public function get_is_embedding() {
+        return $this->is_embedding;
     }
 
     /**

@@ -64,6 +64,7 @@ $string['indexing_server_api_key_help'] = 'Enter the API key for the indexing se
 $string['indexing_server_url'] = 'Indexing server URL';
 $string['indexing_server_url_help'] = 'URL of the indexing server';
 $string['ip'] = 'IP';
+$string['is_embedding'] = 'This is an embedding model';
 $string['logs'] = 'Logs';
 $string['logs_for'] = 'Logs for';
 $string['message'] = 'Message';

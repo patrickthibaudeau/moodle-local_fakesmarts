@@ -20,6 +20,8 @@ class gpt
     public static function _make_call($bot_id, $data, $call = '', $method = 'GET', $use_indexing_server = 1)
     {
         $config = get_config('local_fakesmarts');
+        $FAKESMART = new fakesmart($bot_id);
+        $bot_config = $FAKESMART->get_model_config();
         $ch = curl_init();
         curl_setopt_array($ch, array(
                 CURLOPT_CUSTOMREQUEST => $method,
@@ -40,11 +42,14 @@ class gpt
             );
 
         } else {
-            $url = $config->azure_endpoint . 'openai/deployments/' . $config->deployment_name . '/chat/completions?api-version=2023-05-15';
+            $url = $bot_config->azure_endpoint . 'openai/deployments/' .
+                $bot_config->azure_deployment_name .
+                '/chat/completions?api-version=' .
+                $bot_config->azure_api_version;
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
-                    'api-key: ' . $config->azure_key
+                    'api-key: ' . $bot_config->azure_key
                 )
             );
         }
@@ -176,7 +181,7 @@ class gpt
         }
 
         // Get the cost of the call
-        $cost = self::_get_cost($total_tokens);
+        $cost = self::_get_cost($bot_id, $prompt_tokens, $completion_tokens);
         // Add to logs
         logs::insert($bot_id, $prompt, $summaries, $prompt_tokens, $completion_tokens, $total_tokens, $cost);
 

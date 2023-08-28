@@ -18,23 +18,54 @@ class edit_content_form extends \moodleform
         $mform = &$this->_form;
 
         $word_count = str_word_count($formdata->content);
-        $mform->addElement('hidden', 'id');
-        $mform->setType('id', PARAM_INT);
-        $mform->addElement('hidden', 'fakesmarts_id');
-        $mform->setType('fakesmarts_id', PARAM_INT);
+        $mform->addElement(
+            'hidden',
+            'id'
+        );
+        $mform->setType(
+            'id',
+            PARAM_INT
+        );
+
+        $mform->addElement(
+            'hidden',
+            'fakesmarts_id'
+        );
+        $mform->setType(
+            'fakesmarts_id',
+            PARAM_INT)
+        ;
 
         //Header: General
-        $mform->addElement('header', 'edit_content_form', get_string('edit_content', 'local_fakesmarts'));
+        $mform->addElement(
+            'header',
+            'edit_content_form',
+            get_string('edit_content', 'local_fakesmarts')
+        );
 
         // Show file name
-        $mform->addElement('html', "<h3>$formdata->name</h3>");
+        $mform->addElement(
+            'html',
+            "<h3>$formdata->name</h3>"
+        );
         // Edit file content
-        $mform->addElement('textarea',
+        $mform->addElement(
+            'textarea',
             'content',
             get_string('content', 'local_fakesmarts'),
-            ['rows' => 30, 'cols' => 80]
+            [
+                'rows' => 30,
+                'cols' => 80
+            ]
         );
-        $mform->addElement('static', 'word_count', get_string('word_count', 'local_fakesmarts'), $word_count);
+
+        $mform->addElement(
+            'static',
+            'word_count',
+            get_string('word_count', 'local_fakesmarts'),
+            $word_count
+        );
+
         $this->add_action_buttons();
         $this->set_data($formdata);
     }

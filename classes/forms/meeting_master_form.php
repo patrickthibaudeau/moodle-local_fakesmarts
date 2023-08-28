@@ -20,12 +20,16 @@ class meeting_master_form extends \moodleform
 
 
         // Edit file content
-        $mform->addElement('textarea',
+        $mform->addElement(
+            'textarea',
             'content',
             get_string('paste_text', 'local_fakesmarts'),
             ['rows' => 30]
         );
-        $mform->setType('content', PARAM_RAW);
+        $mform->setType(
+            'content',
+            PARAM_RAW
+        );
         // Language you would like the response to be in
         $mform->addElement(
             'select',
@@ -36,9 +40,18 @@ class meeting_master_form extends \moodleform
                 'French' => 'Français'
             ]
         );
-        $mform->setType('language', PARAM_TEXT);
-        $mform->setDefault('language', 'English');
-        $mform->addHelpButton('language', 'language', 'local_fakesmarts');
+        $mform->setType(
+            'language',
+            PARAM_TEXT
+        );
+        $mform->setDefault(
+            'language',
+            'English'
+        );
+        $mform->addHelpButton(
+            'language',
+            'language', 'local_fakesmarts'
+        );
 
         $this->add_action_buttons();
         $this->set_data($formdata);

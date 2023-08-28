@@ -93,9 +93,28 @@ class cria
         $FAKESMART = new fakesmart($bot_id);
         $system_message = $FAKESMART->get_bot_type_system_message() . ' ' . $FAKESMART->get_bot_system_message();
 
+        $llm = $FAKESMART->get_model_config();
+        $embedding = $FAKESMART->get_embedding_config();
+
         $data = [
-            "field" => "system_message",
-            "value" => $system_message
+            "system_message" => $system_message,
+            "chat_expires_seconds" => 900,
+            "azure_credentials" => [
+                "llm" => [
+                    "api_base" => $llm->azure_endpoint,
+                    "api_version" => $llm->azure_api_version,
+                    "api_key" => $llm->azure_key,
+                    "api_deployment" => $llm->azure_deployment_name,
+                    "api_model" => $llm->model_name
+                ],
+                "embedding" => [
+                    "api_base" => $embedding->azure_endpoint,
+                    "api_version" => $embedding->azure_api_version,
+                    "api_key" => $embedding->azure_key,
+                    "api_deployment" => $embedding->azure_deployment_name,
+                    "api_model" => $embedding->model_name
+                ]
+            ],
         ];
 
         $data = json_encode($data);

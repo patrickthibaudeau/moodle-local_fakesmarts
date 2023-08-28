@@ -436,5 +436,20 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023082701, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023082800) {
+
+        // Define field is_embedding to be added to local_fakesmarts_models.
+        $table = new xmldb_table('local_fakesmarts_models');
+        $field = new xmldb_field('is_embedding', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'azure_deployment_name');
+
+        // Conditionally launch add field is_embedding.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023082800, 'local', 'fakesmarts');
+    }
+
     return true;
 }
