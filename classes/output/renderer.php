@@ -80,4 +80,14 @@ class renderer extends \plugin_renderer_base {
         return $this->render_from_template('local_fakesmarts/bot_models', $data);
     }
 
+    /**
+     * @param \templatable $bot_types
+     * @return bool|string
+     * @throws \moodle_exception
+     */
+    public function render_minutes_maker(\templatable $message) {
+        $data = $message->export_for_template($this);
+        return $this->render_from_template('local_fakesmarts/minutes_maker', $data);
+    }
+
 }

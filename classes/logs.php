@@ -16,7 +16,7 @@ class logs
      * @throws \dml_exception
      */
     public static function insert($fakesmarts_id, $prompt, $message, $prompt_tokens, $completion_tokens, $total_tokens, $cost, $context = '') {
-        global $DB;
+        global $DB, $USER;
         // Get client IP
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -28,6 +28,7 @@ class logs
 
         $data = [
             'fakesmarts_id' => $fakesmarts_id,
+            'userid' => $USER->id,
             'prompt' => $prompt,
             'message' => $message,
             'prompt_tokens' => $prompt_tokens,
@@ -51,7 +52,8 @@ class logs
     public static function get_logs($fakesmarts_id) {
         global $DB;
         $sql = "SELECT 
-                    id, 
+                    id,
+                    userid,
                     fakesmarts_id, 
                     prompt, 
                     message,
