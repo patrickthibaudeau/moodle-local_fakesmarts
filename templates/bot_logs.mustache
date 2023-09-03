@@ -36,6 +36,7 @@
                 <table id="bot_logs" class="table table-striped table-responsive">
                     <thead>
                     <tr>
+                        <th>{{#str}}userid, local_fakesmarts{{/str}}</th>
                         <th>{{#str}}prompt, local_fakesmarts{{/str}}</th>
                         <th>{{#str}}response, local_fakesmarts{{/str}}</th>
                         <th>{{#str}}index_context, local_fakesmarts{{/str}}</th>
@@ -50,6 +51,7 @@
                     <tbody>
                     {{#logs}}
                         <tr>
+                            <td>{{{userid}}}</td>
                             <td>{{{prompt}}}</td>
                             <td>{{{message}}}</td>
                             <td>{{{index_context}}}</td>
