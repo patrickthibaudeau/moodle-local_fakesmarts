@@ -67,7 +67,6 @@ class local_fakesmarts_external_gpt extends external_api {
                 'content' => $content
             )
         );
-
         //Context validation
         //OPTIONAL but in most web service it should present
         $context = \context_system::instance();

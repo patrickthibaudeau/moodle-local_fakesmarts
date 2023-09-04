@@ -3,13 +3,13 @@ import ajax from 'core/ajax';
 import config from 'core/config';
 
 export const init = () => {
-    get_response();
+    process_notes();
 };
 
 /**
  * Delete a content
  */
-function get_response() {
+function process_notes() {
 
     $("#process-notes").off();
     $("#process-notes").on('click', function () {
@@ -17,7 +17,6 @@ function get_response() {
         var bot_id = $(this).data('bot_id');
         var language = $('#language').val();
         var content = $('#notes').val();
-        var chat_id = $('#fakesmarts-chat-id').val();
         var prompt = `Create meeting notes and separate the notes by topic. Each topic should be in a 
         numbered list. Once done, create all action items from transcription. Format the action items as a list having 
         the following headings: Assigned to, Description, Date due`;
@@ -34,20 +33,18 @@ function get_response() {
 
         $('#process-notes').hide();
         $('#starting-process').show();
-
         //Delete the record
         var gpt_response = ajax.call([{
             methodname: 'fakesmarts_get_gpt_response',
             args: {
                 bot_id: bot_id,
-                chat_id: chat_id,
+                chat_id: 0,
                 prompt: prompt,
                 content: content
             }
         }]);
 
         gpt_response[0].done(function (result) {
-            console.log(result);
             let data = JSON.parse(result);
             let form_data = {
                 'project_name': project_name,
@@ -56,7 +53,6 @@ function get_response() {
                 'location': location,
                 'minutes': data.message
             };
-            console.log(form_data);
             $('#starting-process').hide();
             $('#almost-done').show();
             // JQuery Ajax call to process.php
@@ -64,7 +60,6 @@ function get_response() {
                 $('#almost-done').hide();
                 $('#process-complete').show();
                 $.post(config.wwwroot + "/local/fakesmarts/minutes_master/process.php", form_data, function (response) {
-                    console.log(response);
                     let path_data = JSON.parse(response);
                     window.location.href = config.wwwroot + "/local/fakesmarts/minutes_master/download.php?path="
                         + path_data.path + "&file=" + path_data.file_name;

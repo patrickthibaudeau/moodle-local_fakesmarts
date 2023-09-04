@@ -17,11 +17,12 @@ class gpt
      * @return mixed
      * @throws \dml_exception
      */
-    public static function _make_call($bot_id, $data, $call = '', $method = 'GET', $use_indexing_server = 1)
+    public static function _make_call($bot_id, $data, $call = '', $method = 'GET', $use_indexing_server = true)
     {
         $config = get_config('local_fakesmarts');
         $FAKESMART = new fakesmart($bot_id);
         $bot_config = $FAKESMART->get_model_config();
+
         $ch = curl_init();
         curl_setopt_array($ch, array(
                 CURLOPT_CUSTOMREQUEST => $method,
@@ -40,7 +41,6 @@ class gpt
                     'x-api-key: ' . $config->indexing_server_api_key
                 )
             );
-
         } else {
             $url = $bot_config->azure_endpoint . 'openai/deployments/' .
                 $bot_config->azure_deployment_name .
@@ -54,7 +54,6 @@ class gpt
             );
         }
         $result = json_decode(curl_exec($ch));
-
         curl_close($ch);
         return $result;
     }
@@ -71,10 +70,8 @@ class gpt
         // Create object that will return the data
         $data = new \stdClass();
         $FAKESMART = new fakesmart($bot_id);
-        // initiate cache store
-        $cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
-        // Get system message and user content from cache
-        $system_message = $cache->get($FAKESMART->get_bot_type() . '_' . sesskey());
+        $system_message = $FAKESMART->concatenate_system_messages();
+
         $user_content = $content;
         // Remove all lines and replace with space. AKA lower token count
 //        $user_content = preg_replace('/\s+/', ' ', trim($user_content));
