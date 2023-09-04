@@ -39,6 +39,7 @@ For GPT-3.5-turbo 16k, the maximum number of words per chunk is 12000.';
 $string['completion_cost'] = 'Completion cost';
 $string['completion_tokens'] = 'Completion tokens';
 $string['content'] = 'Content';
+$string['content_for'] = 'Content for';
 $string['cost'] = 'Cost';
 $string['create_meeting_notes'] = 'MinutesMaster';
 $string['create_meeting_notes_help'] = 'Use this tool to create meeting notes based on a transcription';
