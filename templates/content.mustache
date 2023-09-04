@@ -1,26 +1,14 @@
-<div class="row">
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <a href="add_content.php?id={{bot_id}}" class="btn btn-outline-primary">
-                    {{#str}}add_content, local_fakesmarts{{/str}}
-                </a>
-                <a href="test_bot.php?id={{bot_id}}" class="btn btn-outline-primary">
-                {{#str}}test_bot, local_fakesmarts{{/str}}
-                </a>
-                <a href="bot_config.php" class="btn btn-outline-primary">
-                {{#str}}bots, local_fakesmarts{{/str}}
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row mt-2">
     <div class="col">
         <div class="card">
             <h3 class="card-header">
-                {{bot_name}} <span style="font-size: .5em;">{{#str}}total_words, local_fakesmarts{{/str}}: {{word_count}}</span>
+                <a href="add_content.php?id={{bot_id}}" class="btn btn-outline-primary float-right">
+                {{#str}}add_content, local_fakesmarts{{/str}}
+                </a>
+                <a href="bot_config.php" class="btn btn-outline-primary float-right mr-1">
+                    {{#str}}bots, local_fakesmarts{{/str}}
+                </a>
+
             </h3>
             <div class="card-body">
                 <table class="table table-striped">

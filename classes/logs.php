@@ -50,7 +50,8 @@ class logs
      * @return array
      */
     public static function get_logs($fakesmarts_id) {
-        global $DB;
+        global $DB, $USER;
+
         $sql = "SELECT 
                     id,
                     userid,
@@ -67,12 +68,20 @@ class logs
                 FROM 
                     {local_fakesmarts_logs} 
                 WHERE 
-                    fakesmarts_id = :fakesmarts_id 
-                ORDER BY 
-                    timecreated DESC";
+                    fakesmarts_id = ? ";
+
         $params = [
             'fakesmarts_id' => $fakesmarts_id
         ];
+
+        // Site admins can see all logs, users can only see their own
+        if (!is_siteadmin()) {
+            $sql .= " AND userid = ?";
+            $params['userid'] = $USER->id;
+        }
+
+        $sql .= " ORDER BY timecreated DESC";
+
         $logs = $DB->get_records_sql($sql, $params);
         return array_values($logs);
     }
