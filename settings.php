@@ -28,43 +28,12 @@ defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_fakesmarts_settings', new lang_string('pluginname', 'local_fakesmarts'));
 
-    // Microsoft Azure Endpoint.
-    $settings->add( new admin_setting_configtext(
-        'local_fakesmarts/azure_endpoint',
-        get_string('azure_endpoint', 'local_fakesmarts'),
-        get_string('azure_endpoint_help', 'local_fakesmarts'),
-        '', PARAM_TEXT, 255
-    ));
-
-    // Number of tries.
-    $settings->add( new admin_setting_configpasswordunmask(
-        'local_fakesmarts/azure_key',
-        get_string('azure_key', 'local_fakesmarts'),
-        get_string('azure_key_help', 'local_fakesmarts'),
-        '', PARAM_TEXT, 255
-    ));
-
-    // Deployement name.
-    $settings->add( new admin_setting_configtext(
-        'local_fakesmarts/deployment_name',
-        get_string('deployment_name', 'local_fakesmarts'),
-        get_string('deployment_name_help', 'local_fakesmarts'),
-        '', PARAM_TEXT, 255
-    ));
-
-    // Deployement name.
+    // Max chunks
     $settings->add( new admin_setting_configtext(
         'local_fakesmarts/max_chunks',
         get_string('chunk_limit', 'local_fakesmarts'),
         get_string('chunk_limit_help', 'local_fakesmarts'),
         65000, PARAM_INT, 6
-    ));
-
-    $settings->add( new admin_setting_configtext(
-        'local_fakesmarts/gpt_cost',
-        get_string('gpt_cost', 'local_fakesmarts'),
-        get_string('gpt_cost_help', 'local_fakesmarts'),
-        0.0035, PARAM_FLOAT, 12
     ));
 
     $settings->add( new admin_setting_configtext(
@@ -81,7 +50,13 @@ if ($hassiteconfig) {
         '', PARAM_TEXT, 255
     ));
 
-    // MS OpenAI URL will be the following: $AZURE_ENDPOINT/openai/deployments/$DEPLOYMENT_NAME/chat/completions?api-version=2023-05-15
+    // MinutesMaster id
+    $settings->add( new admin_setting_configtext(
+        'local_fakesmarts/minutes_master',
+        get_string('minutes_master_id', 'local_fakesmarts'),
+        get_string('minutes_master_id_help', 'local_fakesmarts'),
+        '', PARAM_INT, 10
+    ));
 
     $ADMIN->add('localplugins', $settings);
 

@@ -2,7 +2,7 @@
 
 namespace local_fakesmarts;
 
-class minutes_maker
+class minutes_master
 {
     public static function create_document(
         $minutes,

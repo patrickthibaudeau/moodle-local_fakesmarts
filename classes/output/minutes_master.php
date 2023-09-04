@@ -17,7 +17,7 @@ namespace local_fakesmarts\output;
 
 use local_fakesmarts\fakesmarts;
 
-class minutes_maker implements \renderable, \templatable
+class minutes_master implements \renderable, \templatable
 {
 
 
@@ -38,10 +38,10 @@ class minutes_maker implements \renderable, \templatable
     {
         global $USER, $CFG, $DB;
 
-        $context = \context_system::instance();
+        $config = get_config('local_fakesmarts');
 
         $data = [
-            'bot_id' => 41,
+            'bot_id' => $config->minutes_master,
         ];
 
         return $data;

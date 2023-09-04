@@ -1,7 +1,7 @@
 <?php
 require_once('../../../config.php');
 
-use local_fakesmarts\minutes_maker;
+use local_fakesmarts\minutes_master;
 
 $path = required_param('path', PARAM_TEXT);
 $file_name = required_param('file', PARAM_TEXT);

@@ -85,9 +85,9 @@ class renderer extends \plugin_renderer_base {
      * @return bool|string
      * @throws \moodle_exception
      */
-    public function render_minutes_maker(\templatable $message) {
+    public function render_minutes_master(\templatable $message) {
         $data = $message->export_for_template($this);
-        return $this->render_from_template('local_fakesmarts/minutes_maker', $data);
+        return $this->render_from_template('local_fakesmarts/minutes_master', $data);
     }
 
 }

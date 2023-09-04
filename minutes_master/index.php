@@ -14,7 +14,7 @@ $context = context_system::instance();
     $context
 );
 
-$PAGE->requires->js_call_amd('local_fakesmarts/minutes_maker', 'init');
+$PAGE->requires->js_call_amd('local_fakesmarts/minutes_master', 'init');
 
 //**************** ******
 //*** DISPLAY HEADER ***
@@ -22,8 +22,8 @@ $PAGE->requires->js_call_amd('local_fakesmarts/minutes_maker', 'init');
 echo $OUTPUT->header();
 
 $output = $PAGE->get_renderer('local_fakesmarts');
-$dashboard = new \local_fakesmarts\output\minutes_maker();
-echo $output->render_minutes_maker($dashboard);
+$dashboard = new \local_fakesmarts\output\minutes_master();
+echo $output->render_minutes_master($dashboard);
 //**********************
 //*** DISPLAY FOOTER ***
 //**********************
