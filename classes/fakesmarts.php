@@ -25,7 +25,7 @@ class fakesmarts {
 	 *@global \moodle_database $DB
 	 */
 	public function __construct() {
-	    global $DB;
+	    global $DB, $USER;
         $sql = "
         Select
             f.id,

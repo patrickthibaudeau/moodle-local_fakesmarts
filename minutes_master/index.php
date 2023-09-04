@@ -8,7 +8,7 @@ require_login(1, false);
 $context = context_system::instance();
 
 \local_fakesmarts\base::page(
-    new moodle_url('/local/fakesmarts/minutes_master/test.php'),
+    new moodle_url('/local/fakesmarts/minutes_master/index.php'),
     get_string('minutes_master', 'local_fakesmarts'),
     get_string('minutes_master', 'local_fakesmarts'),
     $context

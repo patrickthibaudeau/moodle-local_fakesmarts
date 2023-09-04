@@ -16,7 +16,7 @@ function get_response() {
         $('#fakesmarts-cost').hide();
         var bot_id = $(this).data('bot_id');
         var language = $('#language').val();
-        var content  = $('#notes').val();
+        var content = $('#notes').val();
         var chat_id = $('#fakesmarts-chat-id').val();
         var prompt = `Create meeting notes and separate the notes by topic. Each topic should be in a 
         numbered list. Once done, create all action items from transcription. Format the action items as a list having 
@@ -26,14 +26,14 @@ function get_response() {
             liste numérotée. Une fois terminé, créez toutes les tâches à partir de la transcription. Formatez les 
             tâches comme une list ayant les entêtes suivantes: Assigné à, Description, Date d'échéance`;
         }
-                    // Get all values from various fields
+        // Get all values from various fields
         var project_name = $('#project_name').val();
         var date = $('#date').val();
         var time = $('#time').val();
         var location = $('#location').val();
 
         $('#process-notes').hide();
-    $('#starting-process').show();
+        $('#starting-process').show();
 
         //Delete the record
         var gpt_response = ajax.call([{
@@ -49,14 +49,14 @@ function get_response() {
         gpt_response[0].done(function (result) {
             console.log(result);
             let data = JSON.parse(result);
-                    let form_data = {
-                        'project_name': project_name,
-                        'date': date,
-                        'time': time,
-                        'location': location,
-                        'minutes': data.message
-                    };
-console.log(form_data);
+            let form_data = {
+                'project_name': project_name,
+                'date': date,
+                'time': time,
+                'location': location,
+                'minutes': data.message
+            };
+            console.log(form_data);
             $('#starting-process').hide();
             $('#almost-done').show();
             // JQuery Ajax call to process.php
