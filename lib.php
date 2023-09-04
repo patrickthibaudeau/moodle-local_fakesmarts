@@ -66,7 +66,7 @@ function local_fakesmarts_navdrawer_items()
         $items[] = navdrawer::add(
             get_string('bot_models', 'local_fakesmarts'),
             null,
-            new moodle_url('/local/fakesmarts/bot_types.php'),
+            new moodle_url('/local/fakesmarts/bot_models.php'),
             'bi-boxes',
         );
     }

@@ -11,7 +11,7 @@ $context = context_system::instance();
 \local_fakesmarts\base::page(
     new moodle_url('/local/fakesmarts/bot_types.php'),
     get_string('bot_types', 'local_fakesmarts'),
-    '',
+    get_string('bot_types', 'local_fakesmarts'),
     $context
 );
 
