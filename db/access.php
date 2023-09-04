@@ -75,6 +75,19 @@ $capabilities = array(
         )
     ),
 
+    'local/fakesmarts:edit_system_reserved' => array(
+
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(
+            'guest' => CAP_PROHIBIT,
+            'student' => CAP_PROHIBIT,
+            'teacher' => CAP_PROHIBIT,
+            'editingteacher' => CAP_PROHIBIT,
+            'manager' => CAP_PREVENT
+        )
+    ),
+
     'local/fakesmarts:view_bot_types' => array(
 
         'captype' => 'read',

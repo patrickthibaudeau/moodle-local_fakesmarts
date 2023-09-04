@@ -451,5 +451,21 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023082800, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023090400) {
+
+        // Define field system_reserved to be added to local_fakesmarts.
+        $table = new xmldb_table('local_fakesmarts');
+        $field = new xmldb_field('system_reserved', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'embedding_id');
+
+        // Conditionally launch add field system_reserved.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023090400, 'local', 'fakesmarts');
+    }
+
+
     return true;
 }

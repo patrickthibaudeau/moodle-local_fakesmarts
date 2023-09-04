@@ -82,6 +82,7 @@ $string['select'] = 'Select';
 $string['submit'] = 'Submit';
 $string['statistics'] = 'Statistics';
 $string['system_message'] = 'System message';
+$string['system_reserved'] = 'System reserved';
 $string['take_me_there'] = 'Let\'s go!';
 $string['test_bot'] = 'Test bot';
 $string['testing_bot'] = 'Testing bot';
@@ -110,6 +111,7 @@ $string['fakesmarts:view_bot_logs'] = 'View bot logs';
 $string['fakesmarts:delete_models'] = 'Delete models';
 $string['fakesmarts:edit_models'] = 'Add/Edit models';
 $string['fakesmarts:view_models'] = 'View models';
+$string['fakesmarts:edit_system_reserved'] = 'Edit system reserved bots';
 
 // MinutesMaster
 $string['convert'] = 'Convert';

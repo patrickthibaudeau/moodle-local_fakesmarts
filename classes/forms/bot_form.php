@@ -22,6 +22,8 @@ class bot_form extends \moodleform
         // Create form object
         $mform = &$this->_form;
 
+        $context = \context_system::instance();
+
         $MODELS = new models();
 
         $mform->addElement(
@@ -38,7 +40,7 @@ class bot_form extends \moodleform
             'home-nav-start',
             get_string('bot', 'local_fakesmarts')
         );
-       // Name form element
+        // Name form element
         $mform->addElement(
             'text',
             'name',
@@ -66,6 +68,17 @@ class bot_form extends \moodleform
             get_string('bot_type', 'local_fakesmarts'),
             fakesmarts::get_bot_types()
         );
+
+        // System reserved form element
+        if (has_capability('local/fakesmarts:edit_system_reserved', $context)) {
+            $mform->addElement(
+                'selectyesno',
+                'system_reserved',
+                get_string('system_reserved', 'local_fakesmarts')
+            );
+        }
+
+
         $mform->setType(
             'bot_type',
             PARAM_INT
@@ -120,7 +133,7 @@ class bot_form extends \moodleform
             'display-settings-nav-start',
             get_string('display_settings', 'local_fakesmarts')
         );
-     // Welcome message element
+        // Welcome message element
         $mform->addElement(
             'editor',
             'welcome_message_editor',
