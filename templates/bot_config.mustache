@@ -50,35 +50,16 @@
   "can_view_bot_logs": true,
 }
 -->
-<div class="row">
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                {{#can_edit}}
-                    <a href="bot.php" class="btn btn-outline-primary">
-                        {{#str}}add_bot, local_fakesmarts{{/str}}
-                    </a>
-                {{/can_edit}}
-                {{#can_view_bot_types}}
-                    <a href="bot_types.php" class="btn btn-outline-primary">
-                        {{#str}}bot_types, local_fakesmarts{{/str}}
-                    </a>
-                {{/can_view_bot_types}}
-                {{#can_view_bot_models}}
-                    <a href="bot_models.php" class="btn btn-outline-primary">
-                        {{#str}}bot_models, local_fakesmarts{{/str}}
-                    </a>
-                {{/can_view_bot_models}}
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row mt-2">
     <div class="col">
         <div class="card">
             <h3 class="card-header">
                 {{#str}}existing_bots, local_fakesmarts{{/str}}
+                {{#can_edit}}
+                    <a href="bot.php" class="btn btn-outline-primary float-right">
+                        {{#str}}add_bot, local_fakesmarts{{/str}}
+                    </a>
+                {{/can_edit}}
             </h3>
             <div class="card-body">
                 <table class="table table-striped">
