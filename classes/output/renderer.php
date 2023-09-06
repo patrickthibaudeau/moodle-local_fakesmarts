@@ -90,4 +90,13 @@ class renderer extends \plugin_renderer_base {
         return $this->render_from_template('local_fakesmarts/minutes_master', $data);
     }
 
+    /**
+     * @param \templatable $bot_types
+     * @return bool|string
+     * @throws \moodle_exception
+     */
+    public function render_bot_app(\templatable $bot) {
+        $data = $bot->export_for_template($this);
+        return $this->render_from_template('local_fakesmarts/bot_app', $data);
+    }
 }

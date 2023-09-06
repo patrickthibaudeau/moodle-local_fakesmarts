@@ -83,4 +83,31 @@ class fakesmarts {
         return $bot_types;
     }
 
+    public function get_published_bots() {
+        global $DB;
+        $sql = "
+        Select
+            f.id,
+            f.name,
+            f.description,
+            f.bot_type,
+            f.system_reserved,
+            f.publish,
+            ft.name As type_name,
+            ft.use_bot_server,
+            f.bot_system_message,
+            ft.use_bot_server
+        From
+            {local_fakesmarts} f Inner Join
+            {local_fakesmarts_type} ft On ft.id = f.bot_type
+        Where
+            f.publish = 1 
+        Order By
+            f.name";
+
+        $result = $DB->get_records_sql($sql);
+        $result = array_values($result);
+	    return $result;
+    }
+
 }

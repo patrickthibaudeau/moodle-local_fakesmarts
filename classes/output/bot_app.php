@@ -12,17 +12,23 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later  **
  * *************************************************************************
  * ************************************************************************ */
-
 namespace local_fakesmarts\output;
 
-use local_fakesmarts\fakesmarts;
-class dashboard implements \renderable, \templatable
+use local_fakesmarts\fakesmart;
+use local_fakesmarts\cria;
+use local_fakesmarts\output\type;
+
+class bot_app implements \renderable, \templatable
 {
 
+    /**
+     * @var int
+     */
+    private $bot_id;
 
-    public function __construct()
+    public function __construct($bot_id)
     {
-
+        $this->bot_id = $bot_id;
     }
 
     /**
@@ -37,15 +43,23 @@ class dashboard implements \renderable, \templatable
     {
         global $USER, $CFG, $DB;
 
-        $context = \context_system::instance();
-        $FAKESMARTS = new fakesmarts();
+        $FAKESMART = new fakesmart($this->bot_id);
 
-        $bots = $FAKESMARTS->get_records();
-        $bots = array_values($bots);
+        $chat_id = 0;
+        if ($FAKESMART->use_bot_server()) {
+            $session = cria::start_chat($this->bot_id);
+            $chat_id = $session->chat_id;
+        } else {
+            $cache = \cache::make('local_fakesmarts', 'fakesmarts_system_messages');
+            $system_message = $cache->set($FAKESMART->get_bot_type() . '_' . sesskey(), $FAKESMART->get_bot_type_system_message()  . ' ' . $FAKESMART->get_bot_system_message());
+        }
 
         $data = [
-            'can_view_bots' => has_capability('local/fakesmarts:view_bots', $context),
-            'published_bots' => $FAKESMARTS->get_published_bots(),
+            'bot_id' => $this->bot_id,
+            'name' => $FAKESMART->get_name(),
+            'use_bot_server' => $FAKESMART->use_bot_server(),
+            'chat_id' => $chat_id,
+            'user_prompt' => $FAKESMART->get_user_prompt(),
         ];
         return $data;
     }
