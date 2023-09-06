@@ -69,16 +69,6 @@ class bot_form extends \moodleform
             fakesmarts::get_bot_types()
         );
 
-        // System reserved form element
-        if (has_capability('local/fakesmarts:edit_system_reserved', $context)) {
-            $mform->addElement(
-                'selectyesno',
-                'system_reserved',
-                get_string('system_reserved', 'local_fakesmarts')
-            );
-        }
-
-
         $mform->setType(
             'bot_type',
             PARAM_INT
@@ -89,7 +79,16 @@ class bot_form extends \moodleform
             'local_fakesmarts'
         );
 
-        // Bot type form element
+        // System reserved form element
+        if (has_capability('local/fakesmarts:edit_system_reserved', $context)) {
+            $mform->addElement(
+                'selectyesno',
+                'system_reserved',
+                get_string('system_reserved', 'local_fakesmarts')
+            );
+        }
+
+        // Model id form element
         $mform->addElement(
             'select', 'model_id',
             get_string('model', 'local_fakesmarts'),
@@ -126,6 +125,46 @@ class bot_form extends \moodleform
             'bot_system_message',
             'bot_system_message',
             'local_fakesmarts'
+        );
+
+        // Requires user prompt form element
+        $mform->addElement(
+            'selectyesno',
+            'requires_user_prompt',
+            get_string('requires_user_prompt', 'local_fakesmarts')
+        );
+        $mform->setType(
+            'requires_user_prompt',
+            PARAM_INT
+        );
+
+        // User prompt form element
+        $mform->addElement(
+            'textarea',
+            'user_prompt',
+            get_string('user_prompt', 'local_fakesmarts')
+        );
+        $mform->setType(
+            'user_prompt',
+            PARAM_TEXT
+        );
+
+        $mform->hideIf(
+            'user_prompt',
+            'requires_user_prompt',
+            'eq',
+            0
+        );
+
+        // Public form element
+        $mform->addElement(
+            'selectyesno',
+            'public',
+            get_string('publish', 'local_fakesmarts')
+        );
+        $mform->setType(
+            'public',
+            PARAM_INT
         );
 
         $mform->addElement(

@@ -34,7 +34,7 @@ class fakesmarts {
             f.bot_type,
             ft.name As type_name,
             f.bot_system_message,
-            ft.use_indexing_server,
+            ft.use_bot_server,
             f.usermodified,
             f.timecreated,
             f.timemodified,

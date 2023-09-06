@@ -36,6 +36,30 @@ if ($hassiteconfig) {
         65000, PARAM_INT, 6
     ));
 
+    //Bot Server
+    $settings->add( new admin_setting_configtext(
+        'local_fakesmarts/bot_server_url',
+        get_string('bot_server_url', 'local_fakesmarts'),
+        get_string('bot_server_url_help', 'local_fakesmarts'),
+        '', PARAM_TEXT, 255
+    ));
+
+    $settings->add( new admin_setting_configpasswordunmask(
+        'local_fakesmarts/bot_server_api_key',
+        get_string('bot_server_api_key', 'local_fakesmarts'),
+        get_string('bot_server_api_key_help', 'local_fakesmarts'),
+        '', PARAM_TEXT, 255
+    ));
+
+    //Embedding Server
+    $settings->add( new admin_setting_configtext(
+        'local_fakesmarts/embedding_server_url',
+        get_string('embedding_server_url', 'local_fakesmarts'),
+        get_string('embedding_server_url_help', 'local_fakesmarts'),
+        '', PARAM_TEXT, 255
+    ));
+
+    // Indexing Server
     $settings->add( new admin_setting_configtext(
         'local_fakesmarts/indexing_server_url',
         get_string('indexing_server_url', 'local_fakesmarts'),

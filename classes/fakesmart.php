@@ -43,6 +43,23 @@ class fakesmart extends crud
      *
      * @var int
      */
+    private $public;
+
+    /**
+     *
+     * @var int
+     */
+    private $requires_user_prompt;
+
+    /**
+     *
+     * @var string
+     */
+    private $user_prompt;
+    /**
+     *
+     * @var int
+     */
     private $model_id;
 
     /**
@@ -116,6 +133,9 @@ class fakesmart extends crud
         $this->bot_type = $result->bot_type ?? 0;
         $this->system_reserved = $result->system_reserved ?? 0;
         $this->model_id = $result->model_id ?? 0;
+        $this->public = $result->public ?? 0;
+        $this->requires_user_prompt = $result->requires_user_prompt ?? 0;
+        $this->user_prompt = $result->user_prompt ?? '';
         $this->embedding_id = $result->embedding_id ?? 0;
         $this->bot_system_message = $result->bot_system_message ?? '';
         $this->usermodified = $result->usermodified ?? 0;
@@ -154,6 +174,30 @@ class fakesmart extends crud
     public function get_bot_type()
     {
         return $this->bot_type;
+    }
+
+    /**
+     * @return int
+     */
+    public function get_public()
+    {
+        return $this->public;
+    }
+
+    /**
+     * @return int
+     */
+    public function get_requires_user_prompt()
+    {
+        return $this->requires_user_prompt;
+    }
+
+    /**
+     * @return string
+     */
+    public function get_user_prompt()
+    {
+        return $this->user_prompt;
     }
 
     /**
@@ -275,6 +319,33 @@ class fakesmart extends crud
     public function set_bot_type($bot_type)
     {
         $this->bot_type = $bot_type;
+    }
+
+    /**
+     * @param $public
+     * @return void
+     */
+    public function set_pulic($public)
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * @param $requires_user_prompt
+     * @return void
+     */
+    public function set_requires_user_prompt($requires_user_prompt)
+    {
+        $this->requires_user_prompt = $requires_user_prompt;
+    }
+
+    /**
+     * @param $user_prompt
+     * @return void
+     */
+    public function set_user_prompt($user_prompt)
+    {
+        $this->user_prompt = $user_prompt;
     }
 
     /**

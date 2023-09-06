@@ -466,6 +466,45 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023090400, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023090501) {
+
+        // Rename field use_indexing_server on table local_fakesmarts_type to NEWNAMEGOESHERE.
+        $table = new xmldb_table('local_fakesmarts_type');
+        $field = new xmldb_field('use_indexing_server', XMLDB_TYPE_INTEGER, '1', null, null, null, '1', 'system_message');
+
+        // Launch rename field use_indexing_server.
+        $dbman->rename_field($table, $field, 'use_bot_server');
+
+        // Define field publlic to be added to local_fakesmarts.
+        $table = new xmldb_table('local_fakesmarts');
+        $field = new xmldb_field('publlic', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'description');
+
+        // Conditionally launch add field publlic.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field requires_user_prompt to be added to local_fakesmarts.
+        $table = new xmldb_table('local_fakesmarts');
+        $field = new xmldb_field('requires_user_prompt', XMLDB_TYPE_INTEGER, '1', null, null, null, '1', 'bot_type');
+
+        // Conditionally launch add field requires_user_prompt.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field user_prompt to be added to local_fakesmarts.
+        $table = new xmldb_table('local_fakesmarts');
+        $field = new xmldb_field('user_prompt', XMLDB_TYPE_TEXT, null, null, null, null, null, 'requires_user_prompt');
+
+        // Conditionally launch add field user_prompt.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023090501, 'local', 'fakesmarts');
+    }
 
     return true;
 }
