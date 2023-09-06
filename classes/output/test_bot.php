@@ -67,6 +67,7 @@ class test_bot implements \renderable, \templatable
             'name' => $FAKESMART->get_name(),
             'use_bot_server' => $FAKESMART->use_bot_server(),
             'chat_id' => $chat_id,
+            'user_prompt' => $FAKESMART->get_user_prompt(),
         ];
         return $data;
     }
