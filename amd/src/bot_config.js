@@ -1,9 +1,11 @@
 import $ from 'jquery';
 import notification from 'core/notification';
 import ajax from 'core/ajax';
+import ModalFactory from 'core/modal_factory';
 
 export const init = () => {
     delete_bot();
+    share_bot();
 };
 
 /**
@@ -34,5 +36,15 @@ function delete_bot() {
                 });
             });
 
+    });
+}
+
+function share_bot() {
+    $(".share-bot").off();
+    $(".share-bot").on('click', function () {
+        let bot_id = $(this).data('id');
+        let share = $(this).data('share');
+        $('#share-code').html(`<code> \t&lt;script type="text/javascript" src="${share}/embed?botId=${bot_id}" async&gt; \t&lt;/script&gt;</code>`);
+        $('#shareModal').modal('show');
     });
 }

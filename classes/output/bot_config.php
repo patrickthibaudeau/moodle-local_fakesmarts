@@ -39,6 +39,7 @@ class bot_config implements \renderable, \templatable
         global $USER, $CFG, $DB;
 
         $context = \context_system::instance();
+        $config = get_config('local_fakesmarts');
 
         $FAKESMARTS = new fakesmarts();
 
@@ -54,6 +55,8 @@ class bot_config implements \renderable, \templatable
             'can_edit_bot_content' => has_capability('local/fakesmarts:edit_bot_content', $context),
             'can_view_bot_logs' => has_capability('local/fakesmarts:view_bot_logs', $context),
             'can_view_bot_models' => has_capability('local/fakesmarts:view_models', $context),
+            'can_share_bots' => has_capability('local/fakesmarts:share_bots', $context),
+            "criachat" => $config->embedding_server_url
         ];
 
         return $data;

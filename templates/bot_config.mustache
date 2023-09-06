@@ -104,6 +104,16 @@
                                         </button>
                                     {{/system_reserved}}
                                 {{/can_delete}}
+                                {{#can_share_bots}}
+                                    {{#use_bot_server}}
+                                    <button
+                                            class="btn btn-outline-primary share-bot"
+                                            data-id="{{id}}"
+                                            data-share='{{criachat}}'>
+                                        {{#str}}share, local_fakesmarts{{/str}}
+                                    </button>
+                                    {{/use_bot_server}}
+                                {{/can_share_bots}}
                             </td>
                         </tr>
                     {{/bots}}
@@ -113,3 +123,30 @@
         </div>
     </div>
 </div>
+
+<!-- Sahre Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareModalLabel">{{#str}}embed_code, local_fakesmarts{{/str}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    {{#str}}embed_code_help, local_fakesmarts{{/str}}
+                </div>
+                <div id="share-code">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -54,6 +54,8 @@ $string['description'] = 'Description';
 $string['display_settings'] = 'Display setttings';
 $string['edit'] = 'Edit';
 $string['edit_content'] = 'Edit content';
+$string['embed_code'] = 'Embed Code';
+$string['embed_code_help'] = 'Copy and paste the code below onto you webpages to embed the chatbot.';
 $string['embedding'] = 'Embedding';
 $string['embedding_server_url'] = 'Embedding server URL';
 $string['embedding_server_url_help'] = 'URL of the embedding server';
@@ -88,6 +90,7 @@ $string['publish'] = 'Publish';
 $string['requires_user_prompt'] = 'Requires user prompt';
 $string['response'] = 'Response';
 $string['select'] = 'Select';
+$string['share'] = 'Share';
 $string['submit'] = 'Submit';
 $string['statistics'] = 'Statistics';
 $string['system_message'] = 'System message';
@@ -122,6 +125,7 @@ $string['fakesmarts:delete_models'] = 'Delete models';
 $string['fakesmarts:edit_models'] = 'Add/Edit models';
 $string['fakesmarts:view_models'] = 'View models';
 $string['fakesmarts:edit_system_reserved'] = 'Edit system reserved bots';
+$string['fakesmarts:share_bots'] = 'Share bots';
 
 // MinutesMaster
 $string['convert'] = 'Convert';
