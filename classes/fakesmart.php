@@ -240,11 +240,11 @@ class fakesmart extends crud
      * @return string
      * @throws \dml_exception
      */
-    public function use_indexing_server(): string
+    public function use_bot_server(): string
     {
         global $DB;
         $bot_type = $DB->get_record('local_fakesmarts_type', array('id' => $this->bot_type));
-        return $bot_type->use_indexing_server;
+        return $bot_type->use_bot_server;
     }
 
     /**
@@ -385,7 +385,7 @@ class fakesmart extends crud
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function create_bot_on_indexing_server()
+    public function create_bot_on_bot_server()
     {
         cria::create_bot($this->id);
     }
@@ -395,7 +395,7 @@ class fakesmart extends crud
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function update_bot_on_indexing_server()
+    public function update_bot_on_bot_server()
     {
         $bot_exists = cria::get_bot($this->id);
 

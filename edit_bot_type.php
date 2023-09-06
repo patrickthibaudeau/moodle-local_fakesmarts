@@ -18,7 +18,7 @@ if ($id) {
     $formdata = $DB->get_record('local_fakesmarts_type', ['id' => $id]);
 } else {
     $formdata = new stdClass();
-    $formdata->use_indexing_server = true;
+    $formdata->use_bot_server = true;
 }
 
 

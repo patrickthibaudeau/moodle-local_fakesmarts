@@ -13,11 +13,11 @@ class gpt
      * @param $bot_id
      * @param $data
      * @param $method
-     * @param $use_indexing_server
+     * @param $use_bot_server
      * @return mixed
      * @throws \dml_exception
      */
-    public static function _make_call($bot_id, $data, $call = '', $method = 'GET', $use_indexing_server = true)
+    public static function _make_call($bot_id, $data, $call = '', $method = 'GET', $use_bot_server = true)
     {
         $config = get_config('local_fakesmarts');
         $FAKESMART = new fakesmart($bot_id);
@@ -33,12 +33,12 @@ class gpt
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             )
         );
-        if ($use_indexing_server) {
-            $url = $config->indexing_server_url . 'bots/' . $bot_id . '/' . $call;
+        if ($use_bot_server) {
+            $url = $config->bot_server_url . 'bots/' . $bot_id . '/' . $call;
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
-                    'x-api-key: ' . $config->indexing_server_api_key
+                    'x-api-key: ' . $config->bot_server_api_key
                 )
             );
         } else {
@@ -275,7 +275,7 @@ class gpt
      * @return object
      * @throws \dml_exception
      */
-    public static function get_response($bot_id, $prompt, $content = '', $use_indexing_server = false): object
+    public static function get_response($bot_id, $prompt, $content = '', $use_bot_server = false): object
     {
         // Build the message
         $data = self::_build_message($bot_id, $prompt, $content);

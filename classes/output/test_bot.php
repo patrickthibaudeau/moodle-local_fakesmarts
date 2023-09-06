@@ -54,7 +54,7 @@ class test_bot implements \renderable, \templatable
         $FAKESMART = new fakesmart($this->bot_id);
 
         $chat_id = 0;
-        if ($FAKESMART->use_indexing_server()) {
+        if ($FAKESMART->use_bot_server()) {
             $session = cria::start_chat($this->bot_id);
             $chat_id = $session->chat_id;
         } else {
@@ -65,7 +65,7 @@ class test_bot implements \renderable, \templatable
         $data = [
             'bot_id' => $this->bot_id,
             'name' => $FAKESMART->get_name(),
-            'use_indexing_server' => $FAKESMART->use_indexing_server(),
+            'use_bot_server' => $FAKESMART->use_bot_server(),
             'chat_id' => $chat_id,
         ];
         return $data;

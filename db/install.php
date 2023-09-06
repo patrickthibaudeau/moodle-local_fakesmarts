@@ -33,7 +33,7 @@ function xmldb_local_fakesmarts_install()
     $record = new stdClass();
     $record->name = 'Factual';
     $record->description = 'Factual bots are designed to provide factual information to the user.';
-    $record->use_indexing_server = 1;
+    $record->use_bot_server = 1;
     $record->system_message = 'You are a Factual Research AI Assistant dedicated to providing accurate information. ';
     $record->system_message .= 'Your primary task is to assist me by providing me reliable and clear responses to my questions, ';
     $record->system_message .= 'based on the information available in the knowledge base as your only source. ';
@@ -51,7 +51,7 @@ function xmldb_local_fakesmarts_install()
     $record = new stdClass();
     $record->name = 'Transcript to Meeting minutes';
     $record->description = 'Meeting Notes bots are designed to convert transcription of a meeting into a set of meeting notes with action items.';
-    $record->use_indexing_server = 0;
+    $record->use_bot_server = 0;
     $record->system_message = 'You are a factual bot that creates meeting notes from the transcript provided. ';
     $record->system_message .= 'You do not add content that is not available in the transcript. ';
     $record->system_message .= 'Your response must be in the same language as the transcript provided. ';
@@ -66,7 +66,7 @@ function xmldb_local_fakesmarts_install()
     $record = new stdClass();
     $record->name = 'Legal Documents';
     $record->description = 'This bot creates legal documents based on information available in Ontario';
-    $record->use_indexing_server = 0;
+    $record->use_bot_server = 0;
     $record->system_message = 'You are a bot that creates legal documents specifically for universities in Ontario, ';
     $record->system_message .= ' Canada. You only provide factual information and you never provide false or untrue ';
     $record->system_message .= ' information. You can use factual information from renowned legal websites in Ontario, ';

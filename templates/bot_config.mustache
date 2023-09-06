@@ -81,11 +81,11 @@
                                     </a>
                                 {{/can_edit}}
                                 {{#can_edit_bot_content}}
-                                    {{#use_indexing_server}}
+                                    {{#use_bot_server}}
                                         <a href="content.php?id={{id}}" class="btn btn-outline-primary">
                                         {{#str}}content, local_fakesmarts{{/str}}
                                         </a>
-                                    {{/use_indexing_server}}
+                                    {{/use_bot_server}}
                                 {{/can_edit_bot_content}}
                                 {{#can_test}}
                                     <a href="test_bot.php?id={{id}}" class="btn btn-outline-primary">

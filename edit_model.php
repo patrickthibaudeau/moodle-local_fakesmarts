@@ -21,7 +21,6 @@ if ($id) {
     $formdata = $MODEL->get_result();
 } else {
     $formdata = new stdClass();
-    $formdata->use_indexing_server = true;
 }
 
 

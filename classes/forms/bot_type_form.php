@@ -56,16 +56,16 @@ class bot_type_form extends \moodleform
         // Use indexing server form element
         $mform->addElement(
             'selectyesno',
-            'use_indexing_server',
-            get_string('use_indexing_server', 'local_fakesmarts')
+            'use_bot_server',
+            get_string('use_bot_server', 'local_fakesmarts')
         );
         $mform->addHelpButton(
-            'use_indexing_server',
-            'use_indexing_server',
+            'use_bot_server',
+            'use_bot_server',
             'local_fakesmarts'
         );
         $mform->setType(
-            'use_indexing_server',
+            'use_bot_server',
             PARAM_INT
         );
 

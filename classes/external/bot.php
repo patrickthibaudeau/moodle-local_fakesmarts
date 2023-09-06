@@ -65,7 +65,7 @@ class local_fakesmarts_external_bot extends external_api {
         $context = \context_system::instance();
         self::validate_context($context);
         $FAKESMART = new fakesmart($id);
-        if ($FAKESMART->use_indexing_server()) {
+        if ($FAKESMART->use_bot_server()) {
             // Delete bot on indexing server
             cria::delete_bot($id);
         }
