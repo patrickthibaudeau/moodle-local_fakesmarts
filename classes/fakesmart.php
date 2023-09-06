@@ -43,7 +43,7 @@ class fakesmart extends crud
      *
      * @var int
      */
-    private $public;
+    private $publish;
 
     /**
      *
@@ -133,7 +133,7 @@ class fakesmart extends crud
         $this->bot_type = $result->bot_type ?? 0;
         $this->system_reserved = $result->system_reserved ?? 0;
         $this->model_id = $result->model_id ?? 0;
-        $this->public = $result->public ?? 0;
+        $this->publish = $result->publish ?? 0;
         $this->requires_user_prompt = $result->requires_user_prompt ?? 0;
         $this->user_prompt = $result->user_prompt ?? '';
         $this->embedding_id = $result->embedding_id ?? 0;
@@ -179,9 +179,9 @@ class fakesmart extends crud
     /**
      * @return int
      */
-    public function get_public()
+    public function get_publish()
     {
-        return $this->public;
+        return $this->publish;
     }
 
     /**
@@ -325,9 +325,9 @@ class fakesmart extends crud
      * @param $public
      * @return void
      */
-    public function set_pulic($public)
+    public function set_pulish($publish)
     {
-        $this->public = $public;
+        $this->publish = $publish;
     }
 
     /**

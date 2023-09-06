@@ -32,6 +32,8 @@ class fakesmarts {
             f.name,
             f.description,
             f.bot_type,
+            f.system_reserved,
+            f.publish,
             ft.name As type_name,
             f.bot_system_message,
             ft.use_bot_server,

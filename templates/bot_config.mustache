@@ -98,9 +98,11 @@
                                     </a>
                                 {{/can_view_bot_logs}}
                                 {{#can_delete}}
-                                    <button class="btn btn-outline-danger delete-bot" data-id="{{id}}">
-                                        {{#str}}delete, local_fakesmarts{{/str}}
-                                    </button>
+                                    {{^system_reserved}}
+                                        <button class="btn btn-outline-danger delete-bot" data-id="{{id}}">
+                                            {{#str}}delete, local_fakesmarts{{/str}}
+                                        </button>
+                                    {{/system_reserved}}
                                 {{/can_delete}}
                             </td>
                         </tr>

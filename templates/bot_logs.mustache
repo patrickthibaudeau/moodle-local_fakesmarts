@@ -37,6 +37,8 @@
                     <thead>
                     <tr>
                         <th>{{#str}}userid, local_fakesmarts{{/str}}</th>
+                        <th>{{#str}}firstname{{/str}}</th>
+                        <th>{{#str}}lastname{{/str}}</th>
                         <th>{{#str}}prompt, local_fakesmarts{{/str}}</th>
                         <th>{{#str}}response, local_fakesmarts{{/str}}</th>
                         <th>{{#str}}index_context, local_fakesmarts{{/str}}</th>
@@ -52,6 +54,8 @@
                     {{#logs}}
                         <tr>
                             <td>{{{userid}}}</td>
+                            <td>{{{firstname}}}</td>
+                            <td>{{{lastname}}}</td>
                             <td>{{{prompt}}}</td>
                             <td>{{{message}}}</td>
                             <td>{{{index_context}}}</td>

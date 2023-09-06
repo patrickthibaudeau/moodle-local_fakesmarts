@@ -156,14 +156,14 @@ class bot_form extends \moodleform
             0
         );
 
-        // Public form element
+        // Publish form element
         $mform->addElement(
             'selectyesno',
-            'public',
+            'publish',
             get_string('publish', 'local_fakesmarts')
         );
         $mform->setType(
-            'public',
+            'publish',
             PARAM_INT
         );
 

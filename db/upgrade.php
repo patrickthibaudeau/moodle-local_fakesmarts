@@ -506,5 +506,18 @@ function xmldb_local_fakesmarts_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023090501, 'local', 'fakesmarts');
     }
 
+    if ($oldversion < 2023090503) {
+
+        // Rename field publlic on table local_fakesmarts to NEWNAMEGOESHERE.
+        $table = new xmldb_table('local_fakesmarts');
+        $field = new xmldb_field('publlic', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'description');
+
+        // Launch rename field publlic.
+        $dbman->rename_field($table, $field, 'publish');
+
+        // Fakesmarts savepoint reached.
+        upgrade_plugin_savepoint(true, 2023090503, 'local', 'fakesmarts');
+    }
+
     return true;
 }

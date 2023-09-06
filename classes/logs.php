@@ -52,21 +52,28 @@ class logs
     public static function get_logs($fakesmarts_id) {
         global $DB, $USER;
 
-        $sql = "SELECT 
-                    id,
-                    userid,
-                    fakesmarts_id, 
-                    prompt, 
-                    message,
-                    index_context,
-                    prompt_tokens,
-                    completion_tokens,
-                    total_tokens,
-                    cost,
-                    DATE_FORMAT(FROM_UNIXTIME(timecreated), '%m/%d/%Y %h:%i') as timecreated,
-                    ip
-                FROM 
-                    {local_fakesmarts_logs} 
+        $sql = "Select
+                    fl.id,
+                    fl.fakesmarts_id,
+                    f.name As bot_name,
+                    fl.userid,
+                    u.firstname,
+                    u.lastname,
+                    u.idnumber,
+                    u.email,
+                    fl.prompt,
+                    fl.message,
+                    fl.index_context,
+                    fl.prompt_tokens,
+                    fl.completion_tokens,
+                    fl.total_tokens,
+                    fl.cost,
+                    fl.ip,
+                    DATE_FORMAT(FROM_UNIXTIME(fl.timecreated), '%m/%d/%Y %h:%i') as timecreated
+                From
+                    {local_fakesmarts_logs} fl Inner Join
+                    {user} u On u.id = fl.userid Inner Join
+                    {local_fakesmarts} f On f.id = fl.fakesmarts_id
                 WHERE 
                     fakesmarts_id = ? ";
 
@@ -76,11 +83,11 @@ class logs
 
         // Site admins can see all logs, users can only see their own
         if (!is_siteadmin()) {
-            $sql .= " AND userid = ?";
+            $sql .= " AND f.userid = ?";
             $params['userid'] = $USER->id;
         }
 
-        $sql .= " ORDER BY timecreated DESC";
+        $sql .= " ORDER BY f.timecreated DESC";
 
         $logs = $DB->get_records_sql($sql, $params);
         return array_values($logs);
