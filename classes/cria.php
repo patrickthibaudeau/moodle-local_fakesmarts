@@ -164,8 +164,8 @@ class cria
         $curl = curl_init();
         // Set parameters
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $config->indexing_server_url . 'bots/' . $bot_id
-                . '/files/?x-api-key=' . $config->indexing_server_api_key,
+            CURLOPT_URL => $config->bot_server_url . 'bots/' . $bot_id
+                . '/files/?x-api-key=' . $config->bot_server_api_key,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
