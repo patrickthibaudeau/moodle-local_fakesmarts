@@ -45,6 +45,11 @@ class cria
                     "api_model" => $embedding->model_name
                 ]
             ],
+            "embed_enabled" => true,
+            "embed_bot_name" => $FAKESMART->get_name(),
+            "embed_bot_sub_name" => $FAKESMART->get_description(),
+            "embed_bot_greeting" => $FAKESMART->get_welcome_message(),
+            "embed_bot_icon_url" => "null"
         ];
 
         $data = json_encode($data);
@@ -100,7 +105,7 @@ class cria
         $data = [
             "system_message" => $system_message,
             "chat_expires_seconds" => 900,
-            "embed_enabled" => true,
+
             "azure_credentials" => [
                 "llm" => [
                     "api_base" => $llm->azure_endpoint,
@@ -117,6 +122,11 @@ class cria
                     "api_model" => $embedding->model_name
                 ]
             ],
+            "embed_enabled" => true,
+            "embed_bot_name" => $FAKESMART->get_name(),
+            "embed_bot_sub_name" => $FAKESMART->get_description(),
+            "embed_bot_greeting" => $FAKESMART->get_welcome_message(),
+            "embed_bot_icon_url" => "null"
         ];
 
         $data = json_encode($data);
@@ -180,7 +190,7 @@ class cria
         curl_close($curl);
 
         if ($result === false) {
-           \core\notification::error('File upload failed.');
+            \core\notification::error('File upload failed.');
         } else {
             return json_decode($result);
         }
@@ -196,7 +206,7 @@ class cria
     {
         // Create array
         $data = [
-           $file
+            $file
         ];
         $data = json_encode($data);
         // Make call
@@ -240,7 +250,8 @@ class cria
      * @return mixed
      * @throws \dml_exception
      */
-    public static function get_chat_summary($bot_id) {
+    public static function get_chat_summary($bot_id)
+    {
         // Make call
         return gpt::_make_call($bot_id, '', 'chats/summary', 'GET', true);
     }
@@ -252,7 +263,8 @@ class cria
      * @return mixed
      * @throws \dml_exception
      */
-    public static function get_chat_history($bot_id, $chat_id) {
+    public static function get_chat_history($bot_id, $chat_id)
+    {
         // Make call
         $results = gpt::_make_call($bot_id, '', 'chats/' . $chat_id . '/history', 'GET', true);
         if ($results->status == 404) {
@@ -267,7 +279,8 @@ class cria
      * @return mixed
      * @throws \dml_exception
      */
-    public static function end_chat($bot_id, $chat_id) {
+    public static function end_chat($bot_id, $chat_id)
+    {
         // Make call
         return gpt::_make_call($bot_id, '', 'chats/' . $chat_id . '/end', 'DELETE', true);
     }

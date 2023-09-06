@@ -105,6 +105,11 @@ class fakesmart extends crud
      */
     private $table;
 
+    /**
+     *
+     * @var string
+     */
+    private $welcome_message;
 
     /**
      *
@@ -138,6 +143,7 @@ class fakesmart extends crud
         $this->user_prompt = $result->user_prompt ?? '';
         $this->embedding_id = $result->embedding_id ?? 0;
         $this->bot_system_message = $result->bot_system_message ?? '';
+        $this->welcome_message = $result->welcome_message ?? '';
         $this->usermodified = $result->usermodified ?? 0;
         $this->timecreated = $result->timecreated ?? 0;
         $this->timemodified = $result->timemodified ?? 0;
@@ -263,6 +269,13 @@ class fakesmart extends crud
     public function concatenate_system_messages(): string
     {
         return $this->get_bot_type_system_message() . $this->get_bot_system_message();
+    }
+
+    /**
+     * @return string
+     */
+    public function get_welcome_message() {
+        return $this->welcome_message;
     }
 
     /**
