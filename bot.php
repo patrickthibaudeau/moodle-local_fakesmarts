@@ -50,7 +50,7 @@ if ($mform->is_cancelled()) {
         $FAKESMART = new fakeSmart();
         $id = $FAKESMART->insert_record($data);
         $NEW_BOT = new fakeSmart($id);
-        if ($NEW_BOT->use_cot_server()) {
+        if ($NEW_BOT->use_bot_server()) {
             $NEW_BOT->create_bot_on_bot_server();
         }
     }
