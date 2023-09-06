@@ -28,6 +28,7 @@ class cria
         $data = [
             "system_message" => $system_message,
             "chat_expires_seconds" => 900,
+            "embed_enabled" => true,
             "azure_credentials" => [
                 "llm" => [
                     "api_base" => $llm->azure_endpoint,
@@ -99,6 +100,7 @@ class cria
         $data = [
             "system_message" => $system_message,
             "chat_expires_seconds" => 900,
+            "embed_enabled" => true,
             "azure_credentials" => [
                 "llm" => [
                     "api_base" => $llm->azure_endpoint,
