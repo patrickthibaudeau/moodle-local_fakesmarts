@@ -174,8 +174,8 @@ class bot_form extends \moodleform
         );
         // Welcome message element
         $mform->addElement(
-            'editor',
-            'welcome_message_editor',
+            'textarea',
+            'welcome_message',
             get_string('welcome_message', 'local_fakesmarts')
         );
         $mform->setType(

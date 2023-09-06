@@ -49,7 +49,7 @@ class cria
             "embed_bot_name" => $FAKESMART->get_name(),
             "embed_bot_sub_name" => $FAKESMART->get_description(),
             "embed_bot_greeting" => $FAKESMART->get_welcome_message(),
-            "embed_bot_icon_url" => "null"
+            "embed_bot_icon_url" => null
         ];
 
         $data = json_encode($data);
@@ -126,7 +126,7 @@ class cria
             "embed_bot_name" => $FAKESMART->get_name(),
             "embed_bot_sub_name" => $FAKESMART->get_description(),
             "embed_bot_greeting" => $FAKESMART->get_welcome_message(),
-            "embed_bot_icon_url" => "null"
+            "embed_bot_icon_url" => null
         ];
 
         $data = json_encode($data);
