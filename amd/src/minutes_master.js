@@ -16,14 +16,14 @@ function process_notes() {
         $('#fakesmarts-cost').hide();
         var bot_id = $(this).data('bot_id');
         var language = $('#language').val();
-        var content = $('#notes').val();
-        var prompt = `Create meeting notes and separate the notes by topic. Each topic should be in a 
-        numbered list. Once done, create all action items from transcription. Format the action items as a list having 
-        the following headings: Assigned to, Description, Date due`;
+        var content = '[CONTEXT]' + $('#notes').val() + '[/CONTEXT]'
+        var prompt = `[INSTRUCTIONS]Create meeting notes from the context provided and separate the notes by topic. Each topic should be in a 
+        numbered list. Once done, create all action items from the context. Format the action items as a list having 
+        the following headings: Assigned to, Description, Date due[/INSTRUCTIONS]`;
         if (language == 'fr') {
-            prompt = `Créez des notes de réunion et séparez les notes par sujet. Chaque sujet doit être dans une 
+            prompt = `[INSTRUCTIONS]Créez des notes de réunion à partir du context et séparez les notes par sujet. Chaque sujet doit être dans une 
             liste numérotée. Une fois terminé, créez toutes les tâches à partir de la transcription. Formatez les 
-            tâches comme une list ayant les entêtes suivantes: Assigné à, Description, Date d'échéance`;
+            tâches comme une list ayant les entêtes suivantes: Assigné à, Description, Date d'échéance[/INSTRUCTIONS]`;
         }
         // Get all values from various fields
         var project_name = $('#project_name').val();

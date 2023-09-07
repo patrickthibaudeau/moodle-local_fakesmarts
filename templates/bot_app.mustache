@@ -12,7 +12,7 @@
                             <textarea id="user-prompt" class="form-control mt-2" ></textarea>
                         {{/user_prompt}}
                         {{#user_prompt}}
-                            <input type="hidden" id="user-prompt">{{user_prompt}}</input>
+                            <input type="hidden" id="user-prompt" value="{{user_prompt}}">
                         {{/user_prompt}}
                         <button
                                 id="submit-question"

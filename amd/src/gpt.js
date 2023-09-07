@@ -13,8 +13,8 @@ function get_response() {
     $("#submit-question").off();
     $("#submit-question").on('click', function () {
         var bot_id = $(this).data('bot_id');
-        var prompt = $('#user-prompt').val();
-        var content  = $('#fakesmarts-test-input').val();
+        var prompt = '[INSTRUCTIONS]' + $('#user-prompt').val() + '[/INSTRUCTIONS]'
+        var content  = '[CONTEXT]' + $('#fakesmarts-test-input').val() + '[/CONTEXT]'
         var chat_id = $('#fakesmarts-chat-id').val();
         $("#submit-question").hide();
         $("#starting-process").show();
