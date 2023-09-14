@@ -126,6 +126,7 @@ $string['fakesmarts:edit_models'] = 'Add/Edit models';
 $string['fakesmarts:view_models'] = 'View models';
 $string['fakesmarts:edit_system_reserved'] = 'Edit system reserved bots';
 $string['fakesmarts:share_bots'] = 'Share bots';
+$string['fakesmarts:translate'] = 'Translate';
 
 // MinutesMaster
 $string['convert'] = 'Convert';
@@ -150,3 +151,22 @@ $string['project_name'] = 'Project name';
 $string['project_name_help'] = 'Optional: Enter the name of your project. This will also be used to name the file.';
 $string['time'] = 'Time';
 $string['time_help'] = 'Optional: Enter the time in your preferred format.';
+
+// Translate
+$string['academic'] = 'Academic';
+$string['formal'] = 'Formal';
+$string['informal'] = 'Informal';
+$string['literature'] = 'Literary';
+$string['paraphrase'] = 'Paraphrase';
+$string['paraphrase_help'] = 'Selecting Yes will rewrite/paraphrase the text using the voice selected.';
+$string['paraphrase_text'] = 'Rewrite text';
+$string['translate'] = 'Translate';
+$string['translate_id'] = 'Translate ID';
+$string['translate_id_help'] = 'Enter the bot id used for the translation app';
+$string['translate_to'] = 'Translate to';
+$string['translation'] = 'Translation';
+$string['translation_app'] = 'LinguaLlama';
+$string['translation_app_help'] = 'LinguaLlama allows you to quickly translate or paraphrase a text using various writing styles.';
+$string['unchanged'] = 'None';
+$string['voice'] = 'Voice';
+$string['voice_help'] = 'Select the voice you would like your translation in';

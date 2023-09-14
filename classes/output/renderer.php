@@ -99,4 +99,14 @@ class renderer extends \plugin_renderer_base {
         $data = $bot->export_for_template($this);
         return $this->render_from_template('local_fakesmarts/bot_app', $data);
     }
+
+    /**
+     * @param \templatable $bot_types
+     * @return bool|string
+     * @throws \moodle_exception
+     */
+    public function render_translate(\templatable $message) {
+        $data = $message->export_for_template($this);
+        return $this->render_from_template('local_fakesmarts/translate', $data);
+    }
 }

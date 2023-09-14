@@ -82,6 +82,14 @@ if ($hassiteconfig) {
         '', PARAM_INT, 10
     ));
 
+    // Translate id
+    $settings->add( new admin_setting_configtext(
+        'local_fakesmarts/translate',
+        get_string('translate_id', 'local_fakesmarts'),
+        get_string('translate_id_help', 'local_fakesmarts'),
+        '', PARAM_INT, 10
+    ));
+
     $ADMIN->add('localplugins', $settings);
 
     // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
