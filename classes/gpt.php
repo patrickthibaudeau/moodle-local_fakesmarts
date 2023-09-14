@@ -140,7 +140,7 @@ class gpt
                     ]
                 ];
 
-                $comparison_result = self::_make_call(json_encode($messages));
+                $comparison_result = self::_make_call($bot_id, json_encode($messages));
                 // Add the number of tokens used for the comparison to the total tokens
                 $prompt_tokens = $prompt_tokens + $comparison_result->usage->prompt_tokens;
                 $completion_tokens = $completion_tokens + $comparison_result->usage->completion_tokens;
